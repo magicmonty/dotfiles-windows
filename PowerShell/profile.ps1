@@ -313,7 +313,49 @@ Set-Alias pif Paket-Install-Fast
 
 Set-Alias vi gvim
 
-function  Edit-Profile { code C:\tools\cmder\vendor\profile.ps1 }
+function  Edit-Profile { code $env:USERPROFILE\dotfiles\PowerShell\profile.ps1 }
 
 function Start-MSBuild { & 'C:\Program Files (x86)\MSBuild\15.0\Bin\MSBuild.exe' }
 Set-Alias msbuild Start-MSBuild
+
+# Git
+function gs { git status }
+function gst { git st }
+function gstu { git stu }
+function gci { git ci }
+function gcim { git cim }
+function gcima { git cima }
+function gtype { git type }
+function gdump { git dump }
+function amend { git amend }
+function reword { git reword }
+function gundo { git undo }
+function grh { git rh }
+function ga { git a }
+function gaa { git aa }
+function unstage { git unstage }
+function gco { git co }
+function gbr { git br }
+function gb { git b }
+function gbrs { git brs }
+function grv { git rv }
+function gd { git d }
+function gdf { git df }
+function gdc { git dc }
+function preview { git preview }
+function gdt { git dt }
+function gmt { git mt }
+function gunresolve { git unresolve }
+function ll { git ll }
+function gl { git l }
+function gld { git ld }
+function ggl { git gl }
+function glog { git glog }
+function ghist { git hist }
+function gwho { git who }
+function gwdw { git wdw }
+function mostchanged { git most-changed }
+function gcleanf { git cleanf }
+function gtags { git tags }
+function gtagm { git tagm }
+function gtagd { git tagd }

@@ -81,3 +81,8 @@
 
   # clean
   cleanf = clean -xdf
+
+  # Tagging
+  tags = tag -l --format='%(refname:short) - tagged by %(taggername) %(taggeremail) on %(creatordate:short): %(subject)'
+  tagm = tag -a -m
+  tagd = tag -d
