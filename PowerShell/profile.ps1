@@ -209,6 +209,7 @@ if ($host.version.Major -ge 3) {
         Install-Module PsReadLine
     }
     
+    
     if ($host.Name -eq 'ConsoleHost') {
         Import-Module PSReadline
  
@@ -319,45 +320,57 @@ function Start-MSBuild { & 'C:\Program Files (x86)\MSBuild\15.0\Bin\MSBuild.exe'
 Set-Alias msbuild Start-MSBuild
 
 # Git
-function gs { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git status $args }
-function gst { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git st $args }
-function gstu { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git stu $args }
-function gci { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git ci $args }
-function gcim { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git cim $args }
-function gcima { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git cima $args }
-function gtype { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git type $args }
-function gdump { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git dump $args }
-function amend { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git amend $args }
-function reword { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git reword $args }
-function gundo { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git undo $args }
-function grh { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git rh $args }
-function ga { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git a $args }
-function gaa { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git aa $args }
-function unstage { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git unstage $args }
-function gco { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git co $args }
-function gbr { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git br $args }
-function gb { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git b $args }
-function gbrs { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git brs $args }
-function grv { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git rv $args }
-function gd { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git d $args }
-function gdf { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git df $args }
-function gdc { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git dc $args }
-function preview { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git preview $args }
-function gdt { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git dt $args }
-function gmt { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git mt $args }
-function gunresolve { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git unresolve $args }
-function ll { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git ll $args }
-function gl { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git l $args }
-function gld { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git ld $args }
-function ggl { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git gl $args }
-function glog { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git glog $args }
-function ghist { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git hist $args }
-function gwho { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git who $args }
-function wdw { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git wdw $args }
-function mostchanged { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git most-changed $args }
-function gcleanf { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git cleanf $args }
-function gtags { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git tags $args }
-function gtagm { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git tagm $args }
-function gtagd { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git tagd $args }
-function gpush { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git push $args }
-function gpull { param ([Parameter(ValueFromRemainingArguments=$true)] $args) git pull $args }
+function gs { git status $args }
+function gst { git st $args }
+function gstu { git stu $args }
+function gci { git ci $args }
+function gcim { git cim $args }
+function gcima { git cima $args }
+function gtype { git type $args }
+function gdump { git dump $args }
+function amend { git amend $args }
+function reword { git reword $args }
+function gundo { git undo $args }
+function grh { git rh $args }
+function ga { git a $args }
+function gaa { git aa $args }
+function unstage { git unstage $args }
+function gco { git co $args }
+function gbr { git br $args }
+function gb { git b $args }
+function gbrs { git brs $args }
+function grv { git rv $args }
+function gd { git d $args }
+function gdf { git df $args }
+function gdc { git dc $args }
+function preview { git preview $args }
+function gdt { git dt $args }
+function gmt { git mt $args }
+function gunresolve { git unresolve $args }
+function ll { git ll $args }
+function gl { git l $args }
+function gld { git ld $args }
+function ggl { git gl $args }
+function glog { git glog $args }
+function ghist { git hist $args }
+function gwho { git who $args }
+function wdw { git wdw $args }
+function mostchanged { git most-changed $args }
+function gcleanf { git cleanf $args }
+function gtags { git tags $args }
+function gtagm { git tagm $args }
+function gtagd { git tagd $args }
+function gpush { git push $args }
+function gpull { git pull $args }
+
+function grep {
+    $count = @($input).Count
+    $input.Reset()
+
+    if ($count) {
+        $input | rg.exe --hidden $args
+    }
+    else {
+        rg.exe --hidden $args
+    }
+}
