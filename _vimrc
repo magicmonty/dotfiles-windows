@@ -346,6 +346,7 @@ inoremap <C-U>= <Esc>kyyp^v$r=ja
 " Edit user's vimrc in new tabs.
 "
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+nnoremap <leader>ep :tabedit ~/vimfiles/plugins.vim<CR>
 augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc so $MYVIMRC 
