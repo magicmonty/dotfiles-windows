@@ -405,7 +405,11 @@ vmap <leader>aa :Tabularize /\|/l0<CR>
 "
 xnoremap .  :normal .<CR>
 
-"""
+" Shortcuts to commonly-used fugitive.vim features
+"
+nnoremap <Leader>gs  :Gstatus<CR>
+nnoremap <Leader>gd  :Gdiff<CR>
+
 """ Abbreviations
 """
 runtime set_abbreviations.vim
@@ -559,18 +563,16 @@ map <leader># gcc
 inoremap jj <Esc>
 inoremap jk <Esc>
 
-if has("vim-gitgutter")
-  " GitGutter related
-  highlight GitGutterAdd ctermfg=darkgreen
-  highlight GitGutterChange ctermfg=darkyellow
-  highlight GitGutterDelete ctermfg=darkred
-  highlight GitGutterChangeDelete ctermfg=darkyellow
-  highlight SignColumn ctermbg=black
+" GitGutter related
+highlight GitGutterAdd ctermfg=darkgreen
+highlight GitGutterChange ctermfg=darkyellow
+highlight GitGutterDelete ctermfg=darkred
+highlight GitGutterChangeDelete ctermfg=darkyellow
+highlight SignColumn ctermbg=black
 
-  map<leader>gg :GitGutterToggle<CR>
-  map <leader>gp :GitGutterPreviewHunk<CR>
-  map <leader>gr :GitGutterRevertHunk<CR>
-end
+map <leader>gg :GitGutterToggle<CR>
+map <leader>gp :GitGutterPreviewHunk<CR>
+map <leader>gr :GitGutterRevertHunk<CR>
 
 " indent guide plugin
 let g:indent_guides_guide_size=1
@@ -586,7 +588,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 set completeopt=longest,menuone,preview
 
 " yy should work with clipboard=unnamedplus
-nnoremap yy ""*yy
+nnoremap yy "*yy
 
 " C-d duplicates line or visual selection (cursor stays in position in normal and insert mode)
 nmap <C-d> mg""yyp`g:delm g<cr>
@@ -941,6 +943,9 @@ autocmd FileType json nnoremap <leader>pp :call PrettyPrintJSON()<CR>
 " Make markdown compatible tables
 let g:table_mode_corner='|'
 
+nnoremap <leader>. :NERDTreeToggle<cr>
+nnoremap <leader>/ :NERDTreeFind<cr>
+
 let g:NERDTreeWinSize = '40'
 let g:NERDTreeMapOpenVSplit = 's'
 let g:NERDTreeMapOpenSplit = 'i'
@@ -954,4 +959,5 @@ let g:NERDTreeMapToggleHidden = 'I' " Toggles whether hidden files are displayed
 
 " leave vim if NERDTree is the last buffer
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 

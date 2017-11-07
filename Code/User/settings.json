@@ -38,15 +38,13 @@
   
   "csharp.suppressDotnetInstallWarning": true,
   "csharp.suppressDotnetRestoreNotification": true,
-  "FSharp.automaticProjectModification": true,
-
-   "plantuml.exportFormat": "png",
+  
+  "plantuml.exportFormat": "png",
   "plantuml.exportSubFolder": false,
-  "vsicons.dontShowNewVersionMessage": true,
   "workbench.colorTheme": "Gruvbox Dark (Medium)",
-  "workbench.iconTheme": "vscode-icons",
-  "vsicons.projectDetection.autoReload": true,
-  "vim.disableAnnoyingNeovimMessage": true,
-  "vim.enableNeovim": true,
-  "vim.neovimPath": "C:\\tools\\neovim\\Neovim\\bin\\nvim.exe"
+  "workbench.iconTheme": "vscode-great-icons",
+
+  "omnisharp.projectLoadTimeout": 240,
+  "terminal.integrated.fontFamily": "Monoid NF",
+  "terminal.integrated.fontSize": 12
 }

@@ -1,6 +1,6 @@
 [user]
 	name = Martin Gondermann
-  email = mgondermann@np4.net
+	email = mgondermann@np4.net
 
 [http]
   sslverify = false
@@ -9,22 +9,14 @@
 	autocrlf = true
   editor = 'C:/Program Files/Vim/vim80/gvim.exe'
 
-[difftool "bc4"]
-  cmd = 'C:/Program Files (x86)/Beyond Compare 4/bcomp.exe' \"$LOCAL\" \"$REMOTE\"
-  trustExitCode = true
-
-[mergetool "bc4"]
-  cmd = 'C:/Program Files (x86)/Beyond Compare 4/bcomp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
-  trustExitCode = true
-
 [push]
 	default = matching 
 
 [diff]
-  tool = bc4
+	tool = bc
 
 [merge]
-  tool = bc4
+	tool = bc
 
 [alias]
   s = status
@@ -86,3 +78,13 @@
   tags = tag -l --format='%(refname:short) - tagged by %(taggername) %(taggeremail) on %(creatordate:short): %(subject)'
   tagm = tag -a -m
   tagd = tag -d
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files (x86)/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files (x86)/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+	
+[difftool "bc"]
+	path = C:/Program Files (x86)/Beyond Compare 4/bcomp.exe
+[mergetool "bc"]
+	path = c:/Program Files (x86)/Beyond Compare 4/bcomp.exe

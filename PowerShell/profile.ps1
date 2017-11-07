@@ -233,31 +233,32 @@ if (Test-Path Env:\CMDER_START) {
 Set-Alias ls Get-ChildItem-Color -option AllScope -Force
 Set-Alias dir Get-ChildItem-Color -option AllScope -Force
 
-function Set-Location-Speedway ([string]$Branch) { Set-Location C:\Projects\TFS\Speedway_$Branch }
+function Set-Location-Speedway ([string]$Branch) { 
+    Set-Location C:\Projects\Speedway
+    git checkout $Branch 
+}
 
 function Release-Speedway ([string]$Branch) {
-    Set-Location C:\Projects\TFS\Speedway_$Branch
+    Set-Location-Speedway $Branch
     .\_prune_all.bat
     .\_release_and_deploy.bat
 }
 
-function Set-Location-Speedway-PreAlpha { Set-Location-Speedway "PreAlpha" }
-Set-Alias cdspa Set-Location-Speedway-PreAlpha
+function Set-Location-Speedway-Markt { Set-Location-Speedway "MarktRelease" }
+Set-Alias cdsm Set-Location-Speedway-Markt
+function Release-Speedway-Markt { Release-Speedway "MarktRelease" }
+Set-Alias rswm Release-Speedway-Markt
 
-function Set-Location-Speedway-Alpha { Set-Location-Speedway "Alpha" }
-Set-Alias cdsa Set-Location-Speedway-Alpha
-function Release-Speedway-Alpha { Release-Speedway "Alpha" }
-Set-Alias rswa Release-Speedway-Alpha
 
 function Set-Location-Speedway-Beta { Set-Location-Speedway "Beta" }
 Set-Alias cdsb Set-Location-Speedway-Beta
 function Release-Speedway-Beta { Release-Speedway "Beta" }
 Set-Alias rswb Release-Speedway-Beta
 
-function Set-Location-Speedway-Master { Set-Location-Speedway "Master" }
-Set-Alias cdsm Set-Location-Speedway-Master
-function Release-Speedway-Master { Release-Speedway "Master" }
-Set-Alias rswm Release-Speedway-Master
+function Set-Location-Speedway-Master { Set-Location-Speedway "master" }
+Set-Alias cdsw Set-Location-Speedway-Master
+function Release-Speedway-Master { Release-Speedway "master" }
+Set-Alias rsw Release-Speedway-Master
 
 function Set-Location-Development { Set-Location C:\Projects }
 Set-Alias cdd Set-Location-Development
@@ -313,8 +314,9 @@ function Paket-Install-Fast { .paket\paket.exe install }
 Set-Alias pif Paket-Install-Fast
 
 Set-Alias vi gvim
+Set-Alias vim gvim
 
-function  Edit-Profile { code $env:USERPROFILE\dotfiles\PowerShell\profile.ps1 }
+function  Edit-Profile { gvim $env:USERPROFILE\dotfiles\PowerShell\profile.ps1 }
 
 function Start-MSBuild { & 'C:\Program Files (x86)\MSBuild\15.0\Bin\MSBuild.exe' }
 Set-Alias msbuild Start-MSBuild
@@ -362,6 +364,8 @@ function gtagm { git tagm $args }
 function gtagd { git tagd $args }
 function gpush { git push $args }
 function gpull { git pull $args }
+function gls { git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}'  --bind='pgdn:preview-page-down'  --bind='pgup:preview-page-up'  --bind='enter:execute:git show --color=always {2}'  --bind='ctrl-x:execute:git checkout {2} .' }
+function go { git checkout $args }
 
 function grep {
     $count = @($input).Count

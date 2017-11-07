@@ -8,7 +8,6 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'parkr/vim-jekyll'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
-Plug 'KabbAmine/vCoolor.vim'
 
 " Colors
 Plug 'morhetz/gruvbox'
@@ -41,8 +40,8 @@ Plug 'honza/vim-snippets'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'godlygeek/tabular'
 Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTreeToggle', 'NERDTreeFind']}
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mhinz/vim-startify'
 Plug 'kshenoy/vim-signature'
@@ -61,6 +60,7 @@ Plug 'dag/vim-fish'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex'
+Plug 'iwataka/gitignore.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
