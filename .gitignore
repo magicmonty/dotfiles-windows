@@ -1,3 +1,5 @@
 Code/User/workspaceStorage/
 vimfiles/plugged/
 vimfiles/.netrwhist
+vimfiles/autoload/plug.vim.old
+vimfiles/bundle/fsharpbinding-vim/

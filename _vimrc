@@ -13,7 +13,7 @@ let g:mapleader=" "
 set noundofile          " disable the persistent Undo function (and the corresponding .un~ file)
 set showmode            " show the input mode in the footer
 set shortmess+=I        " Don't show the Vim welcome screen.
-set clipboard=unnamedplus " use system clipboard with * register
+" set clipboard=unnamedplus " use system clipboard with * register
 
 set autoindent          " Copy indent from current line for new line.
 set nosmartindent       " 'smartindent' breaks right-shifting of # lines.
@@ -152,6 +152,9 @@ if has('gui_running')
   set go-=r
   let g:solarized_menu=0
   au GUIEnter * simalt ~x
+  if has('windows')
+    set renderoptions=type:directx
+  end
 endif
 
 
@@ -571,8 +574,8 @@ highlight GitGutterChangeDelete ctermfg=darkyellow
 highlight SignColumn ctermbg=black
 
 map <leader>gg :GitGutterToggle<CR>
-map <leader>gp :GitGutterPreviewHunk<CR>
-map <leader>gr :GitGutterRevertHunk<CR>
+"map <leader>gp :GitGutterPreviewHunk<CR>
+"map <leader>gr :GitGutterRevertHunk<CR>
 
 " indent guide plugin
 let g:indent_guides_guide_size=1
@@ -588,7 +591,7 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 set completeopt=longest,menuone,preview
 
 " yy should work with clipboard=unnamedplus
-nnoremap yy "*yy
+" nnoremap yy "*yy
 
 " C-d duplicates line or visual selection (cursor stays in position in normal and insert mode)
 nmap <C-d> mg""yyp`g:delm g<cr>
@@ -657,7 +660,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-autocmd FileType xml let g:syntastic_check_on_open = 0
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -739,9 +741,6 @@ endif
 set encoding=utf-8
 set fileencoding=utf-8
 
-" avoid the escape key
-imap jk <Esc>
-
 set winwidth=84
 set winheight=5
 set winminheight=5
@@ -822,6 +821,8 @@ endfunction
 
 " vim-fsharp plugin
 let g:syntastic_fsharp_checkers=['syntax']
+let g:fsharp_xbuild_path="C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\MSBuild\\15.0\\Bin\\msbuild.exe"
+let g:fsharp_interactive_bin="C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional\\Common7\\IDE\\CommonExtensions\\Microsoft\\FSharp\\fsi.exe"
 
 " Control+S saves the current file (if it's been changed).
 "
@@ -851,29 +852,29 @@ nnoremap <F5> :w<CR> :silent make<CR>
 inoremap <F5> <Esc>:w<CR>:silent make<CR>
 vnoremap <F5> :<C-U>:w<CR>:silent make<CR>
 
-let g:airline_theme='gruvbox'
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_improved_strings=0
-let g:airline#extensions#syntastic#enabled = 1
 
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline_theme='minimalist'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_skip_empty_sections = 1
 
-if has("gui_running")
-  let g:gruvbox_bold=1
-  let g:gruvbox_italic=1
-  let g:gruvbox_underline=1
-  let g:gruvbox_undercurl=1
-endif
-
-if !has("gui_running")
-  let g:gruvbox_italic=0
-  let g:gruvbox_bold=0
-  let g:gruvbox_underline=0
-  let g:gruvbox_undercurl=0
-endif
-
 silent! colorscheme gruvbox
+let g:gruvbox_improved_strings=0
+let g:gruvbox_contrast_dark='hard'
+
+if has("gui_running")
+let g:gruvbox_bold=1
+ let g:gruvbox_italic=1
+ let g:gruvbox_underline=1
+ let g:gruvbox_undercurl=1
+else
+ let g:gruvbox_italic=0
+ let g:gruvbox_bold=0
+ let g:gruvbox_underline=0
+ let g:gruvbox_undercurl=0
+endif
+
+" silent! colorscheme apprentice
 set background=dark
 
 " specific settings for ConEMU
@@ -960,4 +961,16 @@ let g:NERDTreeMapToggleHidden = 'I' " Toggles whether hidden files are displayed
 " leave vim if NERDTree is the last buffer
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+if &diff
+  set diffopt+=iwhite " ignore whitespaces on diff
+  set cursorline      " show current line
+  " remap next change
+  map < ]c           
+  " remap previous change
+  map > [c
+  " change highlight colors
+  hi DiffAdd ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
+  hi DiffChange ctermbg=white guibg=#ececec gui=none cterm=none
+  hi DiffText ctermfg=233 ctermbg=yellow guifg=#000033 guibg=#DDDDFF gui=none cterm=none
+endif
 

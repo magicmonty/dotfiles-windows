@@ -11,6 +11,7 @@ Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
 
 " Colors
 Plug 'morhetz/gruvbox'
+Plug 'romainl/Apprentice'
 
 " dotnet
 Plug 'OrangeT/vim-csharp'
@@ -42,6 +43,7 @@ Plug 'godlygeek/tabular'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'dhruvasagar/vim-vinegar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mhinz/vim-startify'
 Plug 'kshenoy/vim-signature'
@@ -69,25 +71,21 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 
 " Completion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'fszymanski/deoplete-emoji'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'fszymanski/deoplete-emoji'
 
-  function! BuildDeopleteFSharp(info)
-    ' info is a dictionary with 3 fields
-    ' - name:   name of the plugin
-    ' - status: 'installed', 'updated', or 'unchanged'
-    ' - force:  set on PlugInstall! or PlugUpdate!
-    if a:info.status == 'installed' || a:info.force
-      !install.cmd
-      :UpdateRemotePlugins
-    endif
-  endfunction
+function! BuildDeopleteFSharp(info)
+  ' info is a dictionary with 3 fields
+  ' - name:   name of the plugin
+  ' - status: 'installed', 'updated', or 'unchanged'
+  ' - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !install.cmd
+    :UpdateRemotePlugins
+  endif
+endfunction
 
-  Plug 'callmekohei/deoplete-fsharp', { 'do': function('BuildDeopleteFSharp') }
-else
-	Plug 'Shougo/neocomplete.vim'
-endif
+Plug 'callmekohei/deoplete-fsharp2', { 'do': function('BuildDeopleteFSharp') }
 
 " Windows
 Plug 'PProvost/vim-ps1'

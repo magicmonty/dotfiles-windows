@@ -13,10 +13,10 @@
 	default = matching 
 
 [diff]
-	tool = bc
+	tool = sourcetree
 
 [merge]
-	tool = bc
+	tool = sourcetree
 
 [alias]
   s = status
@@ -78,13 +78,19 @@
   tags = tag -l --format='%(refname:short) - tagged by %(taggername) %(taggeremail) on %(creatordate:short): %(subject)'
   tagm = tag -a -m
   tagd = tag -d
+
 [difftool "sourcetree"]
-	cmd = 'C:/Program Files (x86)/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+
 [mergetool "sourcetree"]
-	cmd = 'C:/Program Files (x86)/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
 	trustExitCode = true
-	
+        
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
 [difftool "bc"]
-	path = C:/Program Files (x86)/Beyond Compare 4/bcomp.exe
+	path = c:/program files/beyond compare 4/bcomp.exe
 [mergetool "bc"]
-	path = c:/Program Files (x86)/Beyond Compare 4/bcomp.exe
+	path = c:/program files/beyond compare 4/bcomp.exe

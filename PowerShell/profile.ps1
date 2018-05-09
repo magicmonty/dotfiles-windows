@@ -233,32 +233,10 @@ if (Test-Path Env:\CMDER_START) {
 Set-Alias ls Get-ChildItem-Color -option AllScope -Force
 Set-Alias dir Get-ChildItem-Color -option AllScope -Force
 
-function Set-Location-Speedway ([string]$Branch) { 
+function Set-Location-Speedway () { 
     Set-Location C:\Projects\Speedway
-    git checkout $Branch 
 }
-
-function Release-Speedway ([string]$Branch) {
-    Set-Location-Speedway $Branch
-    .\_prune_all.bat
-    .\_release_and_deploy.bat
-}
-
-function Set-Location-Speedway-Markt { Set-Location-Speedway "MarktRelease" }
-Set-Alias cdsm Set-Location-Speedway-Markt
-function Release-Speedway-Markt { Release-Speedway "MarktRelease" }
-Set-Alias rswm Release-Speedway-Markt
-
-
-function Set-Location-Speedway-Beta { Set-Location-Speedway "Beta" }
-Set-Alias cdsb Set-Location-Speedway-Beta
-function Release-Speedway-Beta { Release-Speedway "Beta" }
-Set-Alias rswb Release-Speedway-Beta
-
-function Set-Location-Speedway-Master { Set-Location-Speedway "master" }
-Set-Alias cdsw Set-Location-Speedway-Master
-function Release-Speedway-Master { Release-Speedway "master" }
-Set-Alias rsw Release-Speedway-Master
+Set-Alias cdsw Set-Location-Speedway
 
 function Set-Location-Development { Set-Location C:\Projects }
 Set-Alias cdd Set-Location-Development
@@ -274,15 +252,20 @@ Set-Alias e Open-Explorer
 function Open-Explorer-Here { e . }
 Set-Alias e. Open-Explorer-Here
 
+function Open-SourceTree ([string]$Directory) { 
+    if ($Directory) {
+        Start-Process $env:LOCALAPPDATA\SourceTree\SourceTree.exe "-f $Directory status"
+    }
+    else {
+        Start-Process $env:LOCALAPPDATA\SourceTree\SourceTree.exe  "-f $PWD status"
+    }
+}
+Set-Alias st Open-SourceTree
+
 function Open-VSCode ([string]$Directory) { code $Directory }
 Set-Alias c Open-VSCode
 function Open-VSCode-Here { c . }
 Set-Alias c. Open-VSCode-Here
-
-function Open-Atom ([string]$Directory) { atom $Directory }
-Set-Alias a Open-Atom
-function Open-Atom-Here { a . }
-Set-Alias a. Open-Atom-Here
 
 function Kill-All ([string]$ProcessName) { pskill $ProcessName }
 
@@ -291,15 +274,6 @@ Set-Alias kb Kill-All-MSBuild
 
 function Kill-All-Showcase { Kill-All Showcase.exe }
 Set-Alias ksc Kill-All-Showcase
-
-function Undo-Unchanged { tfpt uu /noget }
-Set-Alias uu Undo-Unchanged
-
-function Undo-Scorch { tfpt scorch /exclude:*.suo,*.user,horece.mdb,paket.exe,_Resharper.* /noprompt /deletes }
-Set-Alias scorch Undo-Scorch
-
-function Undo-TreeClean { tfpt treeclean /exclude:*.suo,*.user,horece.mdb,paket.exe,_Resharper.* /noprompt }
-Set-Alias tc Undo-TreeClean
 
 function Search-Todo { rg -tcsharp TODO }
 Set-Alias todo Search-Todo
@@ -366,6 +340,10 @@ function gpush { git push $args }
 function gpull { git pull $args }
 function gls { git log --graph --oneline --decorate --all --color=always | fzf --ansi +s --preview='git show --color=always {2}'  --bind='pgdn:preview-page-down'  --bind='pgup:preview-page-up'  --bind='enter:execute:git show --color=always {2}'  --bind='ctrl-x:execute:git checkout {2} .' }
 function go { git checkout $args }
+function rtags {
+  git tag -d $(git tag)
+  git fetch --tags
+}
 
 function grep {
     $count = @($input).Count
