@@ -14,7 +14,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 
 ```powershell
-$ cinst ChocolateyGui gsudo
+$ choco install gsudo
 ```
 
 ### Dotfiles
