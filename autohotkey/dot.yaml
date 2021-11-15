@@ -1,0 +1,9 @@
+windows:
+  links:
+    compile.bat: ~/Documents/AutoHotkey/compile.bat
+    replace.ico: ~/Documents/AutoHotkey/replace.ico
+    TextReplacements.ahk: ~/Documents/AutoHotkey/TextReplacements.ahk
+  installs:
+    cmd: sudo choco install autohotkey
+  updates:
+    cmd: sudo choco update autohotkey
