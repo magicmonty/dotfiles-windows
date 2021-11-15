@@ -28,7 +28,7 @@ $ Install-Module powershell-yaml
 
 Open PowerShell normally
 ```powershell
-$ Clone-Dots
+$ Clone-Dots git@github.com:magicmonty/dotfiles-windows.git
 $ Install-Dots
 $ Link-Dots
 ```
