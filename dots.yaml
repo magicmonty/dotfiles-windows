@@ -1,0 +1,6 @@
+windows:
+  installs:
+    cmd: echo "Nothing to install"
+  updates:
+    cmd: echo "Nothing update"
+linux:

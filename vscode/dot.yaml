@@ -1,0 +1,5 @@
+windows:
+  links:
+    keybindings.json: ~\AppData\Roaming\Code\User\keybindings.json
+    settings.json: ~\AppData\Roaming\Code\User\settings.json
+    syncLocalSettings.json: ~\AppData\Roaming\Code\User\syncLocalSettings.json

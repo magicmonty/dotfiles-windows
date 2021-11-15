@@ -1,0 +1,180 @@
+// Place your settings in this file to overwrite the default settings
+{
+	"editor.tabSize": 2,
+	"editor.insertSpaces": true,
+  "editor.fontFamily": "Monoid NF",
+  "editor.fontLigatures": true,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": false,
+  "editor.lineHeight": 17,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "all",
+  "editor.renderIndentGuides": true,
+  "editor.rulers": [80, 120],
+  "editor.mouseWheelZoom": false,
+  "editor.lineNumbers": "relative",
+  "editor.snippetSuggestions": "bottom",
+  "editor.wordBasedSuggestions": false,
+
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+
+  "files.autoSave": "onFocusChange",
+  "files.autoSaveDelay": 1000,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "*/obj": true,
+    "**/*.js": { "when": "$(basename).ts"}
+  },
+
+  "terminal.external.windowsExec": "C:/Users/mgondermann/Portable/cmder/Cmder.exe",
+  "terminal.integrated.fontFamily": "Monoid NF",
+  "terminal.integrated.fontSize": 12,
+
+
+  "telemetry.enableCrashReporter": false,
+"telemetry.enableTelemetry": false,
+  "window.titleBarStyle": "custom",
+  "window.menuBarVisibility": "toggle",
+
+  "extensions.autoUpdate": true,
+
+  "csharp.suppressDotnetInstallWarning": true,
+  "csharp.suppressDotnetRestoreNotification": true,
+  "omnisharp.disableMSBuildDiagnosticWarning": true,
+
+  "plantuml.exportFormat": "png",
+  "plantuml.exportSubFolder": false,
+
+  "workbench.colorTheme": "Palenight Italic",
+  "workbench.iconTheme": "material-icon-theme",
+
+  "omnisharp.projectLoadTimeout": 240,
+
+  "sync.gist": "d8ce6cf5a3435a68caa8f01b1dd24975",
+  "sync.autoDownload": true,
+  "sync.autoUpload": true,
+  "sync.forceDownload": false,
+  "sync.quietSync": true,
+  "sync.removeExtensions": true,
+  "sync.syncExtensions": true,
+
+  "markdown-pdf.omitBackground": true,
+  "markdown-pdf.headerTemplate": "<div></div>",
+
+  "vscode-json-editor.theme": "dark",
+
+  "breadcrumbs.enabled": true,
+
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+
+  "gitlens.defaultDateFormat": "DD.MM.YYYY hh:mm:ss",
+  "gitlens.defaultDateStyle": "absolute",
+  "gitlens.views.fileHistory.location": "scm",
+  "gitlens.views.lineHistory.location": "scm",
+  "gitlens.advanced.telemetry.enabled": false,
+  "gitlens.codeLens.scopes": [
+    "document",
+    "containers",
+    "blocks"
+  ],
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": false,
+    "suppressShowKeyBindingsNotice": true
+  },
+
+  "FSharp.disableFailedProjectNotifications": true,
+  "FSharp.enableTouchBar": false,
+  "FSharp.showExplorerOnStartup": false,
+  "FSharp.fsacRuntime": "netcore",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "FSharp.externalAutocomplete": true,
+  "FSharp.infoPanelReplaceHover": true,
+  "FSharp.infoPanelUpdate": "both",
+  "FSharp.smartIndent": true,
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.message.update.show": false,
+  "latex-workshop.chktex.enabled": true,
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.subfolder.enabled": true,
+  "sync.forceUpload": true,
+  "xml.codeLens.enabled": true,
+  "xml.format.joinContentLines": true,
+  "xml.format.preserveEmptyContent": true,
+  "xml.format.splitAttributes": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "editor.fontSize": 12,
+  "openhab.host": "openhab.fritz.box",
+  "FSharp.useSdkScripts": true,
+  "[latex]": {
+    "editor.defaultFormatter": "Jeff-Tian.tex-workshop"
+  },
+  "[openhab]": {
+    "editor.defaultFormatter": "max-beckenbauer.oh-alignment-tool"
+  },
+  "remote.SSH.connectTimeout": 60,
+  "sshfs.configs": [
+    {
+      "name": "openhab",
+      "host": "openhab.fritz.box",
+      "privateKeyPath": "$USERPROFILE/.ssh/id_ed25519",
+      "username": "openhabian",
+      "root": "/etc/openhab"
+    }
+  ],
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "oh-alignment-tool.enableBetaFeatures": true,
+  "openhab.sitemapPreviewUI": "basicui",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "angular.experimental-ivy": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "openhab.connection.basicAuth.password": "",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "latex-workshop.docker.enabled": true,
+  "latex-workshop.latex.build.forceRecipeUsage": true,
+  "mssql.connections": [
+    {
+      "server": "{{put-server-name-here}}",
+      "database": "{{put-database-name-here}}",
+      "user": "{{put-username-here}}",
+      "password": "{{put-password-here}}"
+    }
+  ],
+  "editor.inlineSuggest.enabled": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+}

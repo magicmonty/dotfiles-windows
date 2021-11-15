@@ -1,0 +1,9 @@
+windows:
+  links:
+    .oh-my-posh.omp.json: ~/.oh-my-posh.omp.json
+    profile.core.ps1: 
+      - ~/Documents/WindowsPowerShell/Profile.ps1
+      - ~/Documents/PowerShell/Profile.ps1
+    powershell.config.json: 
+      - ~/Documents/WindowsPowershell/powershell.config.json
+      - ~/Documents/Powershell/powershell.config.json

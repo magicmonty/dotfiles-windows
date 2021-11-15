@@ -1,0 +1,8 @@
+global:
+  links: 
+    .gitconfig: ~/.gitconfig
+windows:
+  installs:
+    cmd: sudo choco install git
+  updates:
+    cmd: sudo choco update git

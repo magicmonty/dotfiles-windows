@@ -1,0 +1,56 @@
+// Platzieren Sie Ihre Tastenbindungen in dieser Datei, um die Standardwerte zu überschreiben.
+[
+  // { "key": "alt+enter", "command": "editor.action.quickFix", "when": "editorTextFocus" },
+  { "key": "alt+/",         "command": "editor.action.commentLine", 
+                              "when": "editorTextFocus" },
+  { "key": "ctrl+down",       "command": "editor.action.moveLinesDownAction",
+                              "when": "editorTextFocus && !editory" },
+  { "key": "ctrl+up",         "command": "editor.action.moveLinesUpAction",
+                              "when": "editorTextFocus && !editory" },
+  { "key": "alt+down",        "command": "scrollLineDown",
+                              "when": "editorTextFocus" },
+  { "key": "alt+up",          "command": "scrollLineUp",
+                              "when": "editorTextFocus" },
+  { "key": "shift+alt+up",    "command": "editor.action.insertCursorAbove",
+                              "when": "editorTextFocus" },
+  { "key": "shift+alt+down",  "command": "editor.action.insertCursorBelow",
+                              "when": "editorTextFocus" },
+  {
+    "key": "ctrl+l",
+    "command": "editor.action.deleteLines",
+                              "when": "editorTextFocus && !editorReadonly" },
+  { "key": "ctrl+m ctrl+f",   "command": "editor.fold",
+                              "when": "editorTextFocus" },
+  { "key": "ctrl+m ctrl+u",   "command": "editor.unfold",
+                              "when": "editorTextFocus"
+                            },
+                            {
+                              "key": "ctrl+shift+v",
+                              "command": "-html.showPreview",
+                              "when": "editorLangId == 'html'"
+                            },
+                            {
+                              "key": "ctrl+shift+v",
+                              "command": "-markdown.showPreview",
+                              "when": "editorLangId == 'markdown'"
+                            },
+                            {
+                              "key": "ctrl+shift+v",
+                              "command": "-markdown.extension.togglePreview",
+                              "when": "!terminalFocus"
+                            },
+                            {
+                              "key": "ctrl+alt+enter",
+                              "command": "editor.action.formatDocument",
+                              "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+                            },
+                            {
+                              "key": "shift+alt+f",
+                              "command": "-editor.action.formatDocument",
+                              "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+                            },
+                            {
+                              "key": "ctrl+shift+j",
+                              "command": "editor.action.joinLines"
+                            }
+]

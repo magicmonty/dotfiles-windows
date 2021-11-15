@@ -1,0 +1,134 @@
+[user]
+	name = Martin Gondermann
+	email = mgondermann@np4.net
+
+[http]
+  sslverify = false
+
+[core]
+	autocrlf = true
+	ignorecase = false
+    editor = 'C:\\tools\\neovim\\Neovim\\bin\\nvim-qt.exe' 
+	excludesfile = C:\\Users\\mgondermann\\Documents\\gitignore_global.txt
+
+[push]
+	default = matching 
+
+[diff]
+	tool = bc4
+
+[merge]
+	tool = bc4
+
+[alias]
+  s = status
+  st = status
+  stu = status --untracked-files=no
+
+  ci = commit
+  cim = commit --message
+  cima = commit --all --message
+  type = cat-file -t
+  dump = cat-file -p
+
+  # Correcting commits
+  amend = commit --amend --no-edit
+  reword = commit --amend --message
+  undo = reset HEAD~1
+  rh = reset --hard
+
+  # index related commands
+  a = add
+  aa = add --all
+  unstage = reset HEAD
+
+  # git branch and remote
+  co = checkout
+  br = branch
+  b = branch
+  brs = branch --all --verbose
+
+  # git remote
+  rv = remote --verbose
+
+  # git diff
+  d = diff
+  df = diff
+  dc = diff --staged
+  preview = diff --staged
+  dt = difftool
+
+  # merges
+  mt = mergetool
+  unresolve = checkout --conflict=merge
+  cp = cherry-pick
+  cpc = cherry-pick --continue
+  cpa = cherry-pick --abort
+
+  # git log
+  ll = log
+  l = log --oneline --max-count=15
+  ld = log --oneline --max-count=15 --decorate
+  gl = log --graph --oneline --decorate --branches --all
+  glog = log --graph --oneline --decorate --branches --all
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  who = log --date=relative --pretty='format:%C(yellow)%h%Creset %C(bold blue)%an%Creset %C(bold green)%cr%Creset %s'
+  wdw = log --date=relative --pretty='format:%C(yellow)%h%Creset %C(bold blue)%an%Creset %C(bold green)%cr%Creset %s'
+  most-changed = !git log --format=%n --name-only | grep -v '^$' | sort | uniq -c | sort --numeric-sort --reverse | head -n 50
+
+  # clean
+  cleanf = clean -xdf
+
+  # push
+  pushf = push --force-with-lease
+
+  # Tagging
+  tags = tag -l --format='%(refname:short) - tagged by %(taggername) %(taggeremail) on %(creatordate:short): %(subject)'
+  tagm = tag -a -m
+  tagd = tag -d
+
+[difftool "bc4"]
+  cmd = 'C:\\Program Files\\Beyond Compare 4\\BCompare.exe' \"$LOCAL\" \"$REMOTE\"
+
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "bc4"]
+  cmd = 'C:\\Program Files\\Beyond Compare 4\\BCompare.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" -o \"$MERGED\"
+
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" -o \"$MERGED\"
+	trustExitCode = true
+        
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+
+[fetch]
+	prune = true
+[gui]
+	pruneDuringFetch = true
+
+[tig]
+  line-graphics = ascii
+  truncation-delimiter = utf-8
+  show-notes = true
+  show-changes = true
+  tab-size = 4
+  commit-order = auto
+  ignore-case = smart-case
+  editor-line-number = true
+  focus-child = true
+  main-view-id = true
+[gitopen "gitlab"]
+	domain = git.np4.net
+[rebase]
+	autosquash = true
+[protocol]
+	version = 2
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
+	rebase = true
