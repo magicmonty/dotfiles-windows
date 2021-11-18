@@ -109,3 +109,8 @@ vim.api.nvim_set_keymap('x', '<', ']', {})
 vim.api.nvim_set_keymap('n', '>', ']', {})
 vim.api.nvim_set_keymap('o', '>', ']', {})
 vim.api.nvim_set_keymap('x', '>', ']', {})
+
+
+map('n', '<leader>tc', ':tabnew<cr>', silent)
+map('n', '<leader>tn', ':tabnext<cr>', silent)
+map('n', '<leader>tp', ':tabprev<cr>', silent)
