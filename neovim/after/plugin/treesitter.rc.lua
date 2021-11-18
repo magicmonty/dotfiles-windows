@@ -1,10 +1,27 @@
 local status, treesitter = pcall(require, "nvim-treesitter.configs")
 if not status then return end
 
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
+
+local has_org, _ = pcall(require, "orgmode")
+if has_org then
+  parser_config.org = {
+    install_info = {
+      url = 'https://github.com/milisims/tree-sitter-org',
+      revision = 'main',
+      files = { 'src/parser.c', 'src/scanner.cc' }
+    },
+    filetype = "org"
+  }
+end
+
+
+
 treesitter.setup {
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true
+    additional_vim_regex_highlighting = true,
   },
   indent = {
     enable = true,
@@ -85,12 +102,10 @@ treesitter.setup {
     "toml",
     "typescript",
     "vim",
-    "yaml"
+    "yaml",
+    "org"
   },
 }
-
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

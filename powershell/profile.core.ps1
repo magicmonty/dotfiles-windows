@@ -7,8 +7,6 @@ Import-Module -Name Terminal-Icons
 Import-Module -Name posh-git
 Import-Module -Name npm-completion
 
-$profile.CurrentUserAllHosts = "$env:USERPROFILE\.dotfiles\powershell\profile.core.ps1"
-$profile.CurrentUserCurrentHost = "$env:USERPROFILE\.dotfiles\powershell\profile.core.ps1"
 $env:PATH = "$env:LOCALAPPDATA\Programs\oh-my-posh\bin;" + $env:PATH 
 
 if ($host.Name -eq 'ConsoleHost')
@@ -108,11 +106,7 @@ Set-Alias todo Search-Todo
 function Search-Fixme { rg -tcsharp TODO }
 Set-Alias fixme Search-Fixme
 
-if ((Get-Command "neovide.exe" -ErrorAction SilentlyContinue) -eq $null) {
-  function vi { nvim-qt $args }
-} else {
-  function vi { neovide --maximized $args }
-}
+function vi { nvim $args }
 Set-Alias vim vi 
 
 
@@ -260,4 +254,5 @@ function Invoke-CmdScript() {
 Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 
 Import-Module z
+
 oh-my-posh --init --shell pwsh --config ~/.oh-my-posh.omp.json | Invoke-Expression

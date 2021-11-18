@@ -1,10 +1,10 @@
 -- vim: foldlevel=99:
-if not vim.g.loaded_telescope then return end
+local status, telescope = pcall(require, "telescope")
+if not status then return end
 
 local map=require("vim_ext").map
-local actions = require("telescope.actions")
 
-require('telescope').setup {
+telescope.setup {
   defaults = {
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
@@ -25,9 +25,9 @@ require('telescope').setup {
     },
     winblend = 10,
     mappings = {
-      i = {
-        ["<Esc>"] = actions.close,
-      }
+      -- i = {
+      --   ["<Esc>"] = actions.close,
+      -- }
     },
     preview = {
       timeout = 500,
@@ -42,9 +42,11 @@ require('telescope').setup {
       "--column",
       "--smart-case",
       "--hidden"
-    }
+    },
   }
 }
+
+telescope.load_extension "file_browser"
 
 local opts = { silent = true, noremap = true }
 -- Find files in current project directory
@@ -70,5 +72,5 @@ map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 -- Find file in neovim config directory
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
 -- Open file browser
-map("n", "<leader>.", ":Telescope file_browser<cr>", opts)
+map("n", "<leader>.", ":lua require('telescope').extensions.file_browser.file_browser()<cr>", opts)
 

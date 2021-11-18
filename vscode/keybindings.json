@@ -38,19 +38,5 @@
                               "key": "ctrl+shift+v",
                               "command": "-markdown.extension.togglePreview",
                               "when": "!terminalFocus"
-                            },
-                            {
-                              "key": "ctrl+alt+enter",
-                              "command": "editor.action.formatDocument",
-                              "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
-                            },
-                            {
-                              "key": "shift+alt+f",
-                              "command": "-editor.action.formatDocument",
-                              "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
-                            },
-                            {
-                              "key": "ctrl+shift+j",
-                              "command": "editor.action.joinLines"
                             }
 ]

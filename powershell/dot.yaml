@@ -2,8 +2,10 @@ windows:
   links:
     .oh-my-posh.omp.json: ~/.oh-my-posh.omp.json
     profile.core.ps1: 
-      - ~/Documents/WindowsPowerShell/Profile.ps1
-      - ~/Documents/PowerShell/Profile.ps1
+      - ~/Documents/WindowsPowerShell/Microsoft.Powershell_profile.ps1
+      - ~/Documents/WindowsPowerShell/profile.ps1
+      - ~/Documents/PowerShell/profile.ps1
+      - ~/Documents/PowerShell/Microsoft.Powershell_profile.ps1
     powershell.config.json: 
       - ~/Documents/WindowsPowershell/powershell.config.json
       - ~/Documents/Powershell/powershell.config.json

@@ -17,14 +17,12 @@ $ choco install gsudo
 
 ## Dotfiles
 
-Open PowerShell as Admin
 ```powershell
 
-$ Install-Module Dotted
-$ Install-Module powershell-yaml
+$ Install-Module Dotted powershell-yaml npm-completion oh-my-posh posh-git PSFzf Terminal-Icons z
 ```
 
-Open PowerShell normally
+Reopen PowerShell
 ```powershell
 $ Clone-Dots git@github.com:magicmonty/dotfiles-windows.git
 $ Install-Dots

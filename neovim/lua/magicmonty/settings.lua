@@ -12,7 +12,7 @@ vim.g.mapleader = " "
 
 vim_ext.init_autocmd()
 
-opt.guifont = "Monoid_NF:h10"
+opt.guifont = "Monoid NF:h10"
 opt.compatible = false
 opt.number = true
 opt.relativenumber = true
@@ -66,7 +66,7 @@ opt.softtabstop = 2 -- Edit as if tabs are 2 characters wide.
 opt.autoindent = true
 opt.smartindent = true
 opt.wrap = false
-opt.backspace = { "start", "eol", "indent" }
+opt.backspace = "indent,eol,start"
 
 -- Finding files - Search down into subfolders
 opt.path = opt.path + "**"

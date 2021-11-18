@@ -3,6 +3,11 @@
     "actions": 
     [
         {
+            "keys": "ctrl+.",
+            "command": null
+            
+        },
+        {
             "command": 
             {
                 "action": "newTab"
@@ -178,10 +183,6 @@
                 "direction": "down"
             },
             "keys": "alt+down"
-        },
-        {
-            "command": "toggleFullscreen",
-            "keys": "ctrl+f"
         },
         {
             "command": 

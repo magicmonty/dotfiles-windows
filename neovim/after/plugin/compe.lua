@@ -37,15 +37,15 @@ cmp.setup({
     { name = 'treesitter' },
     { name = 'vsnip' },
     { name = 'path' },
-    {
-      name = 'buffer',
-      opts = {
-        keyword_length = 5,
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      }
-   },
+    -- {
+      -- name = 'buffer',
+      -- opts = {
+        -- keyword_length = 5,
+        -- get_bufnrs = function()
+          -- return vim.api.nvim_list_bufs()
+        -- end
+      -- }
+   -- },
   },
 
   formatting = {
@@ -60,6 +60,7 @@ cmp.setup({
         zsh = "",
         vsnip = "",
         spell = "暈",
+        orgmode = ''
       })[entry.source.name]
 
       return vim_item

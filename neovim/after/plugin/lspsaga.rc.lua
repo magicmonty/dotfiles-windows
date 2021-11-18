@@ -40,7 +40,3 @@ map('n', '<leader>gh', ':Lspsaga lsp_finder<cr>', opts)
 map('n', '<leader>gr', ':Lspsaga rename<cr>', opts)
 map('n', '<C-r><C-r>', ':Lspsaga rename<cr>', opts)
 map('n', '<leader>ca', ':Lspsaga code_action<cr>', opts)
-map('i', '<C-.>', '<Esc>:Lspsaga code_action<cr>', opts)
-map('n', '<C-.>', ':Lspsaga code_action<cr>', opts)
-map('v', '<C-.>', ':<C-u>Lspsaga range_code_action<cr>', opts)
-
