@@ -6,7 +6,7 @@ require('magicmonty.plug').init(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   -- Bracket auto closing
-  -- use 'cohama/lexima.vim'
+  use 'windwp/nvim-autopairs'
 
   -- Color scheme
   use 'EdenEast/nightfox.nvim'
@@ -71,3 +71,4 @@ require('magicmonty.plug').init(function(use)
 
 end)
 
+-- vim: foldlevel=99
