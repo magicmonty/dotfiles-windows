@@ -49,6 +49,10 @@ telescope.setup {
 telescope.load_extension "file_browser"
 
 local opts = { silent = true, noremap = true }
+-- Find references
+map("n", "<leader>fr", ":lua require('telescope.builtin').lsp_references()<cr>", opts)
+map("n", "<leader>gd", ":lua require('telescope.builtin').lsp_definitions()<cr>", opts)
+
 -- Find files in current project directory
 map("n", "<leader>ff", ":lua require('magicmonty.telescope').project_files()<cr>", opts)
 -- Find text in current buffer
