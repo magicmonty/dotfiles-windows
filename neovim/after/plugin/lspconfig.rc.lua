@@ -112,6 +112,12 @@ local luadev = require("lua-dev").setup({
   }
 })
 
+nvim_lsp.angularls.setup({
+  capabilites = capabilites,
+  on_attach = on_attach,
+  filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
+})
+
 nvim_lsp.sumneko_lua.setup(luadev)
 
 require("nvim-web-devicons").setup {
