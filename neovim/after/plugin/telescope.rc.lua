@@ -46,7 +46,9 @@ telescope.setup {
   }
 }
 
-telescope.load_extension "file_browser"
+if vim.g.plugs['telescope-file-browser.nvim'] then
+  telescope.load_extension "file_browser"
+end
 
 local opts = { silent = true, noremap = true }
 -- Find references
