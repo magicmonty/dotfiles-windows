@@ -6,9 +6,3 @@ vim.api.nvim_set_keymap('s', '<Tab>', "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-ne
 vim.api.nvim_set_keymap('i', '<S-Tab>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<Tab>'", { expr = true })
 vim.api.nvim_set_keymap('s', '<S-Tab>', "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<Tab>'", { expr = true })
 
--- Select or cut text to use as $TM_SELECTED_TEXT in the next snippet
-vim.api.nvim_set_keymap('n', 's', '<Plug>(vsnip-select-text)', {})
-vim.api.nvim_set_keymap('x', 's', '<Plug>(vsnip-select-text)', {})
-vim.api.nvim_set_keymap('n', 'S', '<Plug>(vsnip-cut-text)', {})
-vim.api.nvim_set_keymap('x', 'S', '<Plug>(vsnip-cut-text)', {})
-
