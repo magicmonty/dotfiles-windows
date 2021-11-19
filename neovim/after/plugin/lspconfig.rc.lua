@@ -118,6 +118,14 @@ nvim_lsp.angularls.setup({
   filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" }
 })
 
+local pid = vim.fn.getpid()
+local omnisharp_bin = "C:\\Projects\\omnisharp\\OmniSharp.exe"
+nvim_lsp.omnisharp.setup({
+  capabilites = capabilites,
+  on_attach = on_attach,
+  cmd = { omnisharp_bin, '--languageserver', '--hostPID', tostring(pid) }
+})
+
 nvim_lsp.sumneko_lua.setup(luadev)
 
 require("nvim-web-devicons").setup {
