@@ -48,7 +48,7 @@ if ($host.Name -eq 'ConsoleHost')
           [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
 
-  Set-PSReadlineKeyHandler -Key Ctrl+d         -Function DeleteCharOrExit
+  Set-PSReadlineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
 
 }
 

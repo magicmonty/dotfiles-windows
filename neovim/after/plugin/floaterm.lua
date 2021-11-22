@@ -1,20 +1,14 @@
 if vim.fn.has('win32') then
+  local executable
   if (vim.fn.executable('pwsh') > 0) then
-    vim.opt.shell = 'pwsh'
+    executable = 'pwsh.exe'
   else
-    vim.opt.shell = 'powershell'
+    executable = 'powershell.exe'
   end
 
-  local profile = ' -Command  \'iex "' .. vim.env.USERPROFILE .. '\\.dotfiles\\powershell\\profile.core.ps1"\';'
-  vim.opt.shellcmdflag = '-ExecutionPolicy Bypass -NoLogo -NoExit' .. profile 
-
-  vim.opt.shellredir = '2>&1 | Out-file -Encoding UTF8 %s; exit $LastExitCode'
-  vim.opt.shellpipe = '2>&1 | Out-file -Encoding UTF8 %s; exit $LastExitCode'
-  vim.opt.shellquote = ''
-  vim.shellxquote = ''
+  vim.g.floaterm_shell=executable..' -NoLogo -ExecutionPolicy Bypass'
 end
 
-vim.g.floaterm_shell=vim.opt.shell:get()
 vim.g.floaterm_gitcommit='floaterm'
 vim.g.floaterm_autoinsert=1
 vim.g.floaterm_width=0.8
