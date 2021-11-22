@@ -48,8 +48,8 @@ require('magicmonty.plug').init(function(use)
   use 'kyazdani42/nvim-web-devicons'
 
   -- Snippets
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
 
   use ('groenewege/vim-less', { ['for'] = 'less' })

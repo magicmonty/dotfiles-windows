@@ -2,11 +2,20 @@ local hascmp,cmp = pcall(require, 'cmp')
 if not hascmp then return end
 
 local lspkind = require 'lspkind'
+local luasnip = require 'luasnip'
+
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+    return false
+  end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 cmp.setup({
   snippet = {
     expand = function (args)
-      vim.fn["vsnip#anonymous"](args.body)
+      luasnip.lsp_expand(args.body)
     end,
   },
 
@@ -20,8 +29,27 @@ cmp.setup({
   },
 
   mapping = {
-    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
-    ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
+    ['<Tab>'] = cmp.mapping(function(fallback) 
+        if cmp.visible() then 
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end
+      , {'i', 's'}),
+    ['<S-Tab>'] = cmp.mapping(function(fallback) 
+        if cmp.visible then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, {'i', 's'}),
     ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -33,9 +61,9 @@ cmp.setup({
   },
 
   sources = {
+    { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'treesitter' },
-    { name = 'vsnip' },
     { name = 'path' },
     -- {
       -- name = 'buffer',
@@ -52,13 +80,13 @@ cmp.setup({
     format = function(entry, vim_item)
       vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
-				nvim_lsp = "ﲳ",
+        nvim_lsp = "ﲳ",
         nvim_lua = "",
         treesitter = "",
         path = "ﱮ",
         buffer = "﬘",
         zsh = "",
-        vsnip = "",
+        luasnip = "",
         spell = "暈",
         orgmode = ''
       })[entry.source.name]
@@ -73,3 +101,4 @@ if hasautopairs then
   cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
 
+require("luasnip/loaders/from_vscode").lazy_load()
