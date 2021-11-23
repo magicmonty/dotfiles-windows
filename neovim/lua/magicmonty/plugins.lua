@@ -46,6 +46,7 @@ require('magicmonty.plug').init(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-file-browser.nvim'
+  use 'nvim-telescope/telescope-project.nvim'
   use 'kyazdani42/nvim-web-devicons'
 
   -- Snippets

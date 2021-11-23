@@ -5,6 +5,14 @@ if not status then return end
 local map=require("vim_ext").map
 
 telescope.setup {
+  extensions = {
+    project = {
+      base_dirs = {
+        "/Projects/",
+        "~/.dotfiles/"
+      }
+    }
+  },
   defaults = {
     prompt_prefix = "❯ ",
     selection_caret = "❯ ",
@@ -49,14 +57,20 @@ telescope.setup {
 if vim.g.plugs['telescope-file-browser.nvim'] then
   telescope.load_extension "file_browser"
 end
+if vim.g.plugs['telescope-project.nvim'] then
+  telescope.load_extension "project"
+end
 
 local opts = { silent = true, noremap = true }
 -- Find references
 map("n", "<leader>fr", ":lua require('telescope.builtin').lsp_references()<cr>", opts)
 map("n", "<leader>gd", ":lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 
+-- Find projects
+map("n", "<leader>fp", ":lua require('telescope').extensions.project.project{}<cr>", opts)
 -- Find files in current project directory
 map("n", "<leader>ff", ":lua require('magicmonty.telescope').project_files()<cr>", opts)
+map("n", "<leader>fF", ":lua require('telescope.builtin').find_files()<cr>", opts)
 -- Find text in current buffer
 map("n", "<leader>fb", ":lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", opts)
 -- Help
