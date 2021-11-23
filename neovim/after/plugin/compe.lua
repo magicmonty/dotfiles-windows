@@ -21,7 +21,7 @@ cmp.setup({
 
   experimental = {
     native_menu = false,
-    ghost_text = true
+    ghost_text = false
   },
 
   documentation = {
@@ -39,8 +39,8 @@ cmp.setup({
         else
           fallback()
         end
-      end
-      , {'i', 's'}),
+      end, 
+      {'i', 's'}),
     ['<S-Tab>'] = cmp.mapping(function(fallback) 
         if cmp.visible then
           cmp.select_prev_item()
@@ -49,21 +49,20 @@ cmp.setup({
         else
           fallback()
         end
-      end, {'i', 's'}),
+      end, 
+      {'i', 's'}),
     ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<Right>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
     ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace })
   },
 
   sources = {
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'treesitter' },
+    { name = 'luasnip' },
     { name = 'path' },
     -- {
       -- name = 'buffer',
@@ -100,5 +99,3 @@ local hasautopairs,autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 if hasautopairs then
   cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
-
-require("luasnip/loaders/from_vscode").lazy_load()

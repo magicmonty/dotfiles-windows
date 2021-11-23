@@ -12,7 +12,7 @@ if hascmp then
     sources = {
       { name = 'orgmode' },
       { name = 'treesitter' },
-      { name = 'vsnip' },
+      { name = 'luasnip' },
       { name = 'path' }
     }
   }

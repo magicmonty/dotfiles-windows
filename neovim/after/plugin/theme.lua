@@ -16,7 +16,9 @@ if status then
     },
     hlgroups = {
       IndentBlanklineChar = { fg = '${comment}' },
-      IndentBlanklineContextChar = { fg= '${pink}' }
+      IndentBlanklineContextChar = { fg= '${pink}' },
+      DebugBreakpointSign = { fg = '${red}' },
+      DebugBreakpointLine = { bg = '${diff.delete}' },
     }
   })
 
