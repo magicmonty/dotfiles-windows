@@ -145,5 +145,6 @@
   "eslint.validate": [
     "javascript", "typescript", "json", "jsonc", "json5"
   ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "redhat.telemetry.enabled": false
 }
