@@ -40,8 +40,8 @@ map('i', '<C-L>', '<Esc>:nohlsearch<cr><C-L>a', silent)
 map('v', '<C-L>', '<Esc>:nohlsearch<cr><C-L>gv', silent)
 
 -- Buffer navigation with leader key
-map('', '<leader>bn', ':bn<cr>', silent)
-map('', '<leader>bp', ':bp<cr>', silent)
+map('', '<leader>bn', ':TablineBufferNext<cr>', silent)
+map('', '<leader>bp', 'TablineBufferPrevious<cr>', silent)
 
 -- Remap common typo
 map('', 'q:', ':q', remap)
@@ -111,6 +111,8 @@ vim.api.nvim_set_keymap('o', '>', ']', {})
 vim.api.nvim_set_keymap('x', '>', ']', {})
 
 
-map('n', '<leader>tc', ':tabnew<cr>', silent)
+map('n', '<leader>tc', ':TablineTabNew<cr>', silent)
 map('n', '<leader>tn', ':tabnext<cr>', silent)
 map('n', '<leader>tp', ':tabprev<cr>', silent)
+map('n', '<leader>tb', ':TablineToggleShowAllBuffers<cr>', silent)
+map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })

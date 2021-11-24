@@ -1,6 +1,22 @@
 -- vim: foldlevel=99
-local status, lualine = pcall(require, "lualine")
-if (not status) then return end
+local haslualine, lualine = pcall(require, "lualine")
+if (not haslualine) then return end
+
+local tabline = require('tabline')
+tabline.setup { 
+  options = {
+    show_filename_only = true
+  }
+}
+
+local function LspStatus()
+  local status = ''
+  if vim.lsp.buf_get_clients() then
+    status = require('magicmonty.lsp-status').status()
+  end
+
+  return status
+end
 
 lualine.setup {
   options = {
@@ -11,20 +27,12 @@ lualine.setup {
     disabled_filetypes = {}
   },
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = {{'mode', fmt = function(str) return str:sub(1,1) end }},
     lualine_b = {'branch'},
     lualine_c = {'filename'},
+
     lualine_x = {
-      { 
-        'diagnostics',
-        sources = {"nvim_lsp"},
-        symbols = {
-          error = ' ',
-          warn = ' ',
-          info = ' ',
-          hint = ' '
-        } 
-      },
+      LspStatus,
       'encoding',
       'filetype'
     },
@@ -39,6 +47,7 @@ lualine.setup {
     lualine_y = {},
     lualine_z = {}
   },
-  tabline = {},
+  tabline = {
+  },
   extensions = {'fugitive'}
 }

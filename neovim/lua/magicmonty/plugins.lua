@@ -13,6 +13,8 @@ require('magicmonty.plug').init(function(use)
 
   -- Nice status line
   use 'hoob3rt/lualine.nvim'
+  use 'kdheepak/tabline.nvim'
+  use 'nvim-lua/lsp-status.nvim'
 
   -- Auto comment line
   use 'tpope/vim-commentary'
