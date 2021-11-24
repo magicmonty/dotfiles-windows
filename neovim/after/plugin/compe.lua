@@ -64,6 +64,7 @@ cmp.setup({
     { name = 'treesitter' },
     { name = 'luasnip' },
     { name = 'path' },
+    { name = 'jira' },
     -- {
       -- name = 'buffer',
       -- opts = {
@@ -87,7 +88,8 @@ cmp.setup({
         zsh = "",
         luasnip = "",
         spell = "暈",
-        orgmode = ''
+        orgmode = '',
+        jira = '',
       })[entry.source.name]
 
       return vim_item
@@ -99,3 +101,5 @@ local hasautopairs,autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
 if hasautopairs then
   cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
+
+cmp.register_source("jira", require'magicmonty.cmp_jira'.new())

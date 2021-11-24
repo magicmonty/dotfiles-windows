@@ -13,7 +13,8 @@ if status then
       INFO = '',
       DEBUG = "",
       TRACE = "✎",
-    },   background_colour = nightfox.init().bg
+    },
+    background_colour = nightfox.init().bg
   }
 else
   notify.setup({
@@ -26,6 +27,7 @@ else
       DEBUG = "",
       TRACE = "✎",
     },
+    background_colour = '#000000'
   })
 end
 

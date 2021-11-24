@@ -96,3 +96,5 @@ opt.splitright = true -- Split new vertical windows right of current window.
 opt.splitbelow = true -- Split new horizontal windows under current window.
 
 vim.g.neovide_fullscreen = false
+
+require('vim_ext').hi("Normal", { guibg = "#192330" })
