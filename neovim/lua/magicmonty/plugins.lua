@@ -66,6 +66,7 @@ require('magicmonty.plug').init(function(use)
   use 'lukas-reineke/indent-blankline.nvim'
   use 'rcarriga/nvim-notify'
   use 'kyazdani42/nvim-tree.lua'
+  use 'cakebaker/scss-syntax.vim'
 
   -- Rust support
   use 'rust-lang/rust.vim'
