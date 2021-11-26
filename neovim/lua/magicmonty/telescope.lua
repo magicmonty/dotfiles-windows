@@ -5,7 +5,7 @@ local M = {}
 
 M.search_config = function()
   local opts = {
-    cwd = '~/AppData/Local/nvim',
+    cwd = '~/.dotfiles/neovim/',
     path_display = {
       'absolute'
     }
