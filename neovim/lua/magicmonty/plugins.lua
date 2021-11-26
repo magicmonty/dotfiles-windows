@@ -74,6 +74,7 @@ require('magicmonty.plug').init(function(use)
   -- Org Mode support
   use 'kristijanhusak/orgmode.nvim'
   use 'dhruvasagar/vim-table-mode'
+  use 'akinsho/org-bullets.nvim'
 
 end)
 
