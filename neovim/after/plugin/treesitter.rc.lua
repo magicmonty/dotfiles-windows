@@ -37,6 +37,7 @@ treesitter.setup {
   },
   matchup = { enable = true },
   rainbow = {
+    disable = { 'html' },
     enable = true,
     extended_mode = true, -- Highlight also non-parentheses delimiters
     max_file_lines = 1000,
