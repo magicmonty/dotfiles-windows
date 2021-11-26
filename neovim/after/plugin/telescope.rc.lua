@@ -96,6 +96,4 @@ map("n", "<leader>bb", ":lua require('telescope.builtin').buffers({prompt_title 
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 -- Find file in neovim config directory
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
--- Open file browser
-map("n", "<leader>.", ":lua require('telescope').extensions.file_browser.file_browser()<cr>", opts)
 

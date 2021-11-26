@@ -19,6 +19,17 @@ if status then
       IndentBlanklineContextChar = { fg= '${pink}' },
       DebugBreakpointSign = { fg = '${red}' },
       DebugBreakpointLine = { bg = '${diff.delete}' },
+      TSTag = { fg = '${red}'},
+      TSTagDelimiter = { fg = '${fg}'},
+      htmlTag = { fg = '${red}'},
+      htmlEndTag = { fg = '${red}'},
+      NvimTreeExecFile = { style = 'bold' },
+      NvimTreeGitDirty = { fg = '${git.change}' },
+      NvimTreeGitStaged = { fg = '${green_br}' },
+      NvimTreeGitMerge = { fg = '${orange}' },
+      NvimTreeGitRenamed = { fg = '${green_dm}' },
+      NvimTreeGitNew = { fg = '${git.add}' },
+      NvimTreeGitDeleted = { fg = '${git.delete}' },
     }
   })
 
