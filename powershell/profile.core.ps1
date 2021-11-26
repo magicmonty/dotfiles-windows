@@ -109,6 +109,7 @@ Set-Alias fixme Search-Fixme
 function vi { nvim $args }
 Set-Alias vim vi 
 
+Set-Alias lg lazygit
 
 function  Edit-Profile { vi $profile.CurrentUserCurrentHost }
 
