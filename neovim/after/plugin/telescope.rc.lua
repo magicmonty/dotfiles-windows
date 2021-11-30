@@ -91,7 +91,7 @@ map("n", "<leader>fw", ":lua require('telescope.builtin').grep_string()<cr>", op
 -- Find word under cursor (exact word, case sensitive)
 map("n", "<leader>fW", ":lua require('telescope.builtin').grep_string({word_match='-w'})<cr>", opts)
 -- Find buffer
-map("n", "<leader>bb", ":lua require('telescope.builtin').buffers({prompt_title = 'Find Buffer', results_title = 'Buffers', layout_strategy = 'vertical', layout_config = { width = 0.40, height = 0.55 }})<cr>", opts)
+map("n", "<leader>bb", ":lua require('telescope.builtin').buffers({ entry_maker = require'magicmonty.telescope'.gen_buffer_display(), layout_strategy = 'vertical', prompt_title = 'Find Buffer', results_title = 'Buffers' })<cr>", opts)
 -- Live grep
 map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
 -- Find file in neovim config directory
