@@ -17,7 +17,7 @@ require('magicmonty.plug').init(function(use)
   use 'nvim-lua/lsp-status.nvim'
 
   -- Auto comment line
-  use 'tpope/vim-commentary'
+  use 'numToStr/Comment.nvim'
 
   -- LSP/Completion config
   use 'neovim/nvim-lspconfig'
