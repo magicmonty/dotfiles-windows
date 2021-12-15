@@ -36,9 +36,9 @@ require('magicmonty.plug').init(function(use)
   use 'folke/lua-dev.nvim'
 
   -- Treesitter
-  use ('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate', branch = '0.5-compat' })
+  use ('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate'})
   use 'nvim-treesitter/playground'
-  use ('nvim-treesitter/nvim-treesitter-textobjects', { branch = '0.5-compat' })
+  use ('nvim-treesitter/nvim-treesitter-textobjects')
   use 'nvim-treesitter/nvim-treesitter-angular'
   use 'p00f/nvim-ts-rainbow'
   use 'David-Kunz/treesitter-unit'
