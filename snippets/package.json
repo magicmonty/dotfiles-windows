@@ -1,0 +1,23 @@
+{
+  "name": "Angular2",
+  "publisher": "magicmonty",
+  "displayName": "Angular Snippets (Version 12)",
+  "description": "Angular version 12 snippets",
+  "version": "12.0.0",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "typescript",
+        "path": "./snippets/typescript.json"
+      },
+      {
+        "language": "jsonc",
+        "path": "./snippets/jsonc.json"
+      },
+      {
+        "language": "html",
+        "path": "./snippets/html.json"
+      }
+    ]
+  }
+}
