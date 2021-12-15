@@ -63,6 +63,9 @@ end
 if vim.g.plugs['nvim-neoclip.lua'] then
   telescope.load_extension "neoclip"
 end
+if vim.g.plugs['telescope-zoxide'] then
+  telescope.load_extension "zoxide"
+end
 
 local opts = { silent = true, noremap = true }
 -- Go to references
@@ -71,6 +74,10 @@ map("n", "<leader>gd", ":lua require('telescope.builtin').lsp_definitions()<cr>"
 
 -- Clipboard Manager
 map("n", "<leader>cc", ":lua require('telescope').extensions.neoclip.default()<cr>", opts)
+
+-- Zoxide integration
+map("n", "<leader>cd", ":lua require('telescope').extensions.zoxide.list({})<cr>", opts)
+
 -- Find projects
 map("n", "<leader>fp", ":lua require('telescope').extensions.project.project{}<cr>", opts)
 -- Find files in current project directory

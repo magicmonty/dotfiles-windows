@@ -254,6 +254,8 @@ function Invoke-CmdScript() {
 
 Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 
-Import-Module z
+Invoke-Expression (& {
+    (zoxide init --hook "pwd" powershell) -join "`n"
+})
 
 oh-my-posh --init --shell pwsh --config ~/.oh-my-posh.omp.json | Invoke-Expression
