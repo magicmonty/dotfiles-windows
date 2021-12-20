@@ -39,10 +39,6 @@ map('n', '<C-L>', ':nohlsearch<cr><C-L>', silent)
 map('i', '<C-L>', '<Esc>:nohlsearch<cr><C-L>a', silent)
 map('v', '<C-L>', '<Esc>:nohlsearch<cr><C-L>gv', silent)
 
--- Buffer navigation with leader key
-map('', '<leader>bn', ':TablineBufferNext<cr>', silent)
-map('', '<leader>bp', 'TablineBufferPrevious<cr>', silent)
-
 -- Remap common typo
 map('', 'q:', ':q', remap)
 
@@ -71,9 +67,9 @@ map("i", "<C-S>", "<C-O>:update<CR>", silent)
 -- map('i', '<C-space>', '<C-x><C-o>')
 
 -- split handling
-map('n', '<leader>v', ':vsplit<cr>', silent)
--- map('n', '<leader>s', ':split<cr>', silent)
-map('n', '<leader>o', ':only<cr>', { silent = true, noremap = false })
+map('n', '<leader>wv', ':vsplit<cr>', silent)
+map('n', '<leader>ws', ':split<cr>', silent)
+map('n', '<leader>wo', ':only<cr>', { silent = true, noremap = false })
 
 -- Map Control+Shift+Up/Down to move lines and selections up and down.
 -- Define maps for Normal and Visual modes, then re-use
@@ -95,8 +91,6 @@ map('s', '<C-S-Up>', '<C-G><C-Up><C-G>', { silent = true, noremap = false })
 map('s', '<C-S-Down>', '<C-G><C-Down><C-G>', { silent = true, noremap = false })
 
 -- Buffer handling
-map('n', '<leader>bn', ':bn<cr>', silent)
-map('n', '<leader>bp', ':bp<cr>', silent)
 map('n', '<leader>bd', ':bd<cr>', silent)
 
 map('n', '<F11>', ':lua Toggle_FullScreen()<cr>')
@@ -111,8 +105,3 @@ vim.api.nvim_set_keymap('o', '>', ']', {})
 vim.api.nvim_set_keymap('x', '>', ']', {})
 
 
-map('n', '<leader>tc', ':TablineTabNew<cr>', silent)
-map('n', '<leader>tn', ':tabnext<cr>', silent)
-map('n', '<leader>tp', ':tabprev<cr>', silent)
-map('n', '<leader>tb', ':TablineToggleShowAllBuffers<cr>', silent)
-map('n', '<leader>tr', ':TablineTabRename ', { noremap = true })

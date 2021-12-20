@@ -1,7 +1,5 @@
 -- vim: foldlevel=99:
-local status, telescope = pcall(require, "telescope")
-if not status then return end
-
+local telescope = require("telescope")
 local map=require("vim_ext").map
 
 telescope.setup {
@@ -61,10 +59,6 @@ telescope.load_extension "neoclip"
 telescope.load_extension "zoxide"
 
 local opts = { silent = true, noremap = true }
--- Go to references
-map("n", "<leader>gr", ":lua require('telescope.builtin').lsp_references()<cr>", opts)
-map("n", "<leader>gd", ":lua require('telescope.builtin').lsp_definitions()<cr>", opts)
-
 -- Clipboard Manager
 map("n", "<leader>cc", ":lua require('telescope').extensions.neoclip.default()<cr>", opts)
 
@@ -91,9 +85,9 @@ map("n", "<leader>fw", ":lua require('telescope.builtin').grep_string()<cr>", op
 -- Find word under cursor (exact word, case sensitive)
 map("n", "<leader>fW", ":lua require('telescope.builtin').grep_string({word_match='-w'})<cr>", opts)
 -- Find buffer
-map("n", "<leader>bb", ":lua require('telescope.builtin').buffers({ entry_maker = require'magicmonty.telescope'.gen_buffer_display(), layout_strategy = 'vertical', prompt_title = 'Find Buffer', results_title = 'Buffers' })<cr>", opts)
+map("n", "<leader>fB", ":lua require('telescope.builtin').buffers({ entry_maker = require'magicmonty.telescope'.gen_buffer_display(), layout_strategy = 'vertical', prompt_title = 'Find Buffer', results_title = 'Buffers' })<cr>", opts)
 -- Live grep
-map("n", "<leader>lg", ":Telescope live_grep<cr>", opts)
+map("n", "<leader>flg", ":Telescope live_grep<cr>", opts)
 -- Find file in neovim config directory
 map("n", "<leader>en", ":lua require('magicmonty.telescope').search_config()<cr>", opts)
 

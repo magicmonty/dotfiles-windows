@@ -21,6 +21,9 @@ return require('packer').startup({function(use)
   use 'nvim-lua/plenary.nvim'
   use { 'nvim-lua/lsp-status.nvim', config = function() require('settings.lsp-status') end }
 
+  -- Display keybindings
+  use { 'folke/which-key.nvim', config = function() require('settings.which-key') end }
+
   -- Color scheme
   use {
     'EdenEast/nightfox.nvim',
@@ -49,12 +52,7 @@ return require('packer').startup({function(use)
     requires = { "kyazdani42/nvim-web-devicons", "nvim-lua/lsp-status.nvim" }
   }
 
-  use {
-    'kdheepak/tabline.nvim',
-      config = function ()
-        require('tabline').setup( { options = { show_filename_only = true } })
-      end
-  }
+  use { 'kdheepak/tabline.nvim', config = function () require('settings.tabline') end }
 
   -- Git support
   use 'tpope/vim-fugitive'
@@ -95,14 +93,15 @@ return require('packer').startup({function(use)
     }
   }
 
-  use { 
-    'folke/lsp-colors.nvim', 
+  use {
+    'folke/lsp-colors.nvim',
     config = function() require('settings.lsp-colors') end,
     requires = "EdenEast/nightfox.nvim"
   }
 
-  use { 'tami5/lspsaga.nvim', config = function() require('settings.lspsaga') end }
-  use { 'folke/trouble.nvim', config = function() require('settings.trouble') end }
+  -- use { 'tami5/lspsaga.nvim', config = function() require('settings.lspsaga') end }
+  use { 'glepnir/lspsaga.nvim', config = function() require('settings.lspsaga') end }
+  use { 'folke/trouble.nvim', config = function() require('trouble').setup({ use_diagnostic_signs = true }) end }
 
   use {
     'hrsh7th/nvim-cmp',

@@ -16,20 +16,43 @@ local on_attach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
+  local mappings = {
+    f = {
+      name = "Find",
+      d = { ":Telescope lsp_definitions<cr>", "Find definitions"},
+      r = { ":Telescope lsp_references<cr>", "Find references"},
+    },
+    l = {
+      name = "LSP",
+      a = { ":Telescope lsp_code_actions<cr>" , "Show available code actions"},
+      d = { ":Telescope lsp_definitions<cr>", "Find definition"},
+      f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format buffer"},
+      i = { "<cmd>Telescope lsp_implementations<CR>", "Find implementation"},
+      n = { ":Lspsaga rename<cr>", "Rename symbol"},
+      r = { ":Telescope lsp_references<cr>", "Find references"},
+      s = { ":Lspsaga signature_help<cr>", "Signature help"}
+    },
+    x = {
+      name = "Inspections",
+      d = { ":Trouble document_diagnostics<cr>", "Document diagnostics"},
+      l = { ":Trouble loclist<cr>", "Open diagnostics in loclist"},
+      q = { ":Trouble quickfix<cr>", "Open diagnostics in quickfix list"},
+      w = { ":Trouble workspace_diagnostics<cr>", "Workspace diagnostics"},
+      x = { ":TroubleToggle<cr>", "Toggle diagnostics"}
+    }
+  }
+  require("which-key").register(mappings, { prefix = "<leader>", buffer = bufnr, mode = "n", noremap = true, silent = true })
+
   local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua require"telescope.builtin".lsp_code_actions()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap('n', '<C-r><C-r>', ':Lspsaga rename<cr>', opts)
+  buf_set_keymap('n', 'K', ':Lspsaga hover_doc<cr>', opts)
+
+  buf_set_keymap('n', '<M-End>', ':Lspsaga diagnostic_jump_next<cr>', opts)
+  buf_set_keymap('n', '<S-M-Right>', ':Lspsaga diagnostic_jump_next<cr>', opts)
+  buf_set_keymap('n', '<M-Home>', ':Lspsaga diagnostic_jump_prev<cr>', opts)
+  buf_set_keymap('n', '<S-M-Left>', ':Lspsaga diagnostic_jump_prev<cr>', opts)
+
 
  -- automatic formatting on save
   if client.resolved_capabilities.document_formatting then
@@ -37,7 +60,7 @@ local on_attach = function(client, bufnr)
     vim.cmd [[autocmd!]]
     vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.cmd [[augroup END]]
-  end 
+  end
 
   local icons = {
     '', -- Text
@@ -144,7 +167,7 @@ lsp_installer.on_server_ready(function(server)
   end
 
   if server.name == "emmet_ls" then
-    opts.root_dir = function() 
+    opts.root_dir = function()
       return vim.loop.cwd()
     end
     opts.filetypes = { "html", "css", "scss" }
