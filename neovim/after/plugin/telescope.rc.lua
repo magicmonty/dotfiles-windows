@@ -57,6 +57,9 @@ telescope.setup {
 if vim.g.plugs['telescope-file-browser.nvim'] then
   telescope.load_extension "file_browser"
 end
+if vim.g.plugs['telescope-dap.nvim'] then
+  telescope.load_extension "dap"
+end
 if vim.g.plugs['telescope-project.nvim'] then
   telescope.load_extension "project"
 end

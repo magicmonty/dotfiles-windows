@@ -77,7 +77,14 @@ require('magicmonty.plug').init(function(use)
   use 'kristijanhusak/orgmode.nvim'
   use 'dhruvasagar/vim-table-mode'
   use 'akinsho/org-bullets.nvim'
+  use 'theHamsta/nvim-dap-virtual-text'
+
+  -- Debug support
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'nvim-telescope/telescope-dap.nvim'
 
 end)
 
 -- vim: foldlevel=99
+
