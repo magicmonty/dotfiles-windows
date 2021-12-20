@@ -1,44 +1,15 @@
-local status, notify = pcall(require, "notify")
-if not status then return end
+local notify = require("notify")
+local icons = require("icons")
 
-local nightfox
-status, nightfox = pcall(require, "nightfox.colors")
-if status then
-  notify.setup {
-    timeout = 3000,
-    stages = "fade",
-    icons = {
-      ERROR = '',
-      WARN = "",
-      INFO = '',
-      DEBUG = "",
-      TRACE = "✎",
-    },
-    background_colour = nightfox.init().bg
-  }
-else
-  notify.setup({
-    timeout = 3000,
-    stages = "fade",
-    icons = {
-      ERROR = "",
-      WARN = "",
-      INFO = "",
-      DEBUG = "",
-      TRACE = "✎",
-    },
-    background_colour = '#000000'
-  })
-end
-
-local log = require("plenary.log").new {
-  plugin = "notify",
-  level = "debug",
-  use_console = false
+notify.setup {
+  timeout = 3000,
+  stages = "fade",
+  icons = {
+    ERROR = icons.diagnostics.Error,
+    WARN = icons.diagnostics.Warning,
+    INFO = icons.diagnostics.Info,
+    DEBUG = icons.diagnostics.Debug,
+    TRACE = icons.diagnostics.Trace,
+  },
+  background_colour = require("nightfox.colors").init().bg
 }
-vim.notify = notify
-
-vim.notify = function(msg, level, opts)
-  log.info(msg, level, opts)
-  require("notify")(msg, level, opts)
-end

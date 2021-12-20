@@ -1,14 +1,4 @@
 -- vim: foldlevel=99
-local haslualine, lualine = pcall(require, "lualine")
-if (not haslualine) then return end
-
-local tabline = require('tabline')
-tabline.setup { 
-  options = {
-    show_filename_only = true
-  }
-}
-
 local function LspStatus()
   local status = ''
   if vim.lsp.buf_get_clients() then
@@ -18,7 +8,7 @@ local function LspStatus()
   return status
 end
 
-lualine.setup {
+require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'nightfox',

@@ -1,10 +1,8 @@
 local opt = vim.opt
 local cmd = vim.cmd
 local vim_ext = require("vim_ext")
-local hi = vim_ext.hi
 local augroup = vim_ext.augroup
-
-nightfox = require("nightfox")
+local nightfox = require("nightfox")
 
 nightfox.setup({
   fox = "nightfox",
@@ -54,14 +52,7 @@ augroup("BgHighlight", {
   { "WinLeave", "*", "set nocursorline" }
 })
 
-if opt.termguicolors and opt.winblend then
-  cmd 'syntax enable'
-  opt.termguicolors = true
-  opt.winblend = 0
-  opt.wildoptions = { 'pum' }
-  opt.pumblend = 5
-  opt.background = "dark"
-end
+opt.background = "dark"
 
 local has_blankline, blankline = pcall(require, 'indent_blankline')
 if has_blankline then

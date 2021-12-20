@@ -1,7 +1,6 @@
-local status, comment = pcall(require, 'Comment')
-if not status then return end
+local map = require("vim_ext").map
 
-comment.setup({
+require("Comment").setup({
   ---Add a space b/w comment and the line
   ---@type boolean
   padding = true,
@@ -69,10 +68,6 @@ comment.setup({
   ---@type fun(ctx: Ctx)
   post_hook = nil
 })
-
-local map = require("vim_ext").map
-
-
 
 -- comment/uncomment line/block
 map('n', '<leader>#', 'gcc', {noremap = false})

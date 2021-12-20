@@ -1,7 +1,4 @@
-local haslspkind,lspkind = pcall(require, 'lspkind')
-if not haslspkind then return end
-
-lspkind.init({
+require('lspkind').init({
   -- enable text annotations
   with_text = true,
 

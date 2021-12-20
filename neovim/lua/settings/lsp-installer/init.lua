@@ -1,7 +1,5 @@
-local status, lsp_installer = pcall(require, 'nvim-lsp-installer')
-if not status then return end
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
+local lsp_installer = require('nvim-lsp-installer')
+require('lsp-status').register_progress()
 
 local on_init = function(client)
   if client.config.flags then
@@ -10,7 +8,7 @@ local on_init = function(client)
 end
 
 local on_attach = function(client, bufnr)
-  lsp_status.on_attach(client)
+  require('lsp-status').on_attach(client)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -102,7 +100,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 capabilities.textDocument.codeAction = {
   dynamicRegistration = true,
 }
-capabilities = vim.tbl_extend("keep", capabilities, lsp_status.capabilities)
+capabilities = vim.tbl_extend("keep", capabilities, require('lsp-status').capabilities)
 
 lsp_installer.on_server_ready(function(server)
   local opts = {

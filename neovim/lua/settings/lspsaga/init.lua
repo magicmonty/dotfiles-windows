@@ -1,16 +1,13 @@
 -- vim: foldlevel=99:
-
-local status, saga = pcall(require, 'lspsaga')
-if not status then return end
-
 local map = require('vim_ext').map
+local icons = require("icons")
 
-saga.init_lsp_saga {
-  error_sign = '',
-  warn_sign = '',
-  infor_sign = '',
-  hint_sign = '',
-  code_action_icon = ' ',
+require('lspsaga').init_lsp_saga {
+  error_sign = icons.diagnostics.Error,
+  warn_sign = icons.diagnostics.Warning,
+  infor_sign = icons.diagnostics.Info,
+  hint_sign = icons.diagnostics.Hint,
+  code_action_icon = icons.diagnostics.CodeAction .. ' ',
   code_action_prompt = {
     enable = true,
     sign = true,

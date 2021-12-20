@@ -97,4 +97,10 @@ opt.splitbelow = true -- Split new horizontal windows under current window.
 
 vim.g.neovide_fullscreen = false
 
+cmd 'syntax enable'
+opt.termguicolors = true
+opt.winblend = 0
+opt.wildoptions = { 'pum' }
+opt.pumblend = 5
+
 require('vim_ext').hi("Normal", { guibg = "#192330" })

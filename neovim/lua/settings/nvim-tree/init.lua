@@ -1,9 +1,9 @@
-local status, nvim_tree = pcall(require, 'nvim-tree')
-if not status then return end
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+local nvim_tree = require('nvim-tree')
+local tree_cb = require('nvim-tree.config').nvim_tree_callback
+local map = require('vim_ext').map
+local icons = require('icons')
 
 vim.cmd [[
-  let g:nvim_tree_gitignore = 1
   let g:nvim_tree_quit_on_open = 1 " 0 by default, closes the tree when you open a file
   let g:nvim_tree_indent_markers = 1
   let g:nvim_tree_git_hl = 1
@@ -35,8 +35,6 @@ vim.cmd [[
       \ }
 ]]
 
-local map = require('vim_ext').map
-
 map('n', '<leader>.', ':NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
 
 nvim_tree.setup({
@@ -53,11 +51,14 @@ nvim_tree.setup({
   diagnostics = {
     enable = true,
     icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
+      hint = icons.diagnostics.Hint,
+      info = icons.diagnostics.Info,
+      warning = icons.diagnostics.Warning,
+      error = icons.diagnostics.Error,
     }
+  },
+  git = {
+    ignore = true
   },
   view = {
     mappings = {

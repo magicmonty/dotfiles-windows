@@ -1,8 +1,7 @@
-local hascmp,cmp = pcall(require, 'cmp')
-if not hascmp then return end
+local cmp = require('cmp')
 
-local lspkind = require 'lspkind'
-local luasnip = require 'luasnip'
+local lspkind = require('lspkind')
+local luasnip = require('luasnip')
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -97,9 +96,7 @@ cmp.setup({
   }
 })
 
-local hasautopairs,autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
-if hasautopairs then
-  cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
-end
+local autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
 -- cmp.register_source("jira", require'magicmonty.cmp_jira'.new())

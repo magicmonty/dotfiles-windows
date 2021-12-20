@@ -1,7 +1,4 @@
-local status, lsp_status = pcall(require, 'lsp-status')
-if not status then return end
-
-lsp_status.config {
+require('lsp-status').config {
   status_symbol = '',
   select_symbol = function(cursor_pos, symbol)
     if symbol.valueRange then
@@ -20,5 +17,3 @@ lsp_status.config {
     end
   end
 }
-
--- vim: foldlevel=99

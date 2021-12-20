@@ -1,46 +1,15 @@
-local status, treesitter = pcall(require, "nvim-treesitter.configs")
-if not status then return end
-
+local treesitter = require("nvim-treesitter.configs")
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 
-local wanted_parsers = {
-    "angular",
-    "bash",
-    "c_sharp",
-    "cmake",
-    "css",
-    "dockerfile",
-    "html",
-    "javascript",
-    "json",
-    "latex",
-    "lua",
-    "php",
-    "regex",
-    "rust",
-    "scss",
-    "toml",
-    "typescript",
-    "vim",
-    "yaml"
+parser_config.org = {
+  install_info = {
+    url = 'https://github.com/milisims/tree-sitter-org',
+    revision = 'main',
+    files = { 'src/parser.c', 'src/scanner.cc' }
+  },
+  filetype = "org"
 }
-
-local has_org, _ = pcall(require, "orgmode")
-if has_org then
-  parser_config.org = {
-    install_info = {
-      url = 'https://github.com/milisims/tree-sitter-org',
-      revision = 'main',
-      files = { 'src/parser.c', 'src/scanner.cc' }
-    },
-    filetype = "org"
-  }
-
-  table.insert(wanted_parsers, "org")
-end
-
-
 
 treesitter.setup {
   highlight = {
@@ -67,6 +36,7 @@ treesitter.setup {
     max_file_lines = 1000,
   },
   autopairs = { enable = true },
+  autotag = { enable = true },
   textobjects = {
     lsp_interop = {
       enable = true,
@@ -108,7 +78,7 @@ treesitter.setup {
       },
     },
   },
-  ensure_installed = wanted_parsers,
+  ensure_installed = "maintained"
 }
 
 -- vim.opt.foldmethod = "expr"
