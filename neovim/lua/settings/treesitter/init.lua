@@ -4,6 +4,28 @@ if not status then return end
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 
+local wanted_parsers = {
+    "angular",
+    "bash",
+    "c_sharp",
+    "cmake",
+    "css",
+    "dockerfile",
+    "html",
+    "javascript",
+    "json",
+    "latex",
+    "lua",
+    "php",
+    "regex",
+    "rust",
+    "scss",
+    "toml",
+    "typescript",
+    "vim",
+    "yaml"
+}
+
 local has_org, _ = pcall(require, "orgmode")
 if has_org then
   parser_config.org = {
@@ -14,6 +36,8 @@ if has_org then
     },
     filetype = "org"
   }
+
+  table.insert(wanted_parsers, "org")
 end
 
 
@@ -84,28 +108,7 @@ treesitter.setup {
       },
     },
   },
-  ensure_installed = {
-    "angular",
-    "bash",
-    "c_sharp",
-    "cmake",
-    "css",
-    "dockerfile",
-    "html",
-    "javascript",
-    "json",
-    "latex",
-    "lua",
-    "php",
-    "regex",
-    "rust",
-    "scss",
-    "toml",
-    "typescript",
-    "vim",
-    "yaml",
-    "org"
-  },
+  ensure_installed = wanted_parsers,
 }
 
 -- vim.opt.foldmethod = "expr"

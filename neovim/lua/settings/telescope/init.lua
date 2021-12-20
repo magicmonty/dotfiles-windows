@@ -54,21 +54,11 @@ telescope.setup {
   }
 }
 
-if vim.g.plugs['telescope-file-browser.nvim'] then
-  telescope.load_extension "file_browser"
-end
-if vim.g.plugs['telescope-dap.nvim'] then
-  telescope.load_extension "dap"
-end
-if vim.g.plugs['telescope-project.nvim'] then
-  telescope.load_extension "project"
-end
-if vim.g.plugs['nvim-neoclip.lua'] then
-  telescope.load_extension "neoclip"
-end
-if vim.g.plugs['telescope-zoxide'] then
-  telescope.load_extension "zoxide"
-end
+telescope.load_extension "file_browser"
+telescope.load_extension "dap"
+telescope.load_extension "project"
+telescope.load_extension "neoclip"
+telescope.load_extension "zoxide"
 
 local opts = { silent = true, noremap = true }
 -- Go to references

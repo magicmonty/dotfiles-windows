@@ -102,4 +102,4 @@ if hasautopairs then
   cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
 
-cmp.register_source("jira", require'magicmonty.cmp_jira'.new())
+-- cmp.register_source("jira", require'magicmonty.cmp_jira'.new())

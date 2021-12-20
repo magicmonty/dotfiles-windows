@@ -1,8 +1,6 @@
-require("magicmonty.settings")
-require("magicmonty.highlighting")
-require("magicmonty.filetype_settings")
-require("magicmonty.plugins")
-require("magicmonty.mappings")
-require("magicmonty.theme")
-require("magicmonty.globals")
+require("options")
+require("filetype_settings")
+require("plugins")
+require("mappings")
+require("global_helpers")
 
