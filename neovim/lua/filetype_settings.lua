@@ -16,6 +16,7 @@ opt.suffixesadd = ".js,.json,.css,.less,.sass,.py,.md,.cs"
 au({"FileType", "ruby", "setlocal shiftwidth=2 tabstop=2"})
 au({"FileType", "csharp", "setlocal shiftwidth=2 tabstop=2"})
 au({"FileType", "yaml", "setlocal shiftwidth=2 tabstop=2"})
+au({"FileType", "haskell", "setlocal shiftwidth=2 tabstop=2"})
 au({"FocusLost", "*", "silent! :wa"})
 
 -- vim: foldlevel=99:

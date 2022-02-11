@@ -1,6 +1,6 @@
 require('lspkind').init({
   -- enable text annotations
-  with_text = true,
+  mode = 'symbol_text',
 
   -- Use nerd fonts for icons
   preset = 'default',
