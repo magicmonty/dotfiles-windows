@@ -1,5 +1,5 @@
 windows:
   installs:
-    cmd: sudo choco install ChocolateyGui gimp inkscape ripgrep powertoys putty peco winscp fzf
+    cmd: sudo choco install ripgrep peco fzf
   updates:
-    cmd: sudo choco update ChocolateyGui gsudo gimp inkscape ripgrep powertoys putty peco winscp fzf
+    cmd: sudo choco update ripgrep peco fzf

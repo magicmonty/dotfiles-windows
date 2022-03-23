@@ -1,0 +1,5 @@
+windows:
+  installs:
+    cmd: winget install Microsoft.WindowsTerminal JanDeDobbeleer.OhMyPosh Atlassian.SourceTree Microsoft.PowerShell gerardog gsudo GIMP.GIMP Inkscape.Inkscape 
+  updates:
+    cmd: winget upgrade --all

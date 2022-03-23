@@ -4,6 +4,6 @@ windows:
     replace.ico: ~/Documents/AutoHotkey/replace.ico
     TextReplacements.ahk: ~/Documents/AutoHotkey/TextReplacements.ahk
   installs:
-    cmd: sudo choco install autohotkey
+    cmd: winget install Lexikos.AutoHotkey
   updates:
-    cmd: sudo choco update autohotkey
+    cmd: winget update Lexikos.AutoHotkey

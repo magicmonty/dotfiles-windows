@@ -1,6 +1,6 @@
 [user]
 	name = Martin Gondermann
-	email = mgondermann@np4.net
+	email = martin.gondermann@bayoo.net
 
 [http]
   sslverify = false
@@ -8,7 +8,7 @@
 [core]
 	autocrlf = true
 	ignorecase = false
-    editor = 'C:\\tools\\neovim\\Neovim\\bin\\nvim-qt.exe' 
+  editor = 'C:\\tools\\nvim\\bin\\nvim.exe' 
 	excludesfile = C:\\Users\\mgondermann\\Documents\\gitignore_global.txt
 
 [push]
@@ -121,8 +121,6 @@
   editor-line-number = true
   focus-child = true
   main-view-id = true
-[gitopen "gitlab"]
-	domain = git.np4.net
 [rebase]
 	autosquash = true
 [protocol]

@@ -13,43 +13,42 @@ if ($host.Name -eq 'ConsoleHost')
 {
   Import-Module PSReadline  
 
-    Set-PSReadlineKeyHandler -Key Ctrl+Delete    -Function KillWord
-    Set-PSReadlineKeyHandler -Key Ctrl+Backspace -Function BackwardKillWord
-    Set-PSReadlineKeyHandler -Key Shift+Backspace -Function BackwardKillWord
-    Set-PSReadlineKeyHandler -Key UpArrow        -Function HistorySearchBackward
-    Set-PSReadlineKeyHandler -Key DownArrow      -Function HistorySearchForward
-    Set-PSReadlineKeyHandler -Key Tab            -Function Complete
+  Set-PSReadlineKeyHandler -Key Ctrl+Delete    -Function KillWord
+  Set-PSReadlineKeyHandler -Key Ctrl+Backspace -Function BackwardKillWord
+  Set-PSReadlineKeyHandler -Key Shift+Backspace -Function BackwardKillWord
+  Set-PSReadlineKeyHandler -Key UpArrow        -Function HistorySearchBackward
+  Set-PSReadlineKeyHandler -Key DownArrow      -Function HistorySearchForward
+  Set-PSReadlineKeyHandler -Key Tab            -Function Complete
 
-    # History as browsable list
-    Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-    Set-PSReadLineOption -PredictionViewStyle ListView
-    Set-PSReadLineOption -PredictionSource History
-    Set-PSReadLineOption -EditMode Windows
+  # History as browsable list
+  Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+  Set-PSReadLineOption -PredictionViewStyle ListView
+  Set-PSReadLineOption -PredictionSource History
+  Set-PSReadLineOption -EditMode Windows
 
-    Remove-PSReadlineKeyHandler 'Ctrl+r'
+  Remove-PSReadlineKeyHandler 'Ctrl+r'
 
-# Build a directory with <C-S-b>
-    Set-PSReadLineKeyHandler -Key Ctrl+Shift+b `
+  # Build a directory with <C-S-b>
+  Set-PSReadLineKeyHandler -Key Ctrl+Shift+b `
     -BriefDescription BuildCurrentDirectory `
     -LongDescription "Build the current directory" `
     -ScriptBlock {
       [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("dotnet build")
-          [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+      [Microsoft.PowerShell.PSConsoleReadLine]::Insert("dotnet build")
+      [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
 
-# Run tests directory with <C-S-t>
+  # Run tests directory with <C-S-t>
   Set-PSReadLineKeyHandler -Key Ctrl+Shift+t `
     -BriefDescription TestCurrentDirectory `
     -LongDescription "Run tests in the current directory" `
     -ScriptBlock {
       [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("dotnet test")
-          [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+      [Microsoft.PowerShell.PSConsoleReadLine]::Insert("dotnet test")
+      [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
     }
 
   Set-PSReadlineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
-
 }
 
 
@@ -108,6 +107,9 @@ Set-Alias fixme Search-Fixme
 
 function vi { nvim $args }
 Set-Alias vim vi 
+Set-Alias v vi 
+
+Set-Alias l ls
 
 Set-Alias lg lazygit
 
@@ -135,26 +137,14 @@ function ga { git a $args }
 function gaa { git aa $args }
 function unstage { git unstage $args }
 function gco { git co $args }
-function gobs {
-  Param([String] $jiraId = "")
-    Process
-    {
-      if ($jiraId -eq '')
-      {
-        $branch=git branch --all | Select-String -Pattern '^[\s*]*(?:remotes/origin/)?(features/SPWAY-\d+)\s*$' -AllMatches | % {$_.Matches} | %{$_.Groups[1].Value.Trim()} | sort | Get-Unique | peco
-      } else
-      {
-        $branch='features/SPWAY-' + $jiraId
-      }
-      git co $branch 
-    }
-}
 
 function yi { yarn install }
 function yif { yarn install --frozen-lockfile }
 function ngs { ng serve }
 function ngso { ng serve --open }
 function gom { git co main }
+function goma { git co master }
+function god { git co development }
 function gof { git co -b features/$args }
 function gbr { git br $args }
 function gb { git b $args }
@@ -192,6 +182,12 @@ function rtags {
 function gra { git rebase --abort $args }
 function grc { git rebase --continue $args }
 function grm { git rebase main }
+function grma { git rebase master }
+function grd { git rebase development }
+function hello { utt hello }
+function t { utt add $args }
+function report { utt report }
+Set-Alias r report
 
 function grep
 {
@@ -252,10 +248,13 @@ function Invoke-CmdScript() {
     Remove-Item $tempFile
 }
 
-Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+# Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+ Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
 
 Invoke-Expression (& {
-    (zoxide init --hook "pwd" powershell) -join "`n"
+ (zoxide init --hook "pwd" powershell) -join "`n"
 })
 
-oh-my-posh --init --shell pwsh --config ~/.oh-my-posh.omp.json | Invoke-Expression
+if ($Host.Name -ne 'Package Manager Host') {
+  oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression
+}
