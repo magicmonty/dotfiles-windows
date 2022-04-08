@@ -220,7 +220,8 @@
                 "face": "Monoid NF",
                 "size": 9,
                 "weight": "normal"
-            },
+            },            
+            "antialiasingMode": "cleartype",
             "padding": "10",
             "snapOnInput": true
         },

@@ -2,7 +2,6 @@ local cmp = require('cmp')
 
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
-
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
     return false
@@ -28,8 +27,8 @@ cmp.setup({
   },
 
   mapping = {
-    ['<Tab>'] = cmp.mapping(function(fallback) 
-        if cmp.visible() then 
+    ['<Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
@@ -38,9 +37,9 @@ cmp.setup({
         else
           fallback()
         end
-      end, 
+      end,
       {'i', 's'}),
-    ['<S-Tab>'] = cmp.mapping(function(fallback) 
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
@@ -48,7 +47,7 @@ cmp.setup({
         else
           fallback()
         end
-      end, 
+      end,
       {'i', 's'}),
     ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
     ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
@@ -59,11 +58,11 @@ cmp.setup({
   },
 
   sources = {
+    { name = 'path' },
     { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_document_symbol' },
     { name = 'treesitter' },
     { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'jira' },
     -- {
       -- name = 'buffer',
       -- opts = {
@@ -80,6 +79,7 @@ cmp.setup({
       vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
         nvim_lsp = "ﲳ",
+        nvim_lsp_document_symbol = 'ﲳ',
         nvim_lua = "",
         treesitter = "",
         path = "ﱮ",

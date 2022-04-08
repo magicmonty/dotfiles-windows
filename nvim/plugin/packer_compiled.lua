@@ -81,15 +81,15 @@ _G.packer_plugins = {
     path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["cmp-buffer"] = {
-    loaded = true,
-    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\cmp-buffer",
-    url = "https://github.com/hrsh7th/cmp-buffer"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["cmp-nvim-lsp-document-symbol"] = {
+    loaded = true,
+    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lsp-document-symbol",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp-document-symbol"
   },
   ["cmp-nvim-lua"] = {
     loaded = true,
@@ -115,6 +115,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\editorconfig-vim",
     url = "https://github.com/editorconfig/editorconfig-vim"
+  },
+  ["fidget.nvim"] = {
+    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0" },
+    loaded = true,
+    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -162,18 +168,25 @@ _G.packer_plugins = {
   },
   ["lualine.nvim"] = {
     config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.lualine.settings\frequire\0" },
+    load_after = {},
     loaded = true,
-    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\lualine.nvim",
+    needs_bufread = false,
+    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\opt\\lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["nightfox.nvim"] = {
-    config = { "\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31settings.nightfox.settings\frequire\0" },
+    after = { "lualine.nvim" },
     loaded = true,
-    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\nightfox.nvim",
-    url = "https://github.com/EdenEast/nightfox.nvim"
+    only_config = true
+  },
+  ["null-ls.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.null-ls.settings\frequire\0" },
+    loaded = true,
+    path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
-    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    config = { "\27LJ\2\nI\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup settings.autopairs.settings\frequire\0" },
     loaded = true,
     path = "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
@@ -313,7 +326,7 @@ _G.packer_plugins = {
     url = "https://github.com/jvgrootveld/telescope-zoxide"
   },
   ["telescope.nvim"] = {
-    after = { "telescope-file-browser.nvim", "telescope-zoxide", "telescope-project.nvim", "nvim-neoclip.lua" },
+    after = { "telescope-zoxide", "nvim-neoclip.lua", "telescope-project.nvim", "telescope-file-browser.nvim" },
     config = { "\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 settings.telescope.settings\frequire\0" },
     keys = { { "", "<leader>cc" }, { "", "<leader>cd" }, { "", "<leader>c" }, { "", "<leader>f" }, { "", "<leader>fp" }, { "", "<leader>ff" }, { "", "<leader>fF" }, { "", "<leader>fb" }, { "", "<leader>fh" }, { "", "<leader>fn" }, { "", "<leader>fk" }, { "", "<leader>fm" }, { "", "<leader>fw" }, { "", "<leader>fW" }, { "", "<leader>fB" }, { "", "<leader>flg" }, { "", "<leader>en" } },
     loaded = false,
@@ -385,58 +398,38 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
--- Config for: vim-floaterm
-time([[Config for vim-floaterm]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31settings.floaterm.settings\frequire\0", "config", "vim-floaterm")
-time([[Config for vim-floaterm]], false)
--- Config for: nvim-colorizer.lua
-time([[Config for nvim-colorizer.lua]], true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
-time([[Config for nvim-colorizer.lua]], false)
 -- Config for: nvim-lsp-installer
 time([[Config for nvim-lsp-installer]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0$settings.lsp-installer.settings\frequire\0", "config", "nvim-lsp-installer")
 time([[Config for nvim-lsp-installer]], false)
--- Config for: lspkind-nvim
-time([[Config for lspkind-nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.lspkind.settings\frequire\0", "config", "lspkind-nvim")
-time([[Config for lspkind-nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\26settings.cmp.settings\frequire\0", "config", "nvim-cmp")
-time([[Config for nvim-cmp]], false)
--- Config for: lsp-status.nvim
-time([[Config for lsp-status.nvim]], true)
-try_loadstring("\27LJ\2\n<\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0!settings.lsp-status.settings\frequire\0", "config", "lsp-status.nvim")
-time([[Config for lsp-status.nvim]], false)
--- Config for: nvim-web-devicons
-time([[Config for nvim-web-devicons]], true)
-try_loadstring("\27LJ\2\n>\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0#settings.web-devicons.settings\frequire\0", "config", "nvim-web-devicons")
-time([[Config for nvim-web-devicons]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.luasnip.settings\frequire\0", "config", "LuaSnip")
-time([[Config for LuaSnip]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14colorizer\frequire\0", "config", "nvim-colorizer.lua")
+time([[Config for nvim-colorizer.lua]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\nH\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\31settings.gitsigns.settings\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: tabline.nvim
-time([[Config for tabline.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.tabline.settings\frequire\0", "config", "tabline.nvim")
-time([[Config for tabline.nvim]], false)
--- Config for: nvim-notify
-time([[Config for nvim-notify]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29settings.notify.settings\frequire\0", "config", "nvim-notify")
-time([[Config for nvim-notify]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.comment.settings\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\26settings.cmp.settings\frequire\0", "config", "nvim-cmp")
+time([[Config for nvim-cmp]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+try_loadstring("\27LJ\2\n>\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0#settings.web-devicons.settings\frequire\0", "config", "nvim-web-devicons")
+time([[Config for nvim-web-devicons]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.null-ls.settings\frequire\0", "config", "null-ls.nvim")
+time([[Config for null-ls.nvim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
+-- Config for: nightfox.nvim
+time([[Config for nightfox.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31settings.nightfox.settings\frequire\0", "config", "nightfox.nvim")
+time([[Config for nightfox.nvim]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 settings.nvim-tree.settings\frequire\0", "config", "nvim-tree.lua")
@@ -445,36 +438,68 @@ time([[Config for nvim-tree.lua]], false)
 time([[Config for which-key.nvim]], true)
 try_loadstring("\27LJ\2\n;\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0 settings.which-key.settings\frequire\0", "config", "which-key.nvim")
 time([[Config for which-key.nvim]], false)
--- Config for: nightfox.nvim
-time([[Config for nightfox.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31settings.nightfox.settings\frequire\0", "config", "nightfox.nvim")
-time([[Config for nightfox.nvim]], false)
+-- Config for: tabline.nvim
+time([[Config for tabline.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.tabline.settings\frequire\0", "config", "tabline.nvim")
+time([[Config for tabline.nvim]], false)
+-- Config for: nvim-notify
+time([[Config for nvim-notify]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29settings.notify.settings\frequire\0", "config", "nvim-notify")
+time([[Config for nvim-notify]], false)
+-- Config for: lsp-status.nvim
+time([[Config for lsp-status.nvim]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0!settings.lsp-status.settings\frequire\0", "config", "lsp-status.nvim")
+time([[Config for lsp-status.nvim]], false)
+-- Config for: lspkind-nvim
+time([[Config for lspkind-nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.lspkind.settings\frequire\0", "config", "lspkind-nvim")
+time([[Config for lspkind-nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\nI\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup settings.autopairs.settings\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 -- Config for: lsp-colors.nvim
 time([[Config for lsp-colors.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0!settings.lsp-colors.settings\frequire\0", "config", "lsp-colors.nvim")
 time([[Config for lsp-colors.nvim]], false)
+-- Config for: vim-floaterm
+time([[Config for vim-floaterm]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\31settings.floaterm.settings\frequire\0", "config", "vim-floaterm")
+time([[Config for vim-floaterm]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.comment.settings\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.luasnip.settings\frequire\0", "config", "LuaSnip")
+time([[Config for LuaSnip]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd lualine.nvim ]]
+
 -- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30settings.lualine.settings\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
+
+time([[Sequenced loading]], false)
 -- Keymap lazy-loads
 time([[Defining lazy-load keymaps]], true)
+vim.cmd [[noremap <silent> <leader>fF <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fF", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>ff <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>ff", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>fn <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fn", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>f <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>f", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>en <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>en", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>fb <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fb", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>fF <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fF", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>f <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>f", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>cd <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>cd", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>fn <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fn", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>fm <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fm", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>cc <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>cc", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>ff <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>ff", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>flg <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>flg", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>fh <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fh", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>fw <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fw", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>c <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>c", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>fW <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fW", prefix = "" }, _G.packer_plugins)<cr>]]
-vim.cmd [[noremap <silent> <leader>fk <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fk", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>fh <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fh", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>cd <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>cd", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>fm <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fm", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>cc <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>cc", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>fp <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fp", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>flg <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>flg", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>fk <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fk", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> <leader>fw <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fw", prefix = "" }, _G.packer_plugins)<cr>]]
 vim.cmd [[noremap <silent> <leader>fB <cmd>lua require("packer.load")({'telescope.nvim'}, { keys = "<lt>leader>fB", prefix = "" }, _G.packer_plugins)<cr>]]
 time([[Defining lazy-load keymaps]], false)
 
