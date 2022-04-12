@@ -170,9 +170,9 @@ return require("packer").startup({
 
 		use({
 			"j-hui/fidget.nvim",
-			after = 'nvim-lsp-installer',
+      event = 'BufEnter',
 			config = function()
-				require("fidget").setup()
+				require("settings.fidget.settings")
 			end,
 		})
 
