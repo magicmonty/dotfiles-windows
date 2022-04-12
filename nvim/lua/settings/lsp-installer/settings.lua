@@ -1,42 +1,52 @@
 local lsp_installer = require("nvim-lsp-installer")
-require("lsp-status").register_progress()
 
 local on_init = function(client)
-	if client.config.flags then
-		client.config.flags.allow_incremental_sync = true
-	end
+	client.config.flags = client.config.flags or {}
+  client.config.flags.allow_incremental_sync = true
 end
 
 local on_attach = function(client, bufnr)
-	require("lsp-status").on_attach(client)
+	--Enable completion triggered by <c-x><c-o>
+	vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 		client.resolved_capabilities.document_range_formatting = false
 	end
 
-	--Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
 	-- Mappings.
-	local mappings = {
+	local leader_mappings = {
 		l = {
-			name = "LSP",
-			a = { require("telescope.builtin").lsp_code_actions, "Show available code actions" },
-			f = { vim.lsp.buf.formatting, "Format buffer" },
-			n = { vim.lsp.buf.rename, "Rename symbol" },
+			name = 'LSP',
+			a = { vim.lsp.buf.code_action, 'Show available code actions' },
+			f = { '<cmd>Format<cr>', 'Format buffer' },
+			n = { vim.lsp.buf.rename, 'Rename symbol' },
 		},
 		d = {
-			name = "Diagnostics",
-			l = { require("telescope.builtin").diagnostics, "Show diagnostics list" },
-			n = { vim.diagnostic.goto_next, "Jump to next diagnostics entry" },
-			p = { vim.diagnostic.goto_prev, "Jump to previous diagnostics entry" },
+			name = 'Diagnostics',
+			l = { '<cmd>Telescope diagnostics<CR>', 'Workspace diagnostics list' },
+			n = { vim.diagnostic.goto_next, 'Jump to next diagnostic entry' },
+			p = { vim.diagnostic.goto_prev, 'Jump to previous diagnostic entry' },
 		},
 	}
-	require("which-key").register(
-		mappings,
-		{ prefix = "<leader>", buffer = bufnr, mode = "n", noremap = true, silent = true }
-	)
+
+	local wk = require('which-key')
+  wk.register(leader_mappings, { prefix = '<leader>', buffer = bufnr, mode = 'n', noremap = true, silent = true })
+
+	local normal_mappings = {
+    ['<C-s>'] = { vim.lsp.buf.signature_help, 'Show signature help' },
+    g = {
+      name = 'Goto',
+      d = { '<cmd>Telescope lsp_definitions<CR>', 'Goto definition' },
+      D = { vim.lsp.buf.declaration, 'Goto declaration' },
+      i = { '<cmd>Telescope lsp_implementations<CR>', 'Goto implementation' },
+      r = { '<cmd>Telescope lsp_references<CR>', 'Goto reference' },
+      T = { '<cmd>Telescope lsp_type_definitions<CR>', 'Goto type definition' },
+    },
+    K = { vim.lsp.buf.hover, 'Show hover documentation' },
+  }
+
+  wk.register(normal_mappings, { buffer = bufnr, mode = 'n', noremap = true, silent = true })
 
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -44,15 +54,6 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<S-M-Right>", vim.diagnostic.goto_next, opts)
 	vim.keymap.set("n", "<M-Home>", vim.diagnostic.goto_prev, opts)
 	vim.keymap.set("n", "<S-M-Left>", vim.diagnostic.goto_prev, opts)
-
-	-- automatic formatting on save
-	if client.resolved_capabilities.document_formatting then
-		vim.api.nvim_create_augroup("Format", { clear = true })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			buffer = bufnr,
-			callback = vim.lsp.buf.formatting_seq_sync,
-		})
-	end
 
 	local icons = {
 		"", -- Text
@@ -86,6 +87,26 @@ local on_attach = function(client, bufnr)
 	for i, kind in ipairs(kinds) do
 		kinds[i] = icons[kind] or kind
 	end
+
+	if client.resolved_capabilities.document_highlight then
+    vim.cmd([[
+      augroup lsp_document_highlight
+        au! * <buffer>
+        au CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]])
+  end
+
+  if client.resolved_capabilities.code_lens then
+    vim.cmd([[
+      augroup lsp_document_code_lens
+        au! * <buffer>
+        au BufEnter ++once lua vim.lsp.codelens.refresh()
+        au BufWritePost,CursorHold <buffer> lua vim.lsp.codelens.refresh()
+      augroup END
+    ]])
+  end
 end
 
 lsp_installer.settings({
@@ -100,7 +121,6 @@ lsp_installer.settings({
 
 lsp_installer.on_server_ready(function(server)
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = vim.tbl_extend("keep", capabilities, require("lsp-status").capabilities)
 	capabilities.textDocument.codeLens = { dynamicRegistration = false }
 	capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
@@ -220,17 +240,6 @@ lsp_installer.on_server_ready(function(server)
 
 	server:setup(opts)
 end)
-
-require("nvim-web-devicons").setup({
-	override = {
-		zsh = { icon = "", color = "#428850", name = "Zsh" },
-		lua = { icon = "", color = "#4E99DF", name = "Lua" },
-		md = { icon = "", color = "#6BD02B", name = "Md" },
-		MD = { icon = "", color = "#6BD02B", name = "MD" },
-		[".gitignore"] = { icon = "", color = "#F14E32", name = "GitIgnore" },
-	},
-	default = true,
-})
 
 -- LSP Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

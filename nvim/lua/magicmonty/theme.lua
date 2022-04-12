@@ -1,9 +1,9 @@
-local nightfox = require("nightfox.pallet.nightfox")
-local icons = require("icons")
+local icons = require('icons')
 
 local M = {}
 
-M.colors = require("nightfox.spec").load("nightfox")
+M.colorscheme = 'nightfox'
+M.colors = require('nightfox.spec').load(M.colorscheme)
 
 M.icons = icons
 

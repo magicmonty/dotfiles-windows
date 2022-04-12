@@ -6,8 +6,9 @@ local nightfox = require("nightfox")
 
 nightfox.setup({
 	options = {
-		terminal_colors = true,
 		transparent = false,
+		alt_nc = true,
+		terminal_colors = true,
 		dim_inactive = true,
 		inverse = {
 			visual = false,
@@ -16,7 +17,6 @@ nightfox.setup({
 			comments = "italic",
 			keywords = "bold",
 		},
-		alt_nc = true,
 	},
 	groups = {
 		IndentBlanklineChar = { fg = "syntax.comment" },
@@ -43,7 +43,7 @@ nightfox.setup({
 	},
 })
 
-vim.cmd([[ colorscheme nightfox ]])
+vim.cmd("colorscheme " .. require('magicmonty.theme').colorscheme)
 
 opt.list = true
 

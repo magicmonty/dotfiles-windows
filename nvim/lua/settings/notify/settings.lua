@@ -1,16 +1,18 @@
 local notify = require("notify")
 local theme = require("magicmonty.theme")
-local icons = theme.icons
+local icons = theme.icons.diagnostics
 
 notify.setup({
 	timeout = 3000,
 	stages = "fade",
 	icons = {
-		ERROR = icons.diagnostics.Error,
-		WARN = icons.diagnostics.Warning,
-		INFO = icons.diagnostics.Info,
-		DEBUG = icons.diagnostics.Debug,
-		TRACE = icons.diagnostics.Trace,
+		ERROR = icons.Error,
+		WARN = icons.Warning,
+		INFO = icons.Info,
+		DEBUG = icons.Debug,
+		TRACE = icons.Trace,
 	},
 	background_colour = theme.colors.bg0,
 })
+
+vim.notify = require('notify')

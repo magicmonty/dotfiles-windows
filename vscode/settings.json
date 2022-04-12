@@ -109,7 +109,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -146,5 +146,6 @@
     "javascript", "typescript", "json", "jsonc", "json5"
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "markdown-preview-enhanced.previewTheme": "github-dark.css"
 }

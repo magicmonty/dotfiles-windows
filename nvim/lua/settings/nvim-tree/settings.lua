@@ -4,7 +4,6 @@ local map = require('vim_ext').map
 local icons = require('icons')
 
 vim.cmd [[
-  let g:nvim_tree_indent_markers = 1
   let g:nvim_tree_git_hl = 1
   let g:nvim_tree_highlight_opened_files = 3
 
@@ -38,13 +37,17 @@ vim.keymap.set('n', '<leader>.', ':NvimTreeFindFileToggle<cr>', { noremap = true
 nvim_tree.setup({
   disable_netrw = true,
   hijack_netrw = true,
-  auto_close = true,
   hijack_cursor = true,
   open_on_setup = false,
   update_cwd = false,
   update_focused_file = {
     enable = true,
     update_cwd = false
+  },
+  renderer = {
+    indent_markers = {
+      enable = true
+    }
   },
   diagnostics = {
     enable = true,

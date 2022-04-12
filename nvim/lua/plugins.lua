@@ -21,43 +21,25 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	group = "packer_user_config",
 })
 
-vim.api.nvim_create_augroup("packer", { clear = true })
-vim.api.nvim_create_autocmd("User PackerComplete", {
-	group = "packer",
-	pattern = "*",
-	callback = function()
-		-- treesitter needs to be loaded after packer completes
-		-- otherwise it will not enable highlighting on the first load
-		require("settings.treesitter.settings").setup()
-	end,
-})
-
 return require("packer").startup({
 	function(use)
 		use("wbthomason/packer.nvim")
 		use("lewis6991/impatient.nvim") --fast startup
-		use("nvim-lua/plenary.nvim")
 		use("nvim-lua/popup.nvim")
+		use("nvim-lua/plenary.nvim")
 
+		use({
+      'nathom/filetype.nvim',
+      config = function()
+        vim.g.did_load_filetypes = 1
+      end,
+    })
+		
 		-- common dependencies
 		use({
 			"kyazdani42/nvim-web-devicons",
 			config = function()
 				require("settings.web-devicons.settings")
-			end,
-		})
-
-		use({
-			"j-hui/fidget.nvim",
-			config = function()
-				require("fidget").setup()
-			end,
-		})
-
-		use({
-			"nvim-lua/lsp-status.nvim",
-			config = function()
-				require("settings.lsp-status.settings")
 			end,
 		})
 
@@ -75,7 +57,10 @@ return require("packer").startup({
 			config = function()
 				require("settings.nightfox.settings")
 			end,
-			requires = "kyazdani42/nvim-web-devicons",
+			requires = {
+				"kyazdani42/nvim-web-devicons",
+				'lukas-reineke/indent-blankline.nvim',
+			}
 		})
 
 		-- Color scheme and nice notification windows
@@ -93,35 +78,53 @@ return require("packer").startup({
 			config = function()
 				require("settings.nvim-tree.settings")
 			end,
-			requires = "kyazdani42/nvim-web-devicons",
+			requires =  {
+				"EdenEast/nightfox.nvim",
+				"kyazdani42/nvim-web-devicons",
+			}
 		})
 
 		-- Statusline / Tabline
 		use({
 			"nvim-lualine/lualine.nvim",
-			after = "nightfox.nvim",
 			config = function()
 				require("settings.lualine.settings")
 			end,
-			requires = { "kyazdani42/nvim-web-devicons", "nvim-lua/lsp-status.nvim" },
+			requires = { 
+				"EdenEast/nightfox.nvim",
+				"kyazdani42/nvim-web-devicons"
+			},
 		})
 
 		use({
-			"kdheepak/tabline.nvim",
-			config = function()
-				require("settings.tabline.settings")
-			end,
-		})
+      'romgrk/barbar.nvim',
+      config = function()
+        require('settings.barbar.settings')
+      end,
+      requires = {
+        'EdenEast/nightfox.nvim',
+        'kyazdani42/nvim-web-devicons',
+      },
+    })
 
 		-- Git support
 		use("tpope/vim-fugitive")
 		use({
 			"lewis6991/gitsigns.nvim",
+			event = 'BufRead',
 			config = function()
 				require("settings.gitsigns.settings").setup()
 			end,
 			requires = "nvim-lua/plenary.nvim",
 		})
+
+    use({
+      'sindrets/diffview.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+				require('settings.diffview.settings')
+      end
+    })
 
 		-- Auto commenter
 		use({
@@ -135,20 +138,25 @@ return require("packer").startup({
 		use({
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
+      config = function()
+        require("settings.treesitter.settings").setup()
+      end,
 			requires = {
-				{ "nvim-treesitter/playground" },
-				{ "nvim-treesitter/nvim-treesitter-textobjects" },
-				{ "nvim-treesitter/nvim-treesitter-angular" },
-				{ "windwp/nvim-ts-autotag" },
-				{ "p00f/nvim-ts-rainbow" },
-				{ "David-Kunz/treesitter-unit" },
-				{ "folke/lsp-colors.nvim" },
+				'nvim-treesitter/nvim-treesitter-refactor',
+				"nvim-treesitter/nvim-treesitter-textobjects",
+				"nvim-treesitter/playground",
+				"windwp/nvim-ts-autotag",
+				"p00f/nvim-ts-rainbow",
+				"David-Kunz/treesitter-unit",
+				"folke/lsp-colors.nvim",
+				'JoosepAlviste/nvim-ts-context-commentstring'
 			},
 		})
 
 		-- LSP/Completion config
 		use({
 			"williamboman/nvim-lsp-installer",
+			event = 'BufRead',
 			config = function()
 				require("settings.lsp-installer.settings")
 			end,
@@ -156,17 +164,26 @@ return require("packer").startup({
 				"neovim/nvim-lspconfig",
 				"folke/lua-dev.nvim",
 				"kyazdani42/nvim-web-devicons",
-				"nvim-lua/lsp-status.nvim",
+				"folke/lsp-colors.nvim"
 			},
 		})
 
 		use({
-			"jose-elias-alvarez/null-ls.nvim",
+			"j-hui/fidget.nvim",
+			after = 'nvim-lsp-installer',
 			config = function()
-				require("settings.null-ls.settings")
+				require("fidget").setup()
 			end,
 		})
 
+
+		use({
+      'mhartington/formatter.nvim',
+      config = function()
+        require('settings.formatter.settings')
+      end,
+    })
+		
 		use({
 			"folke/lsp-colors.nvim",
 			config = function()
@@ -175,6 +192,16 @@ return require("packer").startup({
 			requires = "EdenEast/nightfox.nvim",
 		})
 
+	
+		--[[ 
+		use({
+			"jose-elias-alvarez/null-ls.nvim",
+			config = function()
+				require("settings.null-ls.settings")
+			end,
+		})
+		]]
+	
 		use({
 			"hrsh7th/nvim-cmp",
 			config = function()
@@ -215,11 +242,11 @@ return require("packer").startup({
 		-- Telescope
 		use({
 			"nvim-telescope/telescope.nvim",
+			opt = true,
 			keys = {
 				"<leader>cc",
 				"<leader>cd",
 				"<leader>c",
-				"<leader>f",
 				"<leader>fp",
 				"<leader>ff",
 				"<leader>fF",
@@ -228,14 +255,22 @@ return require("packer").startup({
 				"<leader>fn",
 				"<leader>fk",
 				"<leader>fm",
+				"<leader>fo",
 				"<leader>fw",
 				"<leader>fW",
 				"<leader>fB",
 				"<leader>flg",
 				"<leader>en",
+				"<leader><Tab>",
 			},
-			module = "telescope.builtin",
-			opt = true,
+			cmd = {
+				'Telescope'
+			},
+			module = {
+				"telescope",
+				"telescope.builtin",
+				"telescope.utils"
+			},
 			config = function()
 				require("settings.telescope.settings")
 			end,
@@ -272,10 +307,36 @@ return require("packer").startup({
 			end,
 		})
 		use("editorconfig/editorconfig-vim")
-		use("lukas-reineke/indent-blankline.nvim")
+		use({
+      'stevearc/dressing.nvim',
+      config = function()
+        require('settings.dressing.settings')
+      end,
+    })
 
 		-- SCSS syntax support
 		use("cakebaker/scss-syntax.vim")
+
+		-- note taking
+		--[[ use({
+      'vimwiki/vimwiki',
+      requires = {
+        'EdenEast/nightfox.nvim',
+      },
+      config = function()
+        require('settings.vimwiki.settings')
+      end,
+    })
+]]
+    use('dhruvasagar/vim-table-mode')
+
+		-- Dashboard
+		use({
+      'glepnir/dashboard-nvim',
+      config = function()
+        require('settings.dashboard.settings').setup()
+      end,
+    })
 
 		if packer_bootstrap then
 			require("packer").sync()

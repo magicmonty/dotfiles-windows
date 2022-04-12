@@ -2,6 +2,7 @@ local cmp = require('cmp')
 
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
+
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
     return false
@@ -98,5 +99,3 @@ cmp.setup({
 
 local autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', autopairs.on_confirm_done({ map_char = { tex = '' } }))
-
--- cmp.register_source("jira", require'magicmonty.cmp_jira'.new())
