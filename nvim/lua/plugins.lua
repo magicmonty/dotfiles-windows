@@ -335,6 +335,18 @@ return require("packer").startup({
       'davidgranstrom/nvim-markdown-preview'
     })
 
+    use({
+      'vim-pandoc/vim-pandoc-syntax',
+      config = function()
+        vim.api.nvim_create_augroup("pandoc_syntax", { clear = true })
+        vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPre', 'BufRead' }, {
+          pattern = '*.md',
+          command = 'set filetype=markdown.pandoc',
+          group = 'pandoc_syntax'
+        })
+      end
+    })
+
 		-- Dashboard
 		use({
       'glepnir/dashboard-nvim',
