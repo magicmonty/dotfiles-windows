@@ -1,2 +1,3 @@
 
-neovim/.netcoredbg_hist
+nvim/.netcoredbg_hist
+nvim/plugin/packer_compiled.lua

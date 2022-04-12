@@ -330,6 +330,11 @@ return require("packer").startup({
 ]]
     use('dhruvasagar/vim-table-mode')
 
+    -- Markdown support
+    use({
+      'davidgranstrom/nvim-markdown-preview'
+    })
+
 		-- Dashboard
 		use({
       'glepnir/dashboard-nvim',
