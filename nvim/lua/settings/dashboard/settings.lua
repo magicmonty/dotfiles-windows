@@ -32,8 +32,14 @@ M.setup = function()
 
   g.dashboard_custom_section = {
     a = { description = { '   Find file                 SPC f F' }, command = 'Telescope find_files' },
-    b = { description = { '   Find project file         SPC f f' }, command = "lua require('magicmonty.telescope').project_files()", },
-    c = { description = { '   Find Project              SPC f p' }, command = "lua require('telescope').extensions.project.project({ display_type = 'minimal' })", },
+    b = {
+      description = { '   Find project file         SPC f f' },
+      command = "lua require('magicmonty.telescope').project_files()",
+    },
+    c = {
+      description = { '   Find Project              SPC f p' },
+      command = "lua require('telescope').extensions.project.project({ display_type = 'minimal' })",
+    },
     d = { description = { '   Recents                   SPC f o' }, command = 'Telescope oldfiles' },
     e = { description = { '   New File                  SPC n f' }, command = 'DashboardNewFile' },
   }

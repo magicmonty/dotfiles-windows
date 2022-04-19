@@ -1,5 +1,5 @@
 -- vim: foldlevel=99:
-local utils = require("telescope.utils")
+local utils = require('telescope.utils')
 
 local M = {}
 
@@ -7,46 +7,46 @@ M.search_config = function()
   local opts = {
     cwd = '~/.dotfiles/neovim/',
     path_display = {
-      'absolute'
-    }
+      'absolute',
+    },
   }
 
   require('telescope.builtin').find_files(opts)
 end
 
 M.project_files = function()
-  local _, ret, _ = utils.get_os_command_output {
-    "git",
-    "rev-parse",
-    "--is-inside-work-tree",
-  }
+  local _, ret, _ = utils.get_os_command_output({
+    'git',
+    'rev-parse',
+    '--is-inside-work-tree',
+  })
 
   local gopts = {}
   local fopts = {}
 
-  gopts.prompt_title = " Git Files"
-  gopts.prompt_prefix = "  "
-  gopts.results_title = "Project Files Results"
+  gopts.prompt_title = ' Git Files'
+  gopts.prompt_prefix = '  '
+  gopts.results_title = 'Project Files Results'
 
   fopts.hidden = true
 
   fopts.file_ignore_patterns = {
-    ".vim/",
-    ".local/",
-    ".cache/",
-    "Downloads/",
-    ".git/",
-    "Dropbox/.*",
-    "Library/.*",
-    ".rustup/.*",
-    "Movies/",
-    ".cargo/registry/",
+    '.vim/',
+    '.local/',
+    '.cache/',
+    'Downloads/',
+    '.git/',
+    'Dropbox/.*',
+    'Library/.*',
+    '.rustup/.*',
+    'Movies/',
+    '.cargo/registry/',
   }
 
   if ret == 0 then
-    require("telescope.builtin").git_files(gopts)
+    require('telescope.builtin').git_files(gopts)
   else
-    require("telescope.builtin").find_files(fopts)
+    require('telescope.builtin').find_files(fopts)
   end
 end
 
@@ -58,7 +58,7 @@ local map = vim.tbl_map
 
 function M.gen_buffer_display(opts)
   opts = opts or {}
-  local default_icons, _ = devicons.get_icon('file', '', {default = true})
+  local default_icons, _ = devicons.get_icon('file', '', { default = true })
 
   local bufnrs = filter(function(b)
     return 1 == vim.fn.buflisted(b)
@@ -67,16 +67,12 @@ function M.gen_buffer_display(opts)
   local max_bufnr = math.max(unpack(bufnrs))
   local bufnr_width = #tostring(max_bufnr)
 
-  local max_bufname = math.max(
-    unpack(
-      map(function(bufnr)
-        return vim.fn.strdisplaywidth(vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':p:t'))
-      end, bufnrs)
-    )
-  )
+  local max_bufname = math.max(unpack(map(function(bufnr)
+    return vim.fn.strdisplaywidth(vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':p:t'))
+  end, bufnrs)))
 
-  local displayer = entry_display.create {
-    separator = " ",
+  local displayer = entry_display.create({
+    separator = ' ',
     items = {
       { width = bufnr_width },
       { width = 4 },
@@ -84,20 +80,20 @@ function M.gen_buffer_display(opts)
       { width = max_bufname },
       { remaining = true },
     },
-  }
+  })
 
   local make_display = function(entry)
-    return displayer {
-      {entry.bufnr, "TelescopeResultsNumber"},
-      {entry.indicator, "TelescopeResultsComment"},
-      {entry.devicons, entry.devicons_highlight},
+    return displayer({
+      { entry.bufnr, 'TelescopeResultsNumber' },
+      { entry.indicator, 'TelescopeResultsComment' },
+      { entry.devicons, entry.devicons_highlight },
       entry.file_name,
-      {entry.dir_name, "Comment"}
-    }
+      { entry.dir_name, 'Comment' },
+    })
   end
 
   return function(entry)
-    local bufname = entry.info.name ~= "" and entry.info.name or '[No Name]'
+    local bufname = entry.info.name ~= '' and entry.info.name or '[No Name]'
     local hidden = entry.info.hidden == 1 and 'h' or 'a'
     local readonly = vim.api.nvim_buf_get_option(entry.bufnr, 'readonly') and '=' or ' '
     local changed = entry.info.changed == 1 and '+' or ' '
@@ -112,7 +108,7 @@ function M.gen_buffer_display(opts)
       valid = true,
 
       value = bufname,
-      ordinal = entry.bufnr .. " : " .. file_name,
+      ordinal = entry.bufnr .. ' : ' .. file_name,
       display = make_display,
 
       bufnr = entry.bufnr,
@@ -127,6 +123,5 @@ function M.gen_buffer_display(opts)
     }
   end
 end
-
 
 return M

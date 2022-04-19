@@ -22,8 +22,10 @@ if ($host.Name -eq 'ConsoleHost')
 
   # History as browsable list
   Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-  Set-PSReadLineOption -PredictionViewStyle ListView
-  Set-PSReadLineOption -PredictionSource History
+  if ($host.Version.Major > 5) {
+    Set-PSReadLineOption -PredictionViewStyle ListView
+    Set-PSReadLineOption -PredictionSource History
+  }
   Set-PSReadLineOption -EditMode Windows
 
   Remove-PSReadlineKeyHandler 'Ctrl+r'
@@ -186,8 +188,11 @@ function grma { git rebase master }
 function grd { git rebase development }
 function hello { utt hello }
 function t { utt add $args }
-function report { utt report }
-Set-Alias r report
+
+if ($Host.Version.Major > 6) {
+  function report { utt report }
+  Set-Alias r report
+}
 
 function grep
 {
@@ -251,9 +256,15 @@ function Invoke-CmdScript() {
 # Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
  Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
 
-Invoke-Expression (& {
- (zoxide init --hook "pwd" powershell) -join "`n"
-})
+if ($Host.Version.Major > 6) {
+  Invoke-Expression (& {
+   (zoxide init --hook "pwd" powershell) -join "`n"
+  })
+} else {
+  Invoke-Expression (& {
+   (zoxide init --hook "none" powershell) -join "`n"
+  })
+}
 
 if ($Host.Name -ne 'Package Manager Host') {
   oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression

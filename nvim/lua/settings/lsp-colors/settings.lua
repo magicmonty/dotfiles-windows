@@ -19,15 +19,13 @@ sign_define(
   { texthl = 'DiagnosticSignError', text = icons.Error, numhl = 'DiagnosticSignError' }
 )
 
-sign_define(
-  'DiagnosticSignWarn',
-  { texthl = 'DiagnosticSignWarn', text = icons.Warning, numhl = 'DiagnosticSignWarn' }
-)
+sign_define('DiagnosticSignWarn', {
+  texthl = 'DiagnosticSignWarn',
+  text = icons.Warning,
+  numhl = 'DiagnosticSignWarn',
+})
 
-sign_define(
-  'DiagnosticSignHint',
-  { texthl = 'DiagnosticSignHint', text = icons.Hint, numhl = 'DiagnosticSignHint' }
-)
+sign_define('DiagnosticSignHint', { texthl = 'DiagnosticSignHint', text = icons.Hint, numhl = 'DiagnosticSignHint' })
 
 sign_define(
   'DiagnosticSignInfo',

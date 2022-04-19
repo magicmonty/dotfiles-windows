@@ -1,5 +1,5 @@
-local ft_to_parser = require "nvim-treesitter.parsers".filetype_to_parsername
-ft_to_parser.tsx = { "javascript", "typescript.tsx" }
+local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+ft_to_parser.tsx = { 'javascript', 'typescript.tsx' }
 
 local M = {}
 
@@ -11,19 +11,19 @@ local opts = {
   },
   indent = {
     enable = true,
-    disable = { 'yaml' }
+    disable = { 'yaml' },
   },
   refactor = {
     highlight_definitions = { enable = true },
-    highlight_current_scope = { enable = false }
+    highlight_current_scope = { enable = false },
   },
   incremental_selection = {
     enable = true,
     keymaps = {
-      icit_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      icit_selection = 'gnn',
+      node_incremental = 'grn',
+      scope_incremental = 'grc',
+      node_decremental = 'grm',
     },
   },
   matchup = { enable = true },
@@ -49,30 +49,30 @@ local opts = {
   textobjects = {
     lsp_interop = {
       enable = true,
-      border = "none",
+      border = 'none',
       peek_definition_code = {
-        ["<leader>df"] = "@function.outer",
-        ["<leader>dF"] = "@class.outer",
+        ['<leader>df'] = '@function.outer',
+        ['<leader>dF'] = '@class.outer',
       },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer",
+        [']m'] = '@function.outer',
+        [']]'] = '@class.outer',
       },
       goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@class.outer",
+        [']M'] = '@function.outer',
+        [']['] = '@class.outer',
       },
       goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer",
+        ['[m'] = '@function.outer',
+        ['[['] = '@class.outer',
       },
       goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer",
+        ['[M'] = '@function.outer',
+        ['[]'] = '@class.outer',
       },
     },
     -- @TODOUA: these selectors may or may not helpful workflow
@@ -80,35 +80,35 @@ local opts = {
       enable = true,
       lookahead = true,
       keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
       },
     },
   },
   ensure_installed = {
-    "c_sharp",
-    "comment",
-    "css",
-    "dockerfile",
-    "html",
-    "http",
-    "javascript",
-    "json",
-    "json5",
-    "jsonc",
-    "lua",
-    "markdown",
-    "regex",
-    "scss",
-    "todotxt",
-    "tsx",
-    "typescript",
-    "vim",
-    "vue",
-    "yaml"
-  }
+    'c_sharp',
+    'comment',
+    'css',
+    'dockerfile',
+    'html',
+    'http',
+    'javascript',
+    'json',
+    'json5',
+    'jsonc',
+    'lua',
+    'markdown',
+    'regex',
+    'scss',
+    'todotxt',
+    'tsx',
+    'typescript',
+    'vim',
+    'vue',
+    'yaml',
+  },
 }
 
 M.setup = function()
@@ -122,13 +122,14 @@ M.setup = function()
     return
   end
 
-  treesitter.setup(opts) 
+  treesitter.setup(opts)
 
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+  vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
   vim.opt.foldlevel = 99
-  vim.opt.fillchars = "fold:-"
-  vim.wo.foldmethod = "expr"
-  vim.o.foldtext = [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
+  vim.opt.fillchars = 'fold:-'
+  vim.wo.foldmethod = 'expr'
+  vim.o.foldtext =
+    [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
 end
 
 return M

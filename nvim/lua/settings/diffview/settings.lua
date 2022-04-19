@@ -58,7 +58,7 @@ diffview.setup({
       ['<tab>'] = cb('select_next_entry'), -- Open the diff for the next file
       ['<s-tab>'] = cb('select_prev_entry'), -- Open the diff for the previous file
       ['gf'] = cb('goto_file'), -- Open the file in a new split in previous tabpage
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
     file_panel = {
       ['j'] = cb('next_entry'), -- Bring the cursor to the next file entry
@@ -78,7 +78,7 @@ diffview.setup({
       ['gf'] = cb('goto_file'),
       ['i'] = cb('listing_style'), -- Toggle between 'list' and 'tree' views
       ['f'] = cb('toggle_flatten_dirs'), -- Flatten empty subdirectories in tree listing style.
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
     file_history_panel = {
       ['g!'] = cb('options'), -- Open the option panel
@@ -96,11 +96,11 @@ diffview.setup({
       ['gf'] = cb('goto_file'),
       ['<leader>e'] = cb('focus_files'),
       ['<leader>b'] = cb('toggle_files'),
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
     option_panel = {
       ['<tab>'] = cb('select'),
-      ['q'] = ":DiffviewClose<CR>", -- Close the diff
+      ['q'] = ':DiffviewClose<CR>', -- Close the diff
     },
   },
 })

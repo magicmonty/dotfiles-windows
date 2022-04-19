@@ -1,16 +1,16 @@
 local config = {
-  disabled_filetype = { "TelescopePrompt" },
+  disabled_filetype = { 'TelescopePrompt' },
   check_ts = true,
   ts_config = {
     lua = { 'string' }, -- don't add auto pair on lua string nodes
   },
   enable_check_bracket_line = true,
-  fast_wrap = {}
+  fast_wrap = {},
 }
 
 local M = {}
 
-M.setup = function() 
+M.setup = function()
   require('nvim-autopairs').setup(config)
 end
 

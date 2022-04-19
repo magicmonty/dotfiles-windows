@@ -1,4 +1,4 @@
-local map = require("vim_ext").map
+local map = vim.keymap.set
 local silent = { silent = true }
 local remap = { noremap = false }
 
@@ -6,9 +6,9 @@ local remap = { noremap = false }
 map('i', '<S-Insert>', '<C-r>+', silent)
 
 -- Quickfix navigation
-map('n', "<space>qn", ":cnext<cr>", silent)
-map('n', "<space>qp", ":cprevious<cr>", silent)
-map('n', "<space>qq", ":cquit<cr>", silent)
+map('n', '<space>qn', ':cnext<cr>', silent)
+map('n', '<space>qp', ':cprevious<cr>', silent)
+map('n', '<space>qq', ':cquit<cr>', silent)
 
 -- Backspace in Visual mode deletes selection.
 map('v', '<BS>', 'd')
@@ -59,9 +59,9 @@ map('i', '<C-d>', '<C-O>mg<C-O>""yy<C-O>p<C-O>`g<C-O>:delm g<cr>', remap)
 map('v', '<C-d>', '""y<up>""p', remap)
 
 -- <C-S> saves the current file (if it's been changed).
-map("", "<C-S>", ":update<CR>", silent)
-map("v", "<C-S>", "<C-C>:update<CR>", silent)
-map("i", "<C-S>", "<C-O>:update<CR>", silent)
+map('', '<C-S>', ':update<CR>', silent)
+map('v', '<C-S>', '<C-C>:update<CR>', silent)
+map('i', '<C-S>', '<C-O>:update<CR>', silent)
 
 -- AutoComplete with C-Space
 -- map('i', '<C-space>', '<C-x><C-o>')
@@ -103,5 +103,3 @@ vim.api.nvim_set_keymap('x', '<', ']', {})
 vim.api.nvim_set_keymap('n', '>', ']', {})
 vim.api.nvim_set_keymap('o', '>', ']', {})
 vim.api.nvim_set_keymap('x', '>', ']', {})
-
-

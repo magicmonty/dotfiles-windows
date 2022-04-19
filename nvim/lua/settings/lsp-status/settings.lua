@@ -1,19 +1,19 @@
-require('lsp-status').config {
+require('lsp-status').config({
   status_symbol = '',
   select_symbol = function(cursor_pos, symbol)
     if symbol.valueRange then
       local value_range = {
-        ["start"] = {
+        ['start'] = {
           character = 0,
-          line = vim.fn.byte2line(symbol.valueRange[1])
+          line = vim.fn.byte2line(symbol.valueRange[1]),
         },
-        ["end"] = {
+        ['end'] = {
           character = 0,
-          line = vim.fn.byte2line(symbol.valueRange[2])
-        }
+          line = vim.fn.byte2line(symbol.valueRange[2]),
+        },
       }
 
-      return require("lsp-status.util").in_range(cursor_pos, value_range)
+      return require('lsp-status.util').in_range(cursor_pos, value_range)
     end
-  end
-}
+  end,
+})

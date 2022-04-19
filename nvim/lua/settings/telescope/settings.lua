@@ -1,32 +1,32 @@
 -- vim: foldlevel=99:
-local telescope = require("telescope")
+local telescope = require('telescope')
 
-telescope.setup {
+telescope.setup({
   extensions = {
     project = {
       base_dirs = {
-        "/Projects/",
-        "~/.dotfiles/"
-      }
-    }
+        '/Projects/',
+        '~/.dotfiles/',
+      },
+    },
   },
   defaults = {
-    prompt_prefix = "❯ ",
-    selection_caret = "❯ ",
-    sorting_strategy = "ascending",
+    prompt_prefix = '❯ ',
+    selection_caret = '❯ ',
+    sorting_strategy = 'ascending',
     dynamic_preview_title = true,
     layout_config = {
-      prompt_position = "bottom",
+      prompt_position = 'bottom',
       horizontal = {
         width_padding = 0.04,
         height_padding = 0.1,
-        preview_width = 0.6
+        preview_width = 0.6,
       },
       vertical = {
         width_padding = 0.04,
         height_padding = 1,
-        preview_height = 0.5
-      }
+        preview_height = 0.5,
+      },
     },
     winblend = 10,
     mappings = {
@@ -36,20 +36,20 @@ telescope.setup {
     },
     preview = {
       timeout = 500,
-      msg_bg_fillchar = ""
+      msg_bg_fillchar = '',
     },
     vimgrep_arguments = {
-      "rg",
-      "--color=never",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-      "--hidden"
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',
     },
-  }
-}
+  },
+})
 
 vim.cmd([[
   packadd! nvim-dap
@@ -63,7 +63,7 @@ vim.cmd([[
   packadd! telescope-zoxide
 ]])
 
-local map=vim.keymap.set
+local map = vim.keymap.set
 
 local opts = { silent = true, noremap = true }
 
@@ -152,4 +152,3 @@ end, opts)
 
 -- Wrap preview text
 vim.api.nvim_create_autocmd('User TelescopePreviewerLoaded', { command = 'setlocal wrap' })
-
