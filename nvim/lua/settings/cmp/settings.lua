@@ -24,9 +24,7 @@ cmp.setup({
   },
 
   window = {
-    documentation = {
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    },
+    documentation = cmp.config.window.bordered(),
   },
 
   mapping = {

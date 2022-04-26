@@ -228,7 +228,7 @@
         "list": 
         [
             {
-                "commandline": "pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command \"Invoke-Expression '. ''%USERPROFILE%\\.dotfiles\\powershell\\profile.core.ps1'''\"",
+                "commandline": "C:/Users/martin.gondermann/AppData/Local/Microsoft/WindowsApps/Microsoft.PowerShell_8wekyb3d8bbwe/pwsh.exe -ExecutionPolicy Bypass -NoLogo -NoProfile -NoExit -Command \"Invoke-Expression '. ''%USERPROFILE%\\.dotfiles\\powershell\\profile.core.ps1'''\"",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell",

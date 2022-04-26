@@ -155,13 +155,26 @@ return require('packer').startup({
     })
 
     -- LSP/Completion config
-    use({
+    --[[ use({
       'williamboman/nvim-lsp-installer',
       config = function()
         require('settings.lsp-installer.settings')
       end,
       requires = {
         'neovim/nvim-lspconfig',
+        'folke/lua-dev.nvim',
+        'kyazdani42/nvim-web-devicons',
+        'folke/lsp-colors.nvim',
+      },
+    }) ]]
+    use({
+      'junnplus/nvim-lsp-setup',
+      config = function()
+        require('settings.lsp-setup.settings')
+      end,
+      requires = {
+        'neovim/nvim-lspconfig',
+        'williamboman/nvim-lsp-installer',
         'folke/lua-dev.nvim',
         'kyazdani42/nvim-web-devicons',
         'folke/lsp-colors.nvim',

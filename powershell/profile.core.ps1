@@ -22,7 +22,7 @@ if ($host.Name -eq 'ConsoleHost')
 
   # History as browsable list
   Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-  if ($host.Version.Major > 5) {
+  if ($host.Version.Major -gt 5) {
     Set-PSReadLineOption -PredictionViewStyle ListView
     Set-PSReadLineOption -PredictionSource History
   }
@@ -189,7 +189,7 @@ function grd { git rebase development }
 function hello { utt hello }
 function t { utt add $args }
 
-if ($Host.Version.Major > 6) {
+if ($Host.Version.Major -gt 6) {
   function report { utt report }
   Set-Alias r report
 }
@@ -254,9 +254,9 @@ function Invoke-CmdScript() {
 }
 
 # Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
- Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
+  Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
 
-if ($Host.Version.Major > 6) {
+if ($Host.Version.Major -gt 6) {
   Invoke-Expression (& {
    (zoxide init --hook "pwd" powershell) -join "`n"
   })
