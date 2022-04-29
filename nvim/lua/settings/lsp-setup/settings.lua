@@ -2,11 +2,6 @@ local function on_attach(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-  end
-
   -- Mappings.
   local leader_mappings = {
     l = {
@@ -112,6 +107,10 @@ require('nvim-lsp-setup').setup({
         return vim.loop.cwd()
       end,
       filetypes = { 'html', 'css', 'scss' },
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        client.resolved_capabilities.textDocument.completion.completionItem.snippetSupport = true
+      end,
     },
     eslint = {},
     html = {},
@@ -175,6 +174,8 @@ require('nvim-lsp-setup').setup({
         },
       },
     },
+    lemminx = {},
+    omnisharp = {},
     powershell_es = {},
     remark_ls = {},
     sumneko_lua = require('lua-dev').setup({
@@ -198,13 +199,19 @@ require('nvim-lsp-setup').setup({
         },
       },
     }),
-    tsserver = {},
+    tsserver = {
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end,
+    },
     volar = {},
     yamlls = {},
   },
 })
 
--- LSP Enable diagnostics
+-- Enable inline diagnostics
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = {
     prefix = '»',
@@ -216,6 +223,18 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   update_in_insert = false,
 })
 
+-- Add Border and max with to signature/hover
 local pop_opts = { border = 'rounded', max_width = 80 }
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, pop_opts)
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, pop_opts)
+
+-- Nicer Icons in LspInstallInfo
+require('nvim-lsp-installer').settings({
+  ui = {
+    icons = {
+      server_installed = '✓',
+      server_pending = '➜',
+      server_uninstalled = '✗',
+    },
+  },
+})

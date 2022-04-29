@@ -51,15 +51,13 @@ nvim_tree.setup({
   },
   diagnostics = {
     enable = true,
+    show_on_dirs = true,
     icons = {
       hint = icons.diagnostics.Hint,
       info = icons.diagnostics.Info,
       warning = icons.diagnostics.Warning,
       error = icons.diagnostics.Error,
     },
-  },
-  git = {
-    ignore = true,
   },
   view = {
     mappings = {
@@ -73,8 +71,11 @@ nvim_tree.setup({
     open_file = {
       -- false by default, closes the tree when you open a file
       quit_on_open = true,
-      window_picker_exclude = {
-        filetype = { 'packer', 'vim-plug', 'qf' },
+      window_picker = {
+        exclude = {
+          filetype = { 'packer', 'vim-plug', 'qf', 'notify' },
+          buftype = { 'nofile', 'terminal', 'help' },
+        },
       },
     },
   },

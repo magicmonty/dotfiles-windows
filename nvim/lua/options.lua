@@ -105,4 +105,6 @@ opt.winblend = 0
 opt.wildoptions = { 'pum' }
 opt.pumblend = 5
 
+opt.updatetime = 1000
+
 require('vim_ext').hi('Normal', { guibg = '#192330' })

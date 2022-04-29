@@ -49,7 +49,7 @@ local opts = {
   textobjects = {
     lsp_interop = {
       enable = true,
-      border = 'none',
+      border = 'rounded',
       peek_definition_code = {
         ['<leader>df'] = '@function.outer',
         ['<leader>dF'] = '@class.outer',
@@ -75,15 +75,12 @@ local opts = {
         ['[]'] = '@class.outer',
       },
     },
-    -- @TODOUA: these selectors may or may not helpful workflow
     select = {
       enable = true,
       lookahead = true,
       keymaps = {
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
       },
     },
   },
