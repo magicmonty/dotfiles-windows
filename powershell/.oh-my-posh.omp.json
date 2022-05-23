@@ -10,10 +10,10 @@
           "leading_diamond": "\ue0b6",
           "powerline_symbol": "\ue0b0",
           "properties": {
-            "style": "folder",
-            "template": " \ue5ff {{ .Path }} "
+            "style": "folder"
           },
           "style": "diamond",
+          "template": " \ue5ff {{ .Path }} ",
           "trailing_diamond": "\ue0b0",
           "type": "path"
         },
@@ -21,10 +21,8 @@
           "background": "#c792ea",
           "foreground": "#f8f8f2",
           "leading_diamond": "<transparent, #c792ea>\ue0b0</>",
-          "properties": {
-            "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} "
-          },
           "style": "diamond",
+          "template": " \ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
           "trailing_diamond": "\ue0b0",
           "type": "node"
         },
@@ -40,29 +38,25 @@
           "powerline_symbol": "\ue0b0",
           "properties": {
             "fetch_status": true,
-            "fetch_upstream_icon": true,
-            "template": " {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} "
+            "fetch_upstream_icon": true
           },
           "style": "powerline",
+          "template": " {{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
           "type": "git"
         },
         {
           "background": "#fee761",
           "foreground": "#292d3e",
           "powerline_symbol": "\ue0b0",
-          "properties": {
-            "template": " \uf0e7 "
-          },
           "style": "powerline",
+          "template": " \uf0e7 ",
           "type": "root"
         },
         {
           "background": "#89ddff",
           "foreground": "#292d3e",
-          "properties": {
-            "template": "<transparent, #89ddff>\ue0b0</> "
-          },
           "style": "plain",
+          "template": "<transparent, #89ddff>\ue0b0</> ",
           "type": "text"
         },
         {
@@ -71,10 +65,10 @@
           "properties": {
             "display_error": false,
             "display_mode": "files",
-            "fetch_version": true,
-            "template": " \ue70c {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }} "
+            "fetch_version": true
           },
           "style": "diamond",
+          "template": " \ue70c {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }} ",
           "type": "dotnet"
         },
         {
@@ -84,10 +78,10 @@
           ],
           "foreground": "#292d3e",
           "properties": {
-            "always_enabled": true,
-            "template": "<#89ddff>\ue0b0</> \ue23a{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} "
+            "always_enabled": true
           },
           "style": "diamond",
+          "template": "<#89ddff>\ue0b0</> \ue23a{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
           "trailing_diamond": "\ue0b4",
           "type": "exit"
         }
@@ -105,18 +99,17 @@
             "paused_icon": "\uf8e3 ",
             "playing_icon": "\ue602 ",
             "stopped_icon": "\uf04d ",
-            "template": " \uf16a {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} - {{ .Track }}{{ end }} ",
             "track_separator": " - "
           },
           "style": "diamond",
+          "template": " \uf16a {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} - {{ .Track }}{{ end }} ",
           "type": "ytm"
         }
       ],
       "type": "rprompt"
     }
   ],
-  "console_title_style": "template",
   "console_title_template": "{{ .Shell }} in {{ .Folder }}",
   "final_space": true,
-  "version": 1
+  "version": 2
 }

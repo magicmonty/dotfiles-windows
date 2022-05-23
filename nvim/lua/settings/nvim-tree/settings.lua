@@ -48,6 +48,9 @@ nvim_tree.setup({
     indent_markers = {
       enable = true,
     },
+    icons = {
+      git_placement = 'after',
+    },
   },
   diagnostics = {
     enable = true,
@@ -60,6 +63,7 @@ nvim_tree.setup({
     },
   },
   view = {
+    width = 50,
     mappings = {
       list = {
         { key = 'cd', cb = tree_cb('cd') },

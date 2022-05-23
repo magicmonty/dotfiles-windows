@@ -121,7 +121,7 @@
       "server": "{{put-server-name-here}}",
       "database": "{{put-database-name-here}}",
       "user": "{{put-username-here}}",
-      "password": "{{put-password-here}}"
+      "password": ""
     }
   ],
   "editor.fontSize": 12,
@@ -147,5 +147,14 @@
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "redhat.telemetry.enabled": false,
-  "markdown-preview-enhanced.previewTheme": "github-dark.css"
+  "markdown-preview-enhanced.previewTheme": "github-dark.css",
+  "[sql]": {
+    "editor.defaultFormatter": "ms-mssql.mssql"
+  },
+  "mssql.format.datatypeCasing": "uppercase",
+  "mssql.format.keywordCasing": "uppercase",
+  "mssql.format.placeSelectStatementReferencesOnNewLine": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
 }

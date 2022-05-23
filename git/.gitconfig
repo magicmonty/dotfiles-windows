@@ -8,7 +8,7 @@
 [core]
 	autocrlf = true
 	ignorecase = false
-  editor = 'C:\\tools\\nvim\\bin\\nvim.exe' 
+  editor = 'C:\\tools\\neovim\\nvim-win64\\bin\\nvim.exe' 
 	excludesfile = C:\\Users\\mgondermann\\Documents\\gitignore_global.txt
 
 [push]

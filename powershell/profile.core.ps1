@@ -27,8 +27,15 @@ if ($host.Name -eq 'ConsoleHost')
     Set-PSReadLineOption -PredictionSource History
   }
   Set-PSReadLineOption -EditMode Windows
-
   Remove-PSReadlineKeyHandler 'Ctrl+r'
+
+  Set-PSReadLineKeyHandler -Key Ctrl+r `
+    -BriefDescription SearchHistory `
+    -LongDescription "Search History with FZF" `
+    -ScriptBlock {
+      $command = Get-Content (Get-PSReadLineOption).HistorySavePath | awk '!a[$0]++' | fzf --tac
+      [Microsoft.PowerShell.PSConsoleReadLine]::Insert($command)
+    }
 
   # Build a directory with <C-S-b>
   Set-PSReadLineKeyHandler -Key Ctrl+Shift+b `

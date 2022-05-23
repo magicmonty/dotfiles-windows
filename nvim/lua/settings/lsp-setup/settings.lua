@@ -1,3 +1,5 @@
+local root_pattern = require('lspconfig.util').root_pattern
+
 local function on_attach(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -76,7 +78,7 @@ local function on_attach(client, bufnr)
     kinds[i] = icons[kind] or kind
   end
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.cmd([[
       augroup lsp_document_highlight
         au! * <buffer>
@@ -86,7 +88,7 @@ local function on_attach(client, bufnr)
     ]])
   end
 
-  if client.resolved_capabilities.code_lens then
+  if client.server_capabilities.code_lens then
     vim.cmd([[
       augroup lsp_document_code_lens
         au! * <buffer>
@@ -109,7 +111,7 @@ require('nvim-lsp-setup').setup({
       filetypes = { 'html', 'css', 'scss' },
       on_attach = function(client, bufnr)
         on_attach(client, bufnr)
-        client.resolved_capabilities.textDocument.completion.completionItem.snippetSupport = true
+        client.server_capabilities.textDocument.completion.completionItem.snippetSupport = true
       end,
     },
     eslint = {},
@@ -202,9 +204,12 @@ require('nvim-lsp-setup').setup({
     tsserver = {
       on_attach = function(client, bufnr)
         on_attach(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.document_range_formatting = false
       end,
+      lspconfig = {
+        root_dir = root_pattern('.git'),
+      }
     },
     volar = {},
     yamlls = {},

@@ -4,6 +4,7 @@ M.setup = function()
   local g = vim.g
   local fn = vim.fn
 
+  local nvim_version = vim.version()
   local plugin_count = fn.len(fn.globpath(fn.stdpath('data') .. '/site/pack/packer/start', '*', 0, 1))
 
   g.dashboard_disable_statusline = 1
@@ -46,7 +47,15 @@ M.setup = function()
 
   g.dashboard_custom_footer = {
     ' ',
-    ' NeoVim loaded ' .. plugin_count .. ' plugins ',
+    ' NeoVim v'
+      .. nvim_version.major
+      .. '.'
+      .. nvim_version.minor
+      .. '.'
+      .. nvim_version.patch
+      .. ' loaded '
+      .. plugin_count
+      .. ' plugins ',
   }
 
   vim.keymap.set('n', '<leader>nf', '<cmd>DashboardNewFile<CR>')
