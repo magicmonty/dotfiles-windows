@@ -1,36 +1,6 @@
 local nvim_tree = require('nvim-tree')
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
-local map = require('vim_ext').map
 local icons = require('icons')
-
-vim.cmd([[
-  let g:nvim_tree_git_hl = 1
-  let g:nvim_tree_highlight_opened_files = 3
-
-  let g:nvim_tree_icons = {
-      \ 'default': '',
-      \ 'symlink': '',
-      \ 'git': {
-      \   'unstaged': "✗",
-      \   'staged': "✓",
-      \   'unmerged': "",
-      \   'renamed': "➜",
-      \   'untracked': "★",
-      \   'deleted': "",
-      \   'ignored': "◌"
-      \   },
-      \ 'folder': {
-      \   'arrow_open': "",
-      \   'arrow_closed': "",
-      \   'default': "",
-      \   'open': "",
-      \   'empty': "",
-      \   'empty_open': "",
-      \   'symlink': "",
-      \   'symlink_open': "",
-      \   }
-      \ }
-]])
 
 vim.keymap.set('n', '<leader>.', ':NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
 
@@ -45,11 +15,36 @@ nvim_tree.setup({
     update_cwd = false,
   },
   renderer = {
+    highlight_git = true,
+    highlight_opened_files = 'all',
     indent_markers = {
       enable = true,
     },
     icons = {
       git_placement = 'after',
+      glyphs = {
+        default = '',
+        symlink = '',
+        git = {
+          unstaged = '✗',
+          staged = '✓',
+          unmerged = '',
+          renamed = '➜',
+          untracked = '★',
+          deleted = '',
+          ignored = '◌',
+        },
+        folder = {
+          arrow_open = '',
+          arrow_closed = '',
+          default = '',
+          open = '',
+          empty = '',
+          empty_open = '',
+          symlink = '',
+          symlink_open = '',
+        },
+      },
     },
   },
   diagnostics = {

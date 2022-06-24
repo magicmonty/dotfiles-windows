@@ -157,4 +157,5 @@
   "liveServer.settings.donotShowInfoMsg": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.importModuleSpecifier": "non-relative",
+  "editor.multiCursorModifier": "ctrlCmd",
 }
