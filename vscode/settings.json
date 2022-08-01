@@ -158,4 +158,7 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "editor.multiCursorModifier": "ctrlCmd",
+  "eslint.packageManager": "yarn",
+  "sonarlint.ls.javaHome": "c:\\Users\\martin.gondermann\\.vscode\\extensions\\sonarsource.sonarlint_managed-jre\\jre\\jdk-11.0.15+10-jre",
+  "security.workspace.trust.untrustedFiles": "open",
 }

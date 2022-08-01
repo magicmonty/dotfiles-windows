@@ -97,6 +97,7 @@ local opts = {
     'jsonc',
     'lua',
     'markdown',
+    'markdown_inline',
     'regex',
     'scss',
     'todotxt',

@@ -273,6 +273,8 @@ if ($Host.Version.Major -gt 6) {
   })
 }
 
+function zz { z - }
+
 if ($Host.Name -ne 'Package Manager Host') {
   oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression
 }

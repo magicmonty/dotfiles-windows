@@ -162,7 +162,8 @@ return require('packer').startup({
       end,
       requires = {
         'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer',
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
         'folke/lua-dev.nvim',
         'kyazdani42/nvim-web-devicons',
         'folke/lsp-colors.nvim',
@@ -318,34 +319,11 @@ return require('packer').startup({
     -- SCSS syntax support
     use('cakebaker/scss-syntax.vim')
 
-    -- note taking
-    --[[ use({
-      'vimwiki/vimwiki',
-      requires = {
-        'EdenEast/nightfox.nvim',
-      },
-      config = function()
-        require('settings.vimwiki.settings')
-      end,
-    })
-]]
     use('dhruvasagar/vim-table-mode')
 
     -- Markdown support
     use({
       'davidgranstrom/nvim-markdown-preview',
-    })
-
-    use({
-      'vim-pandoc/vim-pandoc-syntax',
-      config = function()
-        vim.api.nvim_create_augroup('pandoc_syntax', { clear = true })
-        vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufReadPre', 'BufRead' }, {
-          pattern = '*.md',
-          command = 'set filetype=markdown.pandoc',
-          group = 'pandoc_syntax',
-        })
-      end,
     })
 
     -- Dashboard

@@ -137,7 +137,7 @@ ins_right({
   separator = '',
 })
 
-ins_right({ LspStatus, separator = '' })
+-- ins_right({ LspStatus, separator = '' })
 
 ins_right({
   function()
