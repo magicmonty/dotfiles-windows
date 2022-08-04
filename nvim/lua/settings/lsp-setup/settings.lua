@@ -30,7 +30,7 @@ require('mason').setup({
 })
 
 require('mason-lspconfig').setup({
-  ensure_installed = { 'sumneko_lua', 'json', 'marksman', 'remark_ls' },
+  ensure_installed = { 'sumneko_lua', 'json', 'marksman' },
 })
 
 local function on_attach(client, bufnr)
@@ -280,9 +280,6 @@ lsp_setup.setup({
     yamlls = {},
     marksman = {
       cmd = { path.concat({ path.bin_prefix(), 'marksman.cmd' }) },
-    },
-    remark_ls = {
-      cmd = { path.concat({ path.bin_prefix(), 'remark-language-server.cmd' }), '--stdio' },
     },
   },
 })

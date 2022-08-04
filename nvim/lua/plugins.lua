@@ -14,11 +14,11 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd([[packadd packer.nvim]])
 end
 
-vim.api.nvim_create_augroup('packer_user_config', { clear = true })
+local packer_user_config_group = vim.api.nvim_create_augroup('packer_user_config', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = 'plugins.lua',
   command = 'source <afile> | PackerCompile',
-  group = 'packer_user_config',
+  group = packer_user_config_group,
 })
 
 return require('packer').startup({
@@ -113,7 +113,7 @@ return require('packer').startup({
     use('tpope/vim-fugitive')
     use({
       'lewis6991/gitsigns.nvim',
-      event = 'BufRead',
+      -- event = 'BufRead',
       config = function()
         require('settings.gitsigns.settings').setup()
       end,
@@ -173,7 +173,7 @@ return require('packer').startup({
     -- LSP loading display
     use({
       'j-hui/fidget.nvim',
-      event = 'BufEnter',
+      -- event = 'BufEnter',
       config = function()
         require('settings.fidget.settings')
       end,
@@ -244,49 +244,19 @@ return require('packer').startup({
     -- Telescope
     use({
       'nvim-telescope/telescope.nvim',
-      opt = true,
-      keys = {
-        '<leader>cc',
-        '<leader>cd',
-        '<leader>c',
-        '<leader>fp',
-        '<leader>ff',
-        '<leader>fF',
-        '<leader>fb',
-        '<leader>fh',
-        '<leader>fn',
-        '<leader>fk',
-        '<leader>fm',
-        '<leader>fo',
-        '<leader>fw',
-        '<leader>fW',
-        '<leader>fB',
-        '<leader>flg',
-        '<leader>en',
-        '<leader><Tab>',
-      },
-      cmd = {
-        'Telescope',
-      },
-      module = {
-        'telescope',
-        'telescope.builtin',
-        'telescope.utils',
-      },
       config = function()
         require('settings.telescope.settings')
       end,
       requires = {
-        { 'nvim-lua/plenary.nvim', opt = false },
-        { 'nvim-telescope/telescope-file-browser.nvim', opt = false },
-        { 'nvim-telescope/telescope-project.nvim', opt = false },
-        { 'jvgrootveld/telescope-zoxide', opt = false },
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-telescope/telescope-file-browser.nvim' },
+        { 'nvim-telescope/telescope-project.nvim' },
+        { 'jvgrootveld/telescope-zoxide' },
         {
           'AckslD/nvim-neoclip.lua',
           config = function()
             require('neoclip').setup()
           end,
-          opt = false,
         },
       },
     })

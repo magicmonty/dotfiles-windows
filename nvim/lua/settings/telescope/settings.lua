@@ -51,18 +51,6 @@ telescope.setup({
   },
 })
 
-vim.cmd([[
-  packadd! nvim-dap
-  packadd! nvim-dap-ui
-  packadd! nvim-dap-virtual-text
-  packadd! nvim-neoclip.lua
-  packadd! telescope-dap.nvim
-  packadd! telescope-file-browser.nvim
-  packadd! telescope-fzf-native.nvim
-  packadd! telescope-project.nvim
-  packadd! telescope-zoxide
-]])
-
 local map = vim.keymap.set
 
 local opts = { silent = true, noremap = true }
@@ -70,6 +58,7 @@ local opts = { silent = true, noremap = true }
 local function telescope()
   return require('telescope.builtin')
 end
+
 local function extensions()
   return require('telescope').extensions
 end
