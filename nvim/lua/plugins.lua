@@ -110,17 +110,19 @@ return require('packer').startup({
     })
 
     -- Git support
-    -- use('tpope/vim-fugitive')
     use({
       'TimUntersberger/neogit',
       config = function()
         require('settings.neogit.settings')
       end,
-      requires = 'nvim-lua/plenary.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'sindrets/diffview.nvim',
+      },
     })
+
     use({
       'lewis6991/gitsigns.nvim',
-      -- event = 'BufRead',
       config = function()
         require('settings.gitsigns.settings').setup()
       end,
@@ -180,7 +182,6 @@ return require('packer').startup({
     -- LSP loading display
     use({
       'j-hui/fidget.nvim',
-      -- event = 'BufEnter',
       config = function()
         require('settings.fidget.settings')
       end,

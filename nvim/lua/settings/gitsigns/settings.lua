@@ -41,7 +41,10 @@ local config = {
 local M = {}
 
 M.setup = function()
-  require('gitsigns').setup(config)
+  local has_gitsigns, gitsigns = pcall(require, 'gitsigns')
+  if has_gitsigns then
+    gitsigns.setup(config)
+  end
 end
 
 return M
