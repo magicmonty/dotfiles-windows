@@ -110,7 +110,14 @@ return require('packer').startup({
     })
 
     -- Git support
-    use('tpope/vim-fugitive')
+    -- use('tpope/vim-fugitive')
+    use({
+      'TimUntersberger/neogit',
+      config = function()
+        require('settings.neogit.settings')
+      end,
+      requires = 'nvim-lua/plenary.nvim',
+    })
     use({
       'lewis6991/gitsigns.nvim',
       -- event = 'BufRead',
