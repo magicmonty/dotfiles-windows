@@ -2,7 +2,7 @@ local nvim_tree = require('nvim-tree')
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 local icons = require('icons')
 
-vim.keymap.set('n', '<leader>.', ':NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>.', require("nvim-tree.api").tree.toggle, { noremap = true, silent = true })
 
 nvim_tree.setup({
   disable_netrw = true,
@@ -59,6 +59,7 @@ nvim_tree.setup({
   },
   view = {
     width = 50,
+    adaptive_size = true,
     mappings = {
       list = {
         { key = 'cd', cb = tree_cb('cd') },

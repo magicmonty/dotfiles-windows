@@ -6,15 +6,20 @@ local opt = vim.opt
 -- Fundamentals
 -- ------------
 
+if vim.g.neovide then
+  opt.guifont = 'Monoid NF:h9'
+  vim.g.neovide_transparency = 0.95
+  vim.g.neovide_floating_blur_amount_x = 2.0
+  vim.g.neovide_floating_blur_amount_y = 2.0
+  vim.g.neovide_cursor_vfx_mode = 'pixiedust'
+end
+
 -- Map the leader key to <space>
 vim_ext.map('n', '<space>', '', {})
 vim.g.mapleader = ' '
 
 vim_ext.init_autocmd()
 
-if vim.fn.exists('GuiFont') == 0 then
-  -- opt.guifont = "Monoid NF:h10"
-end
 opt.compatible = false
 opt.number = true
 opt.relativenumber = true
