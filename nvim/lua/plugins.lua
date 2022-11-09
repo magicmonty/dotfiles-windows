@@ -40,15 +40,7 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-web-devicons',
       config = function()
-        require('settings.web-devicons.settings')
-      end,
-    })
-
-    -- Display keybindings
-    use({
-      'folke/which-key.nvim',
-      config = function()
-        require('settings.which-key.settings')
+        require('plugins.web-devicons.config')
       end,
     })
 
@@ -56,7 +48,7 @@ return require('packer').startup({
     use({
       'EdenEast/nightfox.nvim',
       config = function()
-        require('settings.nightfox.settings')
+        require('plugins.nightfox.config')
       end,
       requires = {
         'kyazdani42/nvim-web-devicons',
@@ -68,7 +60,7 @@ return require('packer').startup({
     use({
       'rcarriga/nvim-notify',
       config = function()
-        require('settings.notify.settings')
+        require('plugins.notify.config')
       end,
       requires = 'EdenEast/nightfox.nvim',
     })
@@ -77,7 +69,7 @@ return require('packer').startup({
     use({
       'kyazdani42/nvim-tree.lua',
       config = function()
-        require('settings.nvim-tree.settings')
+        require('plugins.nvim-tree.config')
       end,
       requires = {
         'EdenEast/nightfox.nvim',
@@ -86,10 +78,12 @@ return require('packer').startup({
     })
 
     -- Statusline
+    use('arkav/lualine-lsp-progress')
+
     use({
       'nvim-lualine/lualine.nvim',
       config = function()
-        require('settings.lualine.settings')
+        require('plugins.lualine.config')
       end,
       requires = {
         'EdenEast/nightfox.nvim',
@@ -101,7 +95,7 @@ return require('packer').startup({
     use({
       'romgrk/barbar.nvim',
       config = function()
-        require('settings.barbar.settings')
+        require('plugins.barbar.config')
       end,
       requires = {
         'EdenEast/nightfox.nvim',
@@ -113,7 +107,7 @@ return require('packer').startup({
     use({
       'TimUntersberger/neogit',
       config = function()
-        require('settings.neogit.settings')
+        require('plugins.neogit.config')
       end,
       requires = {
         'nvim-lua/plenary.nvim',
@@ -124,7 +118,7 @@ return require('packer').startup({
     use({
       'lewis6991/gitsigns.nvim',
       config = function()
-        require('settings.gitsigns.settings').setup()
+        require('plugins.gitsigns.config').setup()
       end,
       requires = 'nvim-lua/plenary.nvim',
     })
@@ -133,7 +127,7 @@ return require('packer').startup({
       'sindrets/diffview.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
-        require('settings.diffview.settings')
+        require('plugins.diffview.config')
       end,
     })
 
@@ -141,7 +135,7 @@ return require('packer').startup({
     use({
       'numToStr/Comment.nvim',
       config = function()
-        require('settings.comment.settings')
+        require('plugins.comment.config')
       end,
     })
 
@@ -163,59 +157,84 @@ return require('packer').startup({
       },
     })
 
+    -- Better Diagnostic Virtual texts
+    use({
+      'Maan2003/lsp_lines.nvim',
+      config = function()
+        local installed, lsp_lines = pcall(require, 'lsp_lines')
+        if not installed then
+          return
+        end
+
+        lsp_lines.setup()
+      end,
+    })
+
     -- LSP/Completion config
     use({
-      'junnplus/nvim-lsp-setup',
+      'junnplus/lsp-setup.nvim',
       config = function()
-        require('settings.lsp-setup.settings')
+        require('plugins.lsp-setup.config')
       end,
       requires = {
         'neovim/nvim-lspconfig',
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-        'folke/lua-dev.nvim',
+        'folke/neodev.nvim',
         'kyazdani42/nvim-web-devicons',
         'folke/lsp-colors.nvim',
       },
     })
 
-    -- LSP loading display
     use({
+      'lvimuser/lsp-inlayhints.nvim',
+      config = function()
+        require('plugins.inlayhints.config')
+      end,
+    })
+
+    use({
+      'ray-x/lsp_signature.nvim',
+      config = function()
+        require('plugins.lsp-signature.config')
+      end,
+    })
+
+    -- LSP loading display
+    --[[ use({
       'j-hui/fidget.nvim',
       config = function()
-        require('settings.fidget.settings')
+        require('plugins.fidget.config')
       end,
-    })
+    }) ]]
 
     -- Code formatter
-    use({
+    --[[ use({
       'mhartington/formatter.nvim',
       config = function()
-        require('settings.formatter.settings')
+        require('plugins.formatter.config')
       end,
     })
-
+]]
     use({
       'folke/lsp-colors.nvim',
       config = function()
-        require('settings.lsp-colors.settings')
+        require('plugins.lsp-colors.config')
       end,
       requires = 'EdenEast/nightfox.nvim',
     })
 
-    --[[
-		use({
-			"jose-elias-alvarez/null-ls.nvim",
-			config = function()
-				require("settings.null-ls.settings")
-			end,
-		})
-		]]
+    use({
+      'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        require('plugins.null-ls.config')
+      end,
+    })
 
     use({
       'hrsh7th/nvim-cmp',
       config = function()
-        require('settings.cmp.settings')
+        require('plugins.cmp.config')
       end,
       requires = {
         'hrsh7th/cmp-nvim-lua',
@@ -226,13 +245,13 @@ return require('packer').startup({
         {
           'onsails/lspkind-nvim',
           config = function()
-            require('settings.lspkind.settings')
+            require('plugins.lspkind.config')
           end,
         },
         {
           'L3MON4D3/LuaSnip',
           config = function()
-            require('settings.luasnip.settings')
+            require('plugins.luasnip.config')
           end,
           requires = {
             'saadparwaiz1/cmp_luasnip',
@@ -243,7 +262,7 @@ return require('packer').startup({
         {
           'windwp/nvim-autopairs',
           config = function()
-            require('settings.autopairs.settings').setup()
+            require('plugins.autopairs.config').setup()
           end,
         },
       },
@@ -253,7 +272,7 @@ return require('packer').startup({
     use({
       'nvim-telescope/telescope.nvim',
       config = function()
-        require('settings.telescope.settings')
+        require('plugins.telescope.config')
       end,
       requires = {
         { 'nvim-lua/plenary.nvim' },
@@ -273,7 +292,7 @@ return require('packer').startup({
     use({
       'voldikss/vim-floaterm',
       config = function()
-        require('settings.floaterm.settings')
+        require('plugins.floaterm.config')
       end,
     })
 
@@ -290,7 +309,13 @@ return require('packer').startup({
     use({
       'stevearc/dressing.nvim',
       config = function()
-        require('settings.dressing.settings')
+        require('plugins.dressing.config')
+      end,
+    })
+    use({
+      'ahmedkhalf/project.nvim',
+      config = function()
+        require('plugins.project.config')
       end,
     })
 
@@ -304,13 +329,47 @@ return require('packer').startup({
       'davidgranstrom/nvim-markdown-preview',
     })
 
+    -- Orgmode
+    use({
+      'nvim-orgmode/orgmode',
+      config = function()
+        require('plugins.orgmode.config').setup()
+      end,
+    })
+
     -- Dashboard
     use({
       'glepnir/dashboard-nvim',
       config = function()
-        require('settings.dashboard.settings').setup()
+        require('plugins.dashboard.config').setup()
       end,
     })
+    use({
+      'narutoxy/silicon.lua',
+      requires = { 'nvim-lua/plenary.nvim' },
+      config = function()
+        local silicon = require('silicon')
+        silicon.setup({})
+        -- Generate image of lines in a visual selection
+        vim.keymap.set('v', '<Leader>s', function()
+          silicon.visualise_api({})
+        end)
+        -- Generate image of a whole buffer, with lines in a visual selection highlighted
+        vim.keymap.set('v', '<Leader>bs', function()
+          silicon.visualise_api({ to_clip = true, show_buf = true })
+        end)
+        -- Generate visible portion of a buffer
+        vim.keymap.set('n', '<Leader>s', function()
+          silicon.visualise_api({ to_clip = true, visible = true })
+        end)
+        -- Generate current buffer line in normal mode
+        vim.keymap.set('n', '<Leader>s', function()
+          silicon.visualise_api({ to_clip = true })
+        end)
+      end,
+    })
+
+    use('mg979/vim-visual-multi')
 
     if packer_bootstrap then
       require('packer').sync()

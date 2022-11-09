@@ -17,9 +17,13 @@ end
 -- Map the leader key to <space>
 vim_ext.map('n', '<space>', '', {})
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 vim_ext.init_autocmd()
 
+-- opt.shellslash = true
+opt.conceallevel = 2
+opt.concealcursor = 'nc'
 opt.compatible = false
 opt.number = true
 opt.relativenumber = true

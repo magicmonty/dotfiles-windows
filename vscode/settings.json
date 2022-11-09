@@ -79,7 +79,6 @@
   "FSharp.smartIndent": true,
   "latex-workshop.intellisense.package.enabled": true,
   "latex-workshop.message.update.show": false,
-  "latex-workshop.chktex.enabled": true,
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.autoClean.run": "onBuilt",
   "latex-workshop.latex.clean.subfolder.enabled": true,
@@ -151,7 +150,7 @@
   "[sql]": {
     "editor.defaultFormatter": "ms-mssql.mssql"
   },
-  "mssql.format.datatypeCasing": "uppercase",
+  "mssql.format.datatypeCasing": "lowercase",
   "mssql.format.keywordCasing": "uppercase",
   "mssql.format.placeSelectStatementReferencesOnNewLine": true,
   "liveServer.settings.donotShowInfoMsg": true,
@@ -162,4 +161,10 @@
   "sonarlint.ls.javaHome": "c:\\Users\\martin.gondermann\\.vscode\\extensions\\sonarsource.sonarlint_managed-jre\\jre\\jdk-11.0.15+10-jre",
   "security.workspace.trust.untrustedFiles": "open",
   "diffEditor.ignoreTrimWhitespace": false,
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-utilities.liveReformat.enabled": true,
+  "latex-workshop.linting.lacheck.enabled": true,
+  "latex-workshop.latex.recipe.default": "lastUsed",
+  "sql-formatter.uppercase": true,
+  "mssql.format.alignColumnDefinitionsInColumns": true,
 }
