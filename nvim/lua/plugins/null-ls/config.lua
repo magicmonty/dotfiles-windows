@@ -3,26 +3,25 @@ if not installed then
   return
 end
 
+local my_formatters = require('magicmonty.formatters')
 local b = null_ls.builtins
-
-local sources = {
-  require('magicmonty.formatters').prettier_eslint,
-  b.formatting.stylua,
-}
 
 null_ls.setup({
   debug = true,
-  sources = sources,
-  on_attach = function(client)
+  sources = {
+    b.formatting.stylua,
+    my_formatters.prettier_eslint
+  },
+  on_attach = function(client, bufnr)
     vim.diagnostic.config({ virtual_text = false })
     if client.server_capabilities.documentFormattingProvider then
       local augroup_formatting = vim.api.nvim_create_augroup('NullLsFormatting', { clear = true })
-      vim.api.nvim_clear_autocmds({ buffer = 0, group = augroup_formatting })
+      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup_formatting })
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = augroup_formatting,
-        buffer = 0,
+        buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format(nil)
+          vim.lsp.buf.format({ timeout_ms = 10000 })
         end,
       })
     end

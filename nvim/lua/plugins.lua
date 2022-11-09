@@ -161,12 +161,7 @@ return require('packer').startup({
     use({
       'Maan2003/lsp_lines.nvim',
       config = function()
-        local installed, lsp_lines = pcall(require, 'lsp_lines')
-        if not installed then
-          return
-        end
-
-        lsp_lines.setup()
+        require('plugins.lsp-lines.config')
       end,
     })
 
@@ -197,6 +192,13 @@ return require('packer').startup({
       'ray-x/lsp_signature.nvim',
       config = function()
         require('plugins.lsp-signature.config')
+      end,
+    })
+
+    use({
+      'folke/trouble.nvim',
+      config = function()
+        require('plugins.trouble.config')
       end,
     })
 

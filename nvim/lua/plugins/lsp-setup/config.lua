@@ -182,22 +182,7 @@ local function on_attach(client, bufnr)
   local augroup_format = vim.api.nvim_create_augroup('lsp_format', { clear = true })
   vim.api.nvim_clear_autocmds({ buffer = 0, group = augroup_format })
   local ft = client.config.filetypes
-  if
-    has_filetype(ft, 'lua')
-    or has_filetype(ft, 'typescript')
-    or has_filetype(ft, 'typescriptreact')
-    or has_filetype(ft, 'javascript')
-    or has_filetype(ft, 'javascriptreact')
-    or has_filetype(ft, 'html')
-    or has_filetype(ft, 'css')
-    or has_filetype(ft, 'scss')
-  then
-    --[[ vim.api.nvim_create_autocmd('BufWritePost', {
-      buffer = 0,
-      group = augroup_format,
-      command = 'FormatWrite',
-    }) ]]
-  elseif client.server_capabilities.documentFormattingProvider then
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = 0,
       group = augroup_format,
@@ -206,16 +191,6 @@ local function on_attach(client, bufnr)
       end,
     })
   end
-
-  --[[ local augroup_diagnostics = vim.api.nvim_create_augroup('diagnostics', { clear = true })
-  vim.api.nvim_clear_autocmds({ buffer = 0, group = augroup_diagnostics })
-  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    group = augroup_diagnostics,
-    buffer = 0,
-    callback = function()
-      vim.diagnostic.open_float({ border = 'rounded' }, { focus = false })
-    end,
-  }) ]]
 end
 
 local function root_pattern_or_self(...)
@@ -421,7 +396,6 @@ require('lsp-setup').setup({
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   --[[ virtual_text = {
     prefix = '»',
-    -- severity_limit = 'Warning',
     spacing = 4,
   }, ]]
   virtual_text = false,
@@ -434,5 +408,3 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
 local pop_opts = { border = 'rounded', max_width = 80 }
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, pop_opts)
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, pop_opts)
-
-vim.diagnostic.config({ virtual_lines = true })
