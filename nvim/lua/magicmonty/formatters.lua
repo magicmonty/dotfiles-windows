@@ -37,53 +37,41 @@ if installed then
     meta = {
       url = 'https://github.com/prettier/prettier-eslint-cli',
       description = 'Prettier with eslint settings',
-      notes = '',
     },
-    method = { FORMATTING, RANGE_FORMATTING },
+    method = { FORMATTING },
     filetypes = {
       'javascript',
       'javascriptreact',
       'typescript',
       'typescriptreact',
       'vue',
-      'css',
-      'scss',
-      'less',
-      'html',
-      'json',
-      'jsonc',
-      'yaml',
-      'markdown',
-      'markdown.mdx',
-      'graphql',
-      'handlebars',
-    },
-    generator_opts = {
-      command = 'prettier-eslint',
-      args = h.range_formatting_args_factory({
-        '--stdin-filepath',
-        '$FILENAME',
-      }, '--range-start', '--range-end', { row_offset = -1, col_offset = -1 }),
-      to_stdin = true,
-      dynamic_command = cmd_resolver.from_node_modules(),
-      cwd = h.cache.by_bufnr(function(params)
-        return u.root_pattern(
-        -- https://prettier.io/docs/en/configuration.html
-          '.prettierrc',
-          '.prettierrc.json',
-          '.prettierrc.yml',
-          '.prettierrc.yaml',
-          '.prettierrc.json5',
-          '.prettierrc.js',
-          '.prettierrc.cjs',
-          '.prettierrc.toml',
-          'prettier.config.js',
-          'prettier.config.cjs',
-          'package.json'
-        )(params.bufname)
-      end),
+      'jsx',
     },
     factory = h.formatter_factory,
+    generator_opts = {
+      command = 'prettier-eslint',
+      args = { '--stdin', '--parser', 'babel' },
+      to_stdin = true,
+    },
+  })
+
+  M.prettier_eslint_json = h.make_builtin({
+    name = 'prettier_eslint',
+    meta = {
+      url = 'https://github.com/prettier/prettier-eslint-cli',
+      description = 'Prettier with eslint settings',
+    },
+    method = { FORMATTING },
+    filetypes = {
+      'json',
+      'jsonc',
+    },
+    factory = h.formatter_factory,
+    generator_opts = {
+      command = 'prettier-eslint',
+      args = { '--stdin', '--parser', 'json' },
+      to_stdin = true,
+    },
   })
 end
 

@@ -10,7 +10,8 @@ null_ls.setup({
   debug = true,
   sources = {
     b.formatting.stylua,
-    my_formatters.prettier_eslint
+    my_formatters.prettier_eslint,
+    my_formatters.prettier_eslint_json,
   },
   on_attach = function(client, bufnr)
     vim.diagnostic.config({ virtual_text = false })
