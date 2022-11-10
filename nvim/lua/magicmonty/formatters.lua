@@ -48,9 +48,14 @@ if installed then
       'jsx',
     },
     factory = h.formatter_factory,
+    dynamic_command = cmd_resolver.from_node_modules(),
     generator_opts = {
       command = 'prettier-eslint',
-      args = { '--stdin', '--parser', 'babel' },
+      args = {
+        '--stdin',
+        '--stdin-filepath',
+        '$FILENAME',
+      },
       to_stdin = true,
     },
   })
@@ -67,9 +72,16 @@ if installed then
       'jsonc',
     },
     factory = h.formatter_factory,
+    dynamic_command = cmd_resolver.from_node_modules(),
     generator_opts = {
       command = 'prettier-eslint',
-      args = { '--stdin', '--parser', 'json' },
+      args = {
+        '--stdin',
+        '--stdin-filepath',
+        '$FILENAME',
+        '--parser',
+        'json',
+      },
       to_stdin = true,
     },
   })

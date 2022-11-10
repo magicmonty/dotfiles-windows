@@ -7,7 +7,7 @@ local opt = vim.opt
 -- ------------
 
 if vim.g.neovide then
-  opt.guifont = 'Monoid NF:h9'
+  opt.guifont:prepend('Monoid NF:h9')
   vim.g.neovide_transparency = 0.95
   vim.g.neovide_floating_blur_amount_x = 2.0
   vim.g.neovide_floating_blur_amount_y = 2.0
@@ -115,5 +115,8 @@ opt.wildoptions = { 'pum' }
 opt.pumblend = 5
 
 opt.updatetime = 1000
+
+-- use System clipboard by default for yank/paste
+opt.clipboard:prepend({ 'unnamed', 'unnamedplus' })
 
 require('vim_ext').hi('Normal', { guibg = '#192330' })

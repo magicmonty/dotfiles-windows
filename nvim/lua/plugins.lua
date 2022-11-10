@@ -1,7 +1,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
-local packer_bootstrap = false
+local packer_bootstrap = nil
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({
     'git',
@@ -158,10 +158,17 @@ return require('packer').startup({
     })
 
     -- Better Diagnostic Virtual texts
-    use({
+    --[[ use({
       'Maan2003/lsp_lines.nvim',
       config = function()
         require('plugins.lsp-lines.config')
+      end,
+    }) ]]
+
+    use({
+      'glepnir/lspsaga.nvim',
+      config = function()
+        require('plugins.lspsaga.config')
       end,
     })
 
@@ -181,7 +188,7 @@ return require('packer').startup({
       },
     })
 
-    use({
+    --[[ use({
       'lvimuser/lsp-inlayhints.nvim',
       config = function()
         require('plugins.inlayhints.config')
@@ -194,7 +201,7 @@ return require('packer').startup({
         require('plugins.lsp-signature.config')
       end,
     })
-
+]]
     use({
       'folke/trouble.nvim',
       config = function()
@@ -202,22 +209,6 @@ return require('packer').startup({
       end,
     })
 
-    -- LSP loading display
-    --[[ use({
-      'j-hui/fidget.nvim',
-      config = function()
-        require('plugins.fidget.config')
-      end,
-    }) ]]
-
-    -- Code formatter
-    --[[ use({
-      'mhartington/formatter.nvim',
-      config = function()
-        require('plugins.formatter.config')
-      end,
-    })
-]]
     use({
       'folke/lsp-colors.nvim',
       config = function()

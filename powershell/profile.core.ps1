@@ -179,6 +179,9 @@ function gstu
 function gci
 { git ci $args 
 }
+function gcz
+{ git cz $args
+}
 function gcim
 { git cim $args 
 }

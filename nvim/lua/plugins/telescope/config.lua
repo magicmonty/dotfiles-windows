@@ -55,7 +55,7 @@ local map = vim.keymap.set
 
 local opts = { silent = true, noremap = true }
 
-local function telescope()
+local function telescope_()
   return require('telescope.builtin')
 end
 
@@ -83,20 +83,20 @@ map('n', '<leader>ff', function()
   require('magicmonty.telescope').project_files()
 end, opts)
 map('n', '<leader>fo', function()
-  telescope().oldfiles()
+  telescope_().oldfiles()
 end, opts)
 map('n', '<leader>fF', function()
-  telescope().find_files()
+  telescope_().find_files()
 end, opts)
 
 -- Find text in current buffer
 map('n', '<leader>fb', function()
-  telescope().current_buffer_fuzzy_find()
+  telescope_().current_buffer_fuzzy_find()
 end, opts)
 
 -- Help
 map('n', '<leader>fh', function()
-  telescope().help_tags()
+  telescope_().help_tags()
 end, opts)
 
 -- Browse notification history
@@ -106,37 +106,41 @@ end, opts)
 
 -- Browse keymaps
 map('n', '<leader>fk', function()
-  telescope().keymaps({ results_title = 'Key Maps Results' })
+  telescope_().keymaps({ results_title = 'Key Maps Results' })
 end, opts)
 
 -- Browse marks
 map('n', '<leader>fm', function()
-  telescope().marks({ results_title = 'Marks Results' })
+  telescope_().marks({ results_title = 'Marks Results' })
 end, opts)
 
 -- Find word under cursor
 map('n', '<leader>fw', function()
-  telescope().grep_string()
+  telescope_().grep_string()
 end, opts)
 
 -- Find word under cursor (exact word, case sensitive)
 map('n', '<leader>fW', function()
-  telescope().grep_string({ word_match = '-w' })
+  telescope_().grep_string({ word_match = '-w' })
 end, opts)
 
 -- Find buffer
 map('n', '<leader><Tab>', function()
-  telescope().buffers({ prompt_title = 'Find Buffer', results_title = 'Buffers', layout_strategy = 'vertical' })
+  telescope_().buffers({ prompt_title = 'Find Buffer', results_title = 'Buffers', layout_strategy = 'vertical' })
 end, opts)
 
 -- Live grep
 map('n', '<leader>flg', function()
-  telescope().live_grep()
+  telescope_().live_grep()
 end, opts)
 
 -- Find file in neovim config directory
 map('n', '<leader>en', function()
   require('magicmonty.telescope').search_config()
+end, opts)
+
+map('n', ',,', function()
+  require('telescope.builtin').resume()
 end, opts)
 
 -- Wrap preview text

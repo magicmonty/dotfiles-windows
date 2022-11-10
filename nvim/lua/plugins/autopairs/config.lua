@@ -11,7 +11,11 @@ local config = {
 local M = {}
 
 M.setup = function()
-  require('nvim-autopairs').setup(config)
+  local installed, ap = pcall(require, 'nvim-autopairs')
+  if not installed then
+    return
+  end
+  ap.setup(config)
 end
 
 return M

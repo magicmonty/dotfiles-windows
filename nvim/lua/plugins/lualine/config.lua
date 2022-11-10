@@ -1,15 +1,6 @@
 local theme = require('magicmonty.theme')
 local icons = theme.icons
-local colors = theme.colors
-
-local function LspStatus()
-  local status = ''
-  if vim.lsp.buf_get_clients() then
-    status = require('magicmonty.status').status()
-  end
-
-  return status
-end
+local theme_colors = theme.colors
 
 local conditions = {
   buffer_not_empty = function()
@@ -67,15 +58,26 @@ local config = {
           removed = icons.git.removed .. ' ',
         },
         diff_color = {
-          added = { fg = colors.git.add },
-          modified = { fg = colors.git.changed },
-          removed = { fg = colors.git.removed },
+          added = { fg = theme_colors.git.add },
+          modified = { fg = theme_colors.git.changed },
+          removed = { fg = theme_colors.git.removed },
         },
         cond = conditions.has_gitsigns_info,
       },
     },
     lualine_c = {},
-    lualine_x = {},
+    lualine_x = {
+      {
+        'diagnostics',
+        sources = { 'nvim_diagnostic' },
+        symbols = {
+          error = icons.diagnostics.Error,
+          warn = icons.diagnostics.Warning,
+          info = icons.diagnostics.Information,
+          hint = icons.diagnostics.Hint,
+        },
+      },
+    },
     lualine_y = {
       {
         function()
@@ -113,7 +115,13 @@ local config = {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {},
+    lualine_c = {
+      {
+        'filename',
+        path = 1,
+        file_status = true,
+      },
+    },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {},
@@ -130,14 +138,12 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
-ins_left({ 'filename' })
+ins_left({ 'filename', file_status = true })
 ins_right({
   'filetype',
   cond = conditions.buffer_not_empty,
   separator = '',
 })
-
--- ins_right({ LspStatus, separator = '' })
 
 ins_right({
   function()
@@ -147,7 +153,7 @@ ins_right({
     end
     return ''
   end,
-  color = { fg = colors.palette.green.base },
+  color = { fg = theme_colors.palette.green.base },
 })
 
 ins_right({ 'encoding', cond = conditions.buffer_not_empty })

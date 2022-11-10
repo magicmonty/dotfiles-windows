@@ -3,14 +3,6 @@ local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 
-local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, 'buftype') == 'prompt' then
-    return false
-  end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-end
-
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.shortmess:append('c')
 
@@ -49,7 +41,7 @@ cmp.setup({
       { 'i', 'c' }
     ),
     ['<C-Space>'] = cmp.mapping({
-      i = cmp.mapping.complete(),
+      i = cmp.mapping.complete({}),
       c = function(_)
         if cmp.visible() then
           if not cmp.confirm({ select = true }) then
@@ -119,7 +111,7 @@ cmp.setup({
         path = 'ﱮ',
         buffer = '﬘',
         luasnip = '',
-        org = '🦄'
+        org = '🦄',
       },
     }),
   },

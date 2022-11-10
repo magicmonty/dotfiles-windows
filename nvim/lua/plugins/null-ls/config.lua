@@ -15,6 +15,7 @@ null_ls.setup({
   },
   on_attach = function(client, bufnr)
     vim.diagnostic.config({ virtual_text = false })
+
     if client.server_capabilities.documentFormattingProvider then
       local augroup_formatting = vim.api.nvim_create_augroup('NullLsFormatting', { clear = true })
       vim.api.nvim_clear_autocmds({ buffer = bufnr, group = augroup_formatting })
@@ -22,7 +23,7 @@ null_ls.setup({
         group = augroup_formatting,
         buffer = bufnr,
         callback = function()
-          vim.lsp.buf.format({ timeout_ms = 10000 })
+          vim.lsp.buf.format({ timeout_ms = 2000 })
         end,
       })
     end

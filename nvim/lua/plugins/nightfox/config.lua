@@ -12,6 +12,8 @@ nightfox.setup({
     dim_inactive = true,
     inverse = {
       visual = false,
+      search = false,
+      match_paren = false,
     },
     styles = {
       comments = 'italic',
@@ -42,6 +44,10 @@ nightfox.setup({
       GitSignsChangeNr = { fg = 'git.changed' },
       GitSignsDelete = { fg = 'git.removed' },
       GitSignsDeleteNr = { fg = 'git.removed' },
+      DiagnosticsUnderlineError = { style = 'undercurl' },
+      DiagnosticsUnderlineWarn = { style = 'undercurl' },
+      DiagnosticsUnderlineInfo = { style = 'undercurl' },
+      DiagnosticsUnderlineHint = { style = 'undercurl' },
     },
   },
 })

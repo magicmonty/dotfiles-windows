@@ -3,23 +3,13 @@ if not installed then
   return
 end
 
-local installed, neodev = pcall(require, 'neodev')
-if installed then
+local neodev_installed, neodev = pcall(require, 'neodev')
+if neodev_installed then
   neodev.setup({})
 end
 
 local root_pattern = require('lspconfig.util').root_pattern
 local mappings = require('magicmonty.mappings')
-
-local function has_filetype(filetypes, ft)
-  for _, value in ipairs(filetypes) do
-    if value == ft then
-      return true
-    end
-  end
-
-  return false
-end
 
 -- Nicer Icons in LspInstallInfo
 require('mason').setup({
@@ -58,21 +48,6 @@ lsp_config.setup({
 })
 
 local function on_attach(client, bufnr)
-  local hinstalled, inlayhints = pcall(require, 'lsp-inlayhints')
-  if hinstalled then
-    inlayhints.on_attach(client, bufnr)
-  end
-
-  local sinstalled, signature = pcall(require, 'lsp_signature')
-  if sinstalled then
-    signature.on_attach({
-      bind = true,
-      handler_opts = {
-        border = 'rounded',
-      },
-    }, bufnr)
-  end
-
   --Enable completion triggered by <c-x><c-o>
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -80,19 +55,24 @@ local function on_attach(client, bufnr)
   local leader_mappings = {
     l = {
       name = 'LSP',
-      f = { '<cmd>Format<cr>', 'Format buffer' },
+      f = {
+        function()
+          vim.lsp.buf.format({ timeout_ms = 2000 })
+        end,
+        'Format buffer',
+      },
       n = { vim.lsp.buf.rename, 'Rename symbol' },
     },
     d = {
       name = 'Diagnostics',
       l = { '<cmd>Telescope diagnostics<CR>', 'Workspace diagnostics list' },
-      n = { vim.diagnostic.goto_next, 'Jump to next diagnostic entry' },
-      p = { vim.diagnostic.goto_prev, 'Jump to previous diagnostic entry' },
+      n = { require('lspsaga.diagnostic').goto_next, 'Jump to next diagnostic entry' },
+      p = { require('lspsaga.diagnostic').goto_prev, 'Jump to previous diagnostic entry' },
     },
   }
 
   if client.server_capabilities.codeActionProvider then
-    leader_mappings.l.a = { vim.lsp.buf.code_action, 'Show available code actions' }
+    leader_mappings.l.a = { '<cmd>Lspsaga code_action<CR>', 'Show available code actions' }
   end
 
   mappings.register(leader_mappings, { prefix = '<leader>', buffer = bufnr, mode = 'n', noremap = true, silent = true })
@@ -101,16 +81,16 @@ local function on_attach(client, bufnr)
     ['<C-s>'] = { vim.lsp.buf.signature_help, 'Show signature help' },
     g = {
       name = 'Goto',
-      d = { '<cmd>Telescope lsp_definitions<CR>', 'Goto definition' },
+      d = { '<cmd>Lspsaga lsp_finder<CR>', 'Goto definition' },
       D = { vim.lsp.buf.declaration, 'Goto declaration' },
-      i = { '<cmd>Telescope lsp_implementations<CR>', 'Goto implementation' },
-      r = { '<cmd>Telescope lsp_references<CR>', 'Goto reference' },
+      i = { '<cmd>Lspsaga lsp_finder<CR>', 'Goto implementation' },
+      r = { '<cmd>Lspsaga lsp_finder<CR>', 'Goto reference' },
       T = { '<cmd>Telescope lsp_type_definitions<CR>', 'Goto type definition' },
     },
-    K = { vim.lsp.buf.hover, 'Show hover documentation' },
-    ['<M-End>'] = { vim.diagnostic.goto_next, 'Jump to next diagnostic entry' },
-    ['<M-Home>'] = { vim.diagnostic.goto_prev, 'Jump to previous diagnostic entry' },
-    ['<M-CR>'] = { vim.lsp.buf.code_action, 'Jump to previous diagnostic entry' },
+    K = { '<cmd>Lspsaga hover_doc<CR>', 'Show hover documentation' },
+    ['<M-End>'] = { require('lspsaga.diagnostic').goto_next, 'Jump to next diagnostic entry' },
+    ['<M-Home>'] = { require('lspsaga.diagnostic').goto_prev, 'Jump to previous diagnostic entry' },
+    ['<M-CR>'] = { '<cmd>Lspsaga code_action<CR>', 'Jump to previous diagnostic entry' },
   }
 
   mappings.register(normal_mappings, { buffer = bufnr, mode = 'n', noremap = true, silent = true })
@@ -181,7 +161,6 @@ local function on_attach(client, bufnr)
 
   local augroup_format = vim.api.nvim_create_augroup('lsp_format', { clear = true })
   vim.api.nvim_clear_autocmds({ buffer = 0, group = augroup_format })
-  local ft = client.config.filetypes
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = 0,
@@ -207,7 +186,6 @@ capabilities.textDocument.codeLens = { dynamicRegistration = false }
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local path = require('mason-core.path')
-local platform = require('mason-core.platform')
 
 require('lsp-setup').setup({
   default_mappings = false,
@@ -316,24 +294,22 @@ require('lsp-setup').setup({
     omnisharp = {},
     powershell_es = {},
     sumneko_lua = {
-      runtime_path = false,
-      lspconfig = {
-        on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
-        end,
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-            },
-            format = { enable = true },
-            diagnostics = { globals = { 'use' } },
-            workspace = {
-              preloadFileSize = 350,
-              checkThirdParty = false,
-            },
-            telemetry = { enable = false },
+      runtime_path = true,
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+      end,
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
           },
+          format = { enable = true },
+          diagnostics = { globals = { 'use' } },
+          workspace = {
+            preloadFileSize = 350,
+            checkThirdParty = false,
+          },
+          telemetry = { enable = false },
         },
       },
     },

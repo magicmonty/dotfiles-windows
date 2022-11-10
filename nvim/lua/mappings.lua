@@ -1,5 +1,5 @@
 local map = vim.keymap.set
-local silent = { silent = true }
+local silent = { silent = true, remap = false }
 local remap = { noremap = false }
 
 -- Suppress literal <S-Insert> and paste instead
@@ -49,6 +49,9 @@ map('', 'Q', '<Nop>', remap)
 map('n', '<leader>mm', 'za')
 map('v', '<leader>mm', 'za')
 
+-- Do not yank with 'x'
+map('n', 'x', '"_x')
+
 -- exit insert mode quickly
 map('i', 'jj', '<Esc>')
 map('i', 'jk', '<Esc>')
@@ -67,9 +70,25 @@ map('i', '<C-S>', '<C-O>:update<CR>', silent)
 -- map('i', '<C-space>', '<C-x><C-o>')
 
 -- split handling
-map('n', '<leader>wv', ':vsplit<cr>', silent)
-map('n', '<leader>ws', ':split<cr>', silent)
-map('n', '<leader>wo', ':only<cr>', { silent = true, noremap = false })
+map('n', 'ss', '<cmd>split<cr><C-w>w', silent)
+map('n', 'sv', '<cmd>vsplit<cr><C-w>w', silent)
+map('n', 's<left>', '<C-w>h')
+map('n', 'sh', '<C-w>h')
+map('n', 's<right>', '<C-w>l')
+map('n', 'sl', '<C-w>l')
+map('n', 's<up>', '<C-w>k')
+map('n', 'sk', '<C-w>k')
+map('n', 's<down>', '<C-w>j')
+map('n', 'sj', '<C-w>j')
+map('n', '<leader>wo', ':only<cr>', silent)
+map('n', 'so', ':only<cr>', silent)
+map('n', 'sq', '<C-w>q')
+
+-- Resize windows
+map('n', '<C-w><left>', '<C-w><')
+map('n', '<C-w><right>', '<C-w>>')
+map('n', '<C-w><up>', '<C-w>-')
+map('n', '<C-w><down>', '<C-w>+')
 
 -- Map Control+Shift+Up/Down to move lines and selections up and down.
 -- Define maps for Normal and Visual modes, then re-use
@@ -103,3 +122,7 @@ vim.api.nvim_set_keymap('x', '<', ']', {})
 vim.api.nvim_set_keymap('n', '>', ']', {})
 vim.api.nvim_set_keymap('o', '>', ']', {})
 vim.api.nvim_set_keymap('x', '>', ']', {})
+
+-- Increment / Decrement with + and -
+map('n', '+', '<C-a>')
+map('n', '-', '<C-x>')
