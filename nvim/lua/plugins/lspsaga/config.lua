@@ -10,7 +10,7 @@ saga.init_lsp_saga({
   diagnostic_header = { icons.Error, icons.Warning, icons.Information, icons.Hint },
   code_action_icon = icons.CodeAction .. ' ',
   code_action_keys = {
-    quit = { 'q', '<Esc>' },
+    quit = '<Esc>',
     exec = '<CR>',
   },
   finder_action_keys = {

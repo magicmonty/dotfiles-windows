@@ -1,4 +1,5 @@
 local installed, lsp_config = pcall(require, 'mason-lspconfig')
+
 if not installed then
   return
 end
