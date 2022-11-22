@@ -290,7 +290,16 @@ return require('packer').startup({
     })
 
     -- Generic helpers
-    use('tpope/vim-surround')
+    use({
+      'kylechui/nvim-surround',
+      config = function()
+        local installed, surround = pcall(require, 'nvim-surround')
+        if not installed then
+          return
+        end
+        surround.setup({})
+      end,
+    })
     use('tpope/vim-repeat')
     use({
       'norcalli/nvim-colorizer.lua',
@@ -363,6 +372,21 @@ return require('packer').startup({
     })
 
     use('mg979/vim-visual-multi')
+    use({
+      'gelguy/wilder.nvim',
+      config = function()
+        require('plugins.wilder.config')
+      end,
+    })
+
+    use({
+      'folke/todo-comments.nvim',
+      config = function()
+        require('plugins.todo-comments.config')
+      end,
+    })
+
+    use('wakatime/vim-wakatime')
 
     if packer_bootstrap then
       require('packer').sync()

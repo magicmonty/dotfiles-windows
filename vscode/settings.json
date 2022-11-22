@@ -148,7 +148,7 @@
   "redhat.telemetry.enabled": false,
   "markdown-preview-enhanced.previewTheme": "github-dark.css",
   "[sql]": {
-    "editor.defaultFormatter": "ms-mssql.mssql"
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
   },
   "mssql.format.datatypeCasing": "lowercase",
   "mssql.format.keywordCasing": "uppercase",

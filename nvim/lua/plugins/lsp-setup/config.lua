@@ -45,6 +45,7 @@ lsp_config.setup({
     'texlab',
     'tsserver',
     'tailwindcss',
+    'taplo',
   },
 })
 
@@ -294,6 +295,7 @@ require('lsp-setup').setup({
     lemminx = {},
     omnisharp = {},
     powershell_es = {},
+    taplo = {},
     sumneko_lua = {
       runtime_path = true,
       on_attach = function(client, bufnr)

@@ -7,7 +7,7 @@ neogit.setup({
   disable_signs = false,
   disable_hint = false,
   disable_context_highlighting = false,
-  disable_commit_confirmation = false,
+  disable_commit_confirmation = true,
   auto_refresh = true,
   disable_builtin_notifications = false,
   use_magit_keybindings = false,
