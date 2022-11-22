@@ -337,15 +337,15 @@ function zz { z - }
 
 # OhMyPosh
 
-#if ($Host.Name -ne 'Package Manager Host') {
-#  oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression
-#}
-
-$env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
-
-function Invoke-Starship-TransientFunction {
-  &starship module character
+if ($Host.Name -ne 'Package Manager Host') {
+ oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression
 }
 
-Invoke-Expression (&starship init powershell)
-Enable-TransientPrompt
+# $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
+
+# function Invoke-Starship-TransientFunction {
+  # &starship module character
+# }
+
+# Invoke-Expression (&starship init powershell)
+# Enable-TransientPrompt

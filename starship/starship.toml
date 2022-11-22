@@ -30,6 +30,7 @@ format = "([$added]($added_style) )([ $deleted]($deleted_style) )"
 [dotnet]
 disabled = false
 format = "\n[│](blue)(🎯 $tfm) via $symbol($version)]($style)"
+symbol = " "
 
 [lua]
 symbol = " "
@@ -72,11 +73,12 @@ style_root = "bg:blue fg:white bold"
 format = '[$user]($style)'
 
 [git_status]
-stashed = ""
-staged = ""
+stashed = "異"
+staged = ""
 deleted = ""
 style = "yellow bold"
 ignore_submodules = true
+format = "([$all_status$ahead_behind]($style) )"
 
 [hostname]
 disabled = false
