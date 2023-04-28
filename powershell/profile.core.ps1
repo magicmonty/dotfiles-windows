@@ -64,6 +64,8 @@ if ($host.Name -eq 'ConsoleHost')
 
 [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8
 
+Set-Alias cat bat
+
 function Set-Location-Cms () { Set-Location C:\Projects\tdsuite-cms }
 Set-Alias cdc Set-Location-Cms
 
@@ -349,6 +351,7 @@ $env:SYSTEM_ICON=""
 $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
 
 $env:FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob ""!.git"" --glob ""!node_modules"""
+
 # function Invoke-Starship-TransientFunction {
   # &starship module character
 # }
