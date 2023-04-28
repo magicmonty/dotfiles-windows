@@ -345,6 +345,7 @@ function zz { z - }
  # oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression
 # }
 
+$env:SYSTEM_ICON=""
 $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
 
 $env:FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob ""!.git"" --glob ""!node_modules"""
