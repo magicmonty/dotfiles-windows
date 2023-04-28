@@ -167,4 +167,5 @@
   "latex-workshop.latex.recipe.default": "lastUsed",
   "sql-formatter.uppercase": true,
   "mssql.format.alignColumnDefinitionsInColumns": true,
+  "editor.inlineSuggest.enabled": true,
 }
