@@ -1,1 +1,1 @@
-require('plugins.treesitter.config').setup()
+require('magicmonty.config.treesitter').configure()
