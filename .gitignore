@@ -3,3 +3,5 @@ nvim/.netcoredbg_hist
 nvim/plugin/packer_compiled.lua
 configstore/
 sanity/
+github-copilot/hosts.json
+lazygit/state.yml
