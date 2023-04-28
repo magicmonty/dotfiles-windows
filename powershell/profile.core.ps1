@@ -147,8 +147,12 @@ function gom { git co main }
 function goma { git co master }
 function god { git co development }
 function gof { git co -b features/$args }
-function gbr { git br $args }
-function gb { git b $args }
+function gb { 
+  $branch = git branch --sort=-committerdate | fzf --header "Checkout recent branch" --preview="git diff --color=always {1} | delta --line-numbers --syntax-theme ansi" --pointer=""  
+  if ($branch -ne "") {
+    git co $branch.Trim()
+  }
+}
 function gbrs { git brs $args }
 function grv { git rv $args }
 function gd { git d $args }
@@ -343,6 +347,7 @@ function zz { z - }
 
 $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
 
+$env:FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob ""!.git"" --glob ""!node_modules"""
 # function Invoke-Starship-TransientFunction {
   # &starship module character
 # }
