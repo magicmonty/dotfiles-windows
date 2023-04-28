@@ -3,7 +3,7 @@
 add_newline = true
 
 format = """
-[](blue)$username$hostname[](fg:blue)
+[](blue)$env_var$username$hostname[](fg:blue)
 [│](blue)$directory$git_branch$git_metrics$git_state$git_status$dotnet$lua$nodejs
 [└─](blue)$battery$status[>](blue) """
 
@@ -28,7 +28,7 @@ disabled = false
 format = "([$added]($added_style) )([ $deleted]($deleted_style) )"
 
 [dotnet]
-disabled = false
+disabled = true
 format = "\n[│](blue)(🎯 $tfm) via $symbol($version)]($style)"
 symbol = " "
 
@@ -85,3 +85,10 @@ disabled = false
 ssh_only = false
 format = "[@$ssh_symbol$hostname]($style)"
 style = "bg:blue fg:white bold"
+
+[env_var.SYSTEM_ICON]
+variable = "SYSTEM_ICON"
+default = ""
+style = "bg:blue fg:white bold"
+format = "[$env_value ]($style)"
+disabled = false
