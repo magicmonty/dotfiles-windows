@@ -1,8 +1,7 @@
 -- Theme
 return {
   'EdenEast/nightfox.nvim',
-  name = 'nightfox',
-  commit = '68db77db88bf997f060cf591f81813ccba97c5e6',
+  commit = "68db77db88bf997f060cf591f81813ccba97c5e6",
   pin = true,
   lazy = false, -- make sure we load this during startup
   priority = 1000, -- make sure to load this before all other plugins

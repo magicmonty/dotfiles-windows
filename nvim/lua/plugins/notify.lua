@@ -1,7 +1,6 @@
 -- Nice notification windows
 return {
   'rcarriga/nvim-notify',
-  dependencies = { 'nightfox' },
   config = function()
     local theme = require('magicmonty.theme')
     local icons = theme.icons.diagnostics
