@@ -21,6 +21,4 @@ return {
         },
     },
     dependencies = { { "nvim-lua/plenary.nvim" } },
-    ft = "norg",
-    cmd = "Neorg",
 }

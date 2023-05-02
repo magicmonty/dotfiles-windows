@@ -37,8 +37,7 @@ M.configure = function()
       Struct = "פּ",
       Event = '',
       Operator = "",
-      TypeParameter = '',
-      Copilot = ""
+      TypeParameter = ''
     }
   })
 end

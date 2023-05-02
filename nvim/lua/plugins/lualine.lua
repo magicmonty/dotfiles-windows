@@ -2,6 +2,9 @@
 return {
   'nvim-lualine/lualine.nvim',
   name = 'lualine',
+  dependencies = {
+    'nightfox'
+  },
   config = function()
     local theme = require('magicmonty.theme')
     local icons = theme.icons

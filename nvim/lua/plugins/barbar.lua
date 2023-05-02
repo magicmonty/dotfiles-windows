@@ -1,6 +1,7 @@
 return {
   'romgrk/barbar.nvim',
   dependencies = {
+    'nightfox',
     'webdevicons',
   },
   config = function()
