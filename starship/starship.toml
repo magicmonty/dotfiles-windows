@@ -73,7 +73,7 @@ style_root = "bg:blue fg:white bold"
 format = '[$user]($style)'
 
 [git_status]
-stashed = "異"
+stashed = "󱓞"
 staged = ""
 deleted = ""
 style = "yellow bold"
