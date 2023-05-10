@@ -58,6 +58,9 @@ if ($host.Name -eq 'ConsoleHost')
     [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
   }
 
+  # open lazygit in a new tab with <C-g>
+  Set-PSReadLineKeyHandler -Key Ctrl+g -ScriptBlock { lg }
+
   Set-PSReadlineKeyHandler -Key Ctrl+d -Function DeleteCharOrExit
 }
 
@@ -120,14 +123,13 @@ Set-Alias v vi
 
 Set-Alias l ls
 
-function  Edit-Profile { vi $profile.CurrentUserCurrentHost }
+function  Edit-Profile { vi "$env:USERPROFILE\.dotfiles\powershell\profile.core.ps1" }
 
 # Paket
 function pi { .paket\paket.exe install }
 function pu { .paket\paket.exe update }
 
 # Git
-function gg { C:\Tools\lazygit.exe }
 function gs { git status $args }
 function gst { git st $args }
 function gstu { git stu $args }
@@ -192,7 +194,9 @@ function rtags {
   git fetch --tags
 }
 
-Set-Alias lg lazygit
+function lg {
+  wt -w0 nt lazygit
+}
 Set-Alias g git
 
 # Needs to be called after all functions and aliases, so it can pick them up for tab expansion

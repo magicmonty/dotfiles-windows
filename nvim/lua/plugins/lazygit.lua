@@ -1,7 +1,7 @@
 return {
-    "kdheepak/lazygit.nvim",
-    command = 'LazyGit',
-    keys = {
-        { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit", silent = true }
-    }
+  'kdheepak/lazygit.nvim',
+  cmd = 'LazyGit',
+  keys = {
+    { 'n', '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit', silent = true },
+  },
 }
