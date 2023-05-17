@@ -1,0 +1,9 @@
+notARepository: skip
+gui:
+  showIcons: true
+git:
+  paging:
+    useConfig: true
+  parseEmoji: true
+os:
+  editPreset: 'nvim'

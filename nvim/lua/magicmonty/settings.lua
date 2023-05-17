@@ -1,7 +1,7 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
-vim.opt.guifont = "JetBrains Mono NF:h12"
+vim.opt.guifont = 'JetBrainsMono Nerd Font:h10'
 -- Don't highlight every search result on search
 vim.opt.hlsearch = false
 -- but highlight current search result while creating search term
@@ -104,4 +104,4 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Neovide specific settings
-vim.g.neovide_transparency = 0.8
+-- vim.g.neovide_transparency = 0.8

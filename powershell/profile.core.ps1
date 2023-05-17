@@ -1,7 +1,6 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
-
 Import-Module -Name Terminal-Icons
 
 # For Git Autocompletion
@@ -68,15 +67,6 @@ if ($host.Name -eq 'ConsoleHost')
 [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8
 
 Set-Alias cat bat
-
-function Set-Location-Cms () { Set-Location C:\Projects\tdsuite-cms }
-Set-Alias cdc Set-Location-Cms
-
-function Set-Location-AngularFrontend { Set-Location Code\Web\ClientApp }
-Set-Alias cdcw Set-Location-AngularFrontend
-
-function Set-Location-BackToRoot { Set-Location ..\..\.. }
-Set-Alias cdb Set-Location-BackToRoot
 
 function Set-Location-Development { Set-Location C:\Projects }
 Set-Alias cdd Set-Location-Development
@@ -206,20 +196,11 @@ Set-Alias g git
 # [bool]$EnableProxyFunctionExpansion
 Import-Module -Name posh-git -Arg $False,$False,$True
 
-
 function yi { yarn install }
 function yif { yarn install --frozen-lockfile }
 
 function ngs { ng serve }
 function ngso { ng serve --open }
-
-function hello { utt hello }
-function t { utt add $args }
-
-if ($Host.Version.Major -gt 6) {
-  function report { utt report }
-  Set-Alias r report
-}
 
 function grep {
   $count = @($input).Count
@@ -278,7 +259,7 @@ function Invoke-CmdScript() {
 }
 
 # Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
+# Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
 
 # WinGet support
 class Software {
@@ -336,29 +317,35 @@ function Update-Winget-All() {
 }
 
 
-# Zoxide
-if ($Host.Version.Major -gt 6) {
-  Invoke-Expression (& { (zoxide init --hook "pwd" powershell) -join "`n" })
-} else {
-  Invoke-Expression (& { (zoxide init --hook "none" powershell) -join "`n" })
-}
-
-function zz { z - }
-
-# OhMyPosh
-
-# if ($Host.Name -ne 'Package Manager Host') {
- # oh-my-posh --init --shell pwsh --config $env:USERPROFILE/.dotfiles/powershell/.oh-my-posh.omp.json | Invoke-Expression
-# }
-
+# Starship Prompt
 $env:SYSTEM_ICON=""
 $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
 
 $env:FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob ""!.git"" --glob ""!node_modules"""
 
-# function Invoke-Starship-TransientFunction {
-  # &starship module character
-# }
+function Invoke-Starship-TransientFunction {
+  &starship module character
+}
+
+$prompt = ""
+function Invoke-Starship-PreCommand {
+  $current_location = $executionContext.SessionState.Path.CurrentLocation
+  if ($current_location.Provider.Name -eq "FileSystem") {
+    $ansi_escape = [char]27
+    $provider_path = $current_location.ProviderPath -replace "\\", "/"
+    $prompt = "$ansi_escape]7;file://${env:COMPUTERNAME}/${provider_path}$ansi_escape\"
+  }
+  $host.ui.Write($prompt)
+}
 
 Invoke-Expression (&starship init powershell)
 # Enable-TransientPrompt
+
+# Zoxide
+if ($Host.Version.Major -gt 6) {
+  Invoke-Expression (& { (zoxide init --hook "pwd" powershell | Out-String) })
+} else {
+  Invoke-Expression (& { (zoxide init --hook "none" powershell | Out-String) })
+}
+
+function zz { z - }
