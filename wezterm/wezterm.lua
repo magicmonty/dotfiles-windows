@@ -48,7 +48,7 @@ return {
   pane_focus_follows_mouse = false,
   unicode_version = 14,
   -- win32_system_backdrop = 'Acrylic',
-  -- window_background_opacity = 0,
+  window_background_opacity = 0.95,
   tab_bar_style = {
     new_tab = '<+>',
   },

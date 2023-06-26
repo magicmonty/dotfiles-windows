@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: "0.2.0"
+  assertions:
+    - resource: OsVersion
+      directives:
+        description: Verify min OS version requirement
+        module: Microsoft.Windows.Developer
+      settings:
+        MinVersion: 10.0.19041
+  resources:
+    - resource: DeveloperMode
+      directives:
+        description: Verify developer mode is enabled
+        module: Microsoft.Windows.Developer
+      settings:
+        Ensure: Present
+    - resource: WinGetPackage
+      directives:
+        description: Install sonixd
+        module: Microsoft.WinGet.DSC
+      settings:
+        id: jeffvli.Sonixd
+        source: winget
+    - resource: WinGetPackage
+      directives:
+        description: Install sonixd
+        module: Microsoft.WinGet.DSC
+      settings:
+        id: jeffvli.Sonixd
+        source: winget

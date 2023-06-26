@@ -60,6 +60,7 @@
         "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\telescope-zoxide",
         "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\telescope.nvim",
         "C:\\Projects\\.config\\nvim-data\\site\\pack\\packer\\start\\treesitter-unit",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "C:/Projects/.config/nvim-data/mason/packages/lua-language-server/meta/0298bbaa"
     ]
 }

@@ -1,0 +1,7 @@
+{
+    "workspace.library": [
+        "C:\\tools\\neovim\\nvim-win64\\share\\nvim\\runtime\\lua",
+        "C:\\Users\\martin.gondermann\\.dotfiles\\nvim/lua",
+        "C:/Projects/.config/nvim-data/mason/packages/lua-language-server/meta/331bdcf3"
+    ]
+}

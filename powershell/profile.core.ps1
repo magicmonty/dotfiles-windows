@@ -6,11 +6,10 @@ Import-Module -Name Terminal-Icons
 # For Git Autocompletion
 Import-Module -Name npm-completion
 
-$env:PATH = "$env:LOCALAPPDATA\Programs\oh-my-posh\bin;" + $env:PATH 
-
 if ($host.Name -eq 'ConsoleHost')
 {
   Import-Module PSReadline  
+  $WarningPreference = "SilentlyContinue"
 
   Set-PSReadlineKeyHandler -Key Ctrl+Delete    -Function KillWord
   Set-PSReadlineKeyHandler -Key Ctrl+Backspace -Function BackwardKillWord
@@ -113,13 +112,16 @@ Set-Alias v vi
 
 Set-Alias l ls
 
-function  Edit-Profile { vi "$env:USERPROFILE\.dotfiles\powershell\profile.core.ps1" }
+# function  Edit-Profile { vi "$env:USERPROFILE\.dotfiles\powershell\profile.core.ps1" }
+function Edit-Profile { vi "$PROFILE" }
 
 # Paket
 function pi { .paket\paket.exe install }
 function pu { .paket\paket.exe update }
 
 # Git
+function stash { git stash $args }
+function spop { git stash pop $args }
 function gs { git status $args }
 function gst { git st $args }
 function gstu { git stu $args }
@@ -179,6 +181,11 @@ function grc { git rebase --continue $args }
 function grm { git rebase main }
 function grma { git rebase master }
 function grd { git rebase development }
+function gwt { git worktree $args }
+function gwtl { git wtl }
+function gwta { git wta $args }
+function gwtd { git wtd $args }
+function gwtr { git wtr $args }
 function rtags {
   git tag -d $(git tag)
   git fetch --tags
@@ -323,11 +330,6 @@ $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
 
 $env:FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob ""!.git"" --glob ""!node_modules"""
 
-function Invoke-Starship-TransientFunction {
-  &starship module character
-}
-
-$prompt = ""
 function Invoke-Starship-PreCommand {
   $current_location = $executionContext.SessionState.Path.CurrentLocation
   if ($current_location.Provider.Name -eq "FileSystem") {
@@ -335,17 +337,20 @@ function Invoke-Starship-PreCommand {
     $provider_path = $current_location.ProviderPath -replace "\\", "/"
     $prompt = "$ansi_escape]7;file://${env:COMPUTERNAME}/${provider_path}$ansi_escape\"
   }
+  $null = __zoxide_hook
   $host.ui.Write($prompt)
 }
 
 Invoke-Expression (&starship init powershell)
-# Enable-TransientPrompt
+
+$env:_ZO_DATA_DIR = "$env:XDG_DATA_HOME\zoxide"
 
 # Zoxide
 if ($Host.Version.Major -gt 6) {
-  Invoke-Expression (& { (zoxide init --hook "pwd" powershell | Out-String) })
+  Invoke-Expression (& { (zoxide init --hook pwd powershell | Out-String) })
 } else {
   Invoke-Expression (& { (zoxide init --hook "none" powershell | Out-String) })
 }
 
 function zz { z - }
+

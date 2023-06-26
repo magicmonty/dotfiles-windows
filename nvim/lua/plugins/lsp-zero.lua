@@ -2,6 +2,8 @@ return {
   {
     -- LSP Configuration & Plugins
     'VonHeikemen/lsp-zero.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
+    cmd = { 'Mason' },
     dependencies = {
       'nightfox',
       'neovim/nvim-lspconfig',
@@ -30,7 +32,7 @@ return {
       'luasnip',
 
       -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
+      { 'j-hui/fidget.nvim', tag = 'legacy' },
 
       -- LSP colorscheme
       'onsails/lspkind-nvim',
@@ -57,7 +59,6 @@ return {
 
       -- Configure some indiviual settings for differen plugins
       -- This must be set up before running lsp.preset
-      require('magicmonty.config.mason').configure()
       require('magicmonty.config.lspsaga').configure()
       require('magicmonty.config.trouble').configure()
       require('magicmonty.config.lspkind').configure()

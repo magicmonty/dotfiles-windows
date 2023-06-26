@@ -10,4 +10,7 @@ return { -- Highlight, edit, and navigate code
     'David-Kunz/treesitter-unit',
     'JoosepAlviste/nvim-ts-context-commentstring',
   },
+  init = function()
+    require('magicmonty.config.treesitter').configure()
+  end,
 }

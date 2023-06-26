@@ -25,7 +25,7 @@ threshold = 80
 
 [git_metrics]
 disabled = false
-format = "([$added]($added_style) )([ $deleted]($deleted_style) )"
+format = "([ $added]($added_style) )([ $deleted]($deleted_style) )"
 
 [dotnet]
 disabled = true
@@ -73,9 +73,9 @@ style_root = "bg:blue fg:white bold"
 format = '[$user]($style)'
 
 [git_status]
-stashed = "󱓞"
-staged = ""
-deleted = ""
+stashed = "󱓞 "
+staged = " "
+deleted = " "
 style = "yellow bold"
 ignore_submodules = true
 format = "([$all_status$ahead_behind]($style) )"

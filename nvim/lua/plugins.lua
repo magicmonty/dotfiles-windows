@@ -20,4 +20,12 @@ return {
   { 'tpope/vim-classpath', ft = { 'clojure' } },
   { 'tpope/vim-sexp-mappings-for-regular-people', ft = { 'clojure' } },
   { 'guns/vim-sexp', ft = { 'clojure' } },
+
+  -- HexEditor
+  {
+    'RaafatTurki/hex.nvim',
+    config = function()
+      require('hex').setup()
+    end,
+  },
 }

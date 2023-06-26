@@ -19,11 +19,17 @@ M.configure = function()
   Autocmd('WinLeave', { pattern = '*', group = bgHighlight, command = 'setlocal nocursorline' })
 
   -- Undercurl support
-  vim.cmd [[let &t_Cs = "\e[4:3m"]]
-  vim.cmd [[let &t_Ce = "\e[4:0m"]]
+  vim.cmd([[let &t_Cs = "\e[4:3m"]])
+  vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
   -- No background color erase
-  vim.cmd [[let &t_ut = '']]
+  vim.cmd([[ let &t_ut = '' ]])
+
+  vim.cmd([[
+    if !exists('g:neovide')
+      hi Normal ctermbg=None guibg=None
+    endif
+  ]])
 end
 
 M.icons = require('magicmonty.icons')

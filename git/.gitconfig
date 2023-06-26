@@ -1,6 +1,6 @@
 [user]
-	name = Martin Gondermann
-	email = martin.gondermann@bayoo.net
+  name = Martin Gondermann
+  email = martin.gondermann@bayoo.net
 
 [http]
   sslverify = false
@@ -12,6 +12,9 @@
   excludesfile = 
   pager = delta
 
+[commit]
+  cleanup = "scissors"
+
 [interactive]
   diffFilter = delta --color-only
 
@@ -22,7 +25,7 @@
   light = false
 
 [push]
-	default = matching 
+  default = current 
 
 [diff]
   tool = bc4
@@ -30,7 +33,7 @@
 
 [merge]
   conflictstyle = diff3
-	tool = bc4
+  tool = bc4
 
 [alias]
   s = status
@@ -119,9 +122,10 @@
   prompt = false
 
 [fetch]
-	prune = true
+  prune = true
+
 [gui]
-	pruneDuringFetch = true
+  pruneDuringFetch = true
 
 [tig]
   line-graphics = ascii
