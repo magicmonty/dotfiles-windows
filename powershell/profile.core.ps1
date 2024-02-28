@@ -26,6 +26,10 @@ if ($host.Name -eq 'ConsoleHost')
     Set-PSReadLineOption -PredictionSource History
   }
   Set-PSReadLineOption -EditMode Windows
+  
+  Set-PSReadLineOption -MaximumHistoryCount 100
+  Set-PSReadLineOption -HistoryNoDuplicates 
+
   Remove-PSReadlineKeyHandler 'Ctrl+r'
 
   Set-PSReadLineKeyHandler -Key Ctrl+r `
@@ -79,6 +83,17 @@ Set-Alias e Open-Explorer
 function Open-Explorer-Here { e . }
 Set-Alias e. Open-Explorer-Here
 
+function ya {
+  $tmp = [System.IO.Path]::GetTempFileName()
+    yazi $args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+      Set-Location -Path $cwd
+    }
+  Remove-Item -Path $tmp
+}
+Set-Alias r. ya
+
 function Open-SourceTree ([string]$Directory) { 
   if ($Directory) {
     Start-Process $env:LOCALAPPDATA\SourceTree\SourceTree.exe "-f $Directory status"
@@ -87,6 +102,10 @@ function Open-SourceTree ([string]$Directory) {
   }
 }
 Set-Alias st Open-SourceTree
+
+function cdf() {
+  fd -t d | fzf | cd
+}
 
 function Open-VSCode ([string]$Directory) { code $Directory }
 Set-Alias c Open-VSCode
@@ -103,7 +122,7 @@ Set-Alias kb Kill-All-MSBuild
 function Search-Todo { rg -tcsharp TODO }
 Set-Alias todo Search-Todo
 
-function Search-Fixme { rg -tcsharp TODO }
+function Search-Fixme { rg -tcsharp FIXME }
 Set-Alias fixme Search-Fixme
 
 function vi { nvim $args }
@@ -192,7 +211,7 @@ function rtags {
 }
 
 function lg {
-  wt -w0 nt lazygit
+  lazygit
 }
 Set-Alias g git
 
@@ -265,8 +284,94 @@ function Invoke-CmdScript() {
   Remove-Item $tempFile
 }
 
-# Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-# Invoke-CmdScript "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\Tools\VsDevCmd.bat"
+# Activity Watch plugin
+$AW_API_URL="http://localhost:5600/api"
+$AW_BUCKET="aw-watcher-powershell_" + $env:COMPUTERNAME
+
+function PostToUrl([string]$url, [string]$json) {
+  $header = @{ accept = "application/json"; "Content-Type" = "application/json" }
+  $res = Invoke-WebRequest -Method Post -Uri $url -Headers $header -body $json -UseBasicParsing
+
+  return $res
+}
+
+
+function Get-Last-History-Command() {
+  $command = "";
+  try {
+    $historyItem = (Get-History |select -Last 1)
+    $commandObj = ($historyItem|select -Property CommandLine).CommandLine
+    $commandText = ([regex]::split($commandObj,"[ |;:]")[0])
+    $command = $commandText.Replace("(","").Replace('"', "'")
+  } catch [Exception] {
+    if($command -eq "") {
+      $command = "error"
+    }
+  }
+
+  return $command
+}
+
+function Init-AW-Bucket() {
+  $url = "$AW_API_URL/0/buckets/$AW_BUCKET"
+  $req = [system.Net.WebRequest]::Create($url)
+  try {
+    $res = $req.GetResponse()
+  } catch [System.Net.WebException] {
+    $res = $_.Exception.Response
+  }
+
+  $status = [int]$res.StatusCode
+  if ($status -eq 404) {
+    $payload=@{ client = $AW_BUCKET; type = "powershell"; hostname = $env:COMPUTERNAME }
+    $res = PostToUrl $url  (ConvertTo-Json $payload)
+  
+    $status = [int]$res.StatusCode
+    if ($status -eq 200) {
+      Write-Host "Initialized Bucket $AW_BUCKET"
+    } else {
+      Write-Error "Error $($res.statusCode) initializing $AW_BUCKET"
+    }
+  }
+}
+
+function LogToAWBucket() {
+  $command=(Get-Last-History-Command)
+  $gitFolder=(Get-GitDirectory)
+  
+  # Get-Job -State Completed|?{$_.Name.Contains("ActivityWatchJob")}|Remove-Job
+  # $job = Start-Job -Name "ActivityWatchJob" -ScriptBlock {
+    # param($command, $gitFolder)
+
+    if ($command -eq "") {
+      return
+    }
+
+    $project = ""
+    if ($gitFolder -eq $null) {
+      $project = (Get-Item .).Name
+    } else {
+      $gitFolder = (Get-Item ($gitFolder).Replace(".git", ""))
+      $project = $gitFolder.Name
+    }
+
+    $timestamp=(Get-Date -Format "o")
+    
+    $data = @{ project = $project; command = $command }
+    $payload = @{ timestamp = $timestamp; duration = 0; data = $data }
+
+    $url="$AW_API_URL/0/buckets/$AW_BUCKET/heartbeat?pulsetime=120.0"
+
+    $res = PostToUrl $url (ConvertTo-Json $payload)
+    $status = [int]$res.StatusCode
+    if ($status -eq 200) {
+    } else {
+      Write-Error "Request failed"
+      $env:LAST_STATUS=$status
+    }
+
+  # } -ArgumentList $command, $gitFolder
+}
 
 # WinGet support
 class Software {
@@ -331,6 +436,7 @@ $env:STARSHIP_CONFIG = "$HOME\.dotfiles\starship\starship.toml"
 $env:FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob ""!.git"" --glob ""!node_modules"""
 
 function Invoke-Starship-PreCommand {
+  LogToAWBucket
   $current_location = $executionContext.SessionState.Path.CurrentLocation
   if ($current_location.Provider.Name -eq "FileSystem") {
     $ansi_escape = [char]27
@@ -354,3 +460,4 @@ if ($Host.Version.Major -gt 6) {
 
 function zz { z - }
 
+Init-AW-Bucket

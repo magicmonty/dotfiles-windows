@@ -1,7 +1,7 @@
-
 nvim/.netcoredbg_hist
 nvim/plugin/packer_compiled.lua
 configstore/
 sanity/
-github-copilot/hosts.json
+github-copilot/
 lazygit/state.yml
+.android/avd/

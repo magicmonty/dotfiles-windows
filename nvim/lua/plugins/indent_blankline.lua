@@ -2,20 +2,29 @@
 return {
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
-      filetype_exclude = {
-        'dashboard',
-        'help',
-        'alpha',
-        'neo-tree',
-        'NvimTree',
-        'Trouble',
-        'lazy',
-        'mason',
-        'null-ls-info',
+      indent = {
+        char = '┊',
+      },
+      whitespace = {
+        remove_blankline_trail = true,
+      },
+      exclude = {
+        filetypes = {
+          'dashboard',
+          'help',
+          'alpha',
+          'neo-tree',
+          'NvimTree',
+          'Trouble',
+          'lazy',
+          'mason',
+          'null-ls-info',
+        },
+      },
+      scope = {
+        enabled = false,
       },
     },
   },

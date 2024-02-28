@@ -31,18 +31,18 @@ local opts = {
     'typescript',
     'vim',
     'vue',
-    'yaml'
+    'yaml',
   },
   auto_install = true,
   sync_install = false,
   highlight = {
     enable = true,
     disable = {},
-    additional_vim_regex_highlighting = false
+    additional_vim_regex_highlighting = false,
   },
   indent = {
     enable = true,
-    diable = { 'yaml' }
+    diable = { 'yaml' },
   },
   refactor = {
     highlight_definitions = { enable = true },
@@ -57,20 +57,6 @@ local opts = {
   },
   autotag = { enable = true },
   autopairs = { enable = true },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-    config = {
-      typescript = '// %s',
-      css = '/* %s */',
-      scss = '/* %s */',
-      html = '<!-- %s -->',
-      vue = '<!-- %s -->',
-      sonicpi = { __default = '# %s', __multiline = '=begin %s =end' },
-      ruby = { __default = '# %s', __multiline = '=begin %s =end' },
-      json = '',
-    }
-  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -126,21 +112,35 @@ local opts = {
   },
 }
 
-local has_plugin, context_comment_string = pcall(require, 'ts_context_commentstring.internal')
+local has_plugin, context_comment_string = pcall(require, 'ts_context_commentstring')
 if has_plugin then
-  context_comment_string.update_commentstring({
-    key = '__multiline'
+  context_comment_string.setup({
+    enable_autocmd = false,
+    languages = {
+      typescript = '// %s',
+      css = '/* %s */',
+      scss = '/* %s */',
+      html = '<!-- %s -->',
+      vue = '<!-- %s -->',
+      sonicpi = { __default = '# %s', __multiline = '=begin %s =end' },
+      ruby = { __default = '# %s', __multiline = '=begin %s =end' },
+      json = '',
+    },
   })
 end
 
 M.configure = function()
   -- avoid running in headless mode since it's harder to detect failures
-  if #vim.api.nvim_list_uis() == 0 then return end
+  if #vim.api.nvim_list_uis() == 0 then
+    return
+  end
 
-  local installed, treesitter = pcall(require, "nvim-treesitter.configs")
-  if not installed then return end
+  local installed, treesitter = pcall(require, 'nvim-treesitter.configs')
+  if not installed then
+    return
+  end
 
-
+  require('nvim-treesitter.install').compilers = { 'clang' }
   treesitter.setup(opts)
 
   vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -148,14 +148,14 @@ M.configure = function()
   vim.opt.fillchars = 'fold:-'
   vim.wo.foldmethod = 'expr'
   vim.o.foldtext =
-  [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
+    [['--- ' . substitute(getline(v:foldstart),'\\t',repeat(' ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines) ']]
 
   local comment_installed, comment = pcall(require, 'Comment')
   if comment_installed then
-    comment.setup {
+    comment.setup({
       -- integration with treesitter context comment string
       pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-    }
+    })
   end
 end
 

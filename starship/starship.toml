@@ -8,6 +8,7 @@ format = """
 [└─](blue)$battery$status[>](blue) """
 
 continuation_prompt = "[>](bright-black) "
+command_timeout = 2000
 
 [character]
 success_symbol = "[▶](bold green)"

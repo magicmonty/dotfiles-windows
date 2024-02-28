@@ -1,6 +1,6 @@
 [user]
-  name = Martin Gondermann
-  email = martin.gondermann@bayoo.net
+	name = Martin.Gondermann
+	email = martin.gondermann@bayoo.net
 
 [http]
   sslverify = false
@@ -8,6 +8,7 @@
 [core]
   autocrlf = true
   ignorecase = false
+  longPaths = true
   editor = 'C:\\tools\\neovim\\nvim-win64\\bin\\nvim.exe' 
   excludesfile = 
   pager = delta
@@ -157,3 +158,8 @@
 
 [credential "https://dev.azure.com"]
   provider = generic
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

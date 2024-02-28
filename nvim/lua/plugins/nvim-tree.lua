@@ -29,7 +29,6 @@ return {
   },
   config = function()
     local icons = require('magicmonty.theme').icons.diagnostics
-    local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
     require('nvim-tree').setup({
       on_attach = on_attach,

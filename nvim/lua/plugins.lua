@@ -21,6 +21,9 @@ return {
   { 'tpope/vim-sexp-mappings-for-regular-people', ft = { 'clojure' } },
   { 'guns/vim-sexp', ft = { 'clojure' } },
 
+  -- ActivityWatch
+  { 'ActivityWatch/aw-watcher-vim' },
+
   -- HexEditor
   {
     'RaafatTurki/hex.nvim',
