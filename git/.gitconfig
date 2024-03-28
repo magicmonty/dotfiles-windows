@@ -6,7 +6,7 @@
   sslverify = false
 
 [core]
-  autocrlf = true
+	autocrlf = true
   ignorecase = false
   longPaths = true
   editor = 'C:\\tools\\neovim\\nvim-win64\\bin\\nvim.exe' 
@@ -163,3 +163,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[credential "helperselector"]
+	selected = manager

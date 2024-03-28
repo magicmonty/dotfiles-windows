@@ -428,6 +428,43 @@ function Update-Winget-All() {
   }
 }
 
+function Start-SqlServer() {
+  $CONFIG_DIR = "C:\Projects\SqlServer"
+  $DATA_DIR = "$CONFIG_DIR\data"
+  $BACPACS = "$CONFIG_DIR\bacpacs"
+  $SQLPACKAGE = "$CONFIG_DIR\sqlpackage\sqlpackage.exe"
+  $SQL_SERVER_VERSION = "2019-latest"
+
+  if (-not (Test-Path -Path $CONFIG_DIR)) {
+    New-Item -Path $CONFIG_DIR -ItemType Directory
+  }
+
+  if (-not (Test-Path -Path $DATA_DIR)) {
+    New-Item -Path $DATA_DIR -ItemType Directory
+  }
+
+  if (-not (Test-Path -Path $SQLPACKAGE -PathType Leaf)) {
+    New-Item -Path "$CONFIG_DIR\sqlpackage" -ItemType Directory
+    Write-Host "Downloading SqlPackage..."
+    Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?linkid=2261576" -Outfile "$CONFIG_DIR\sqlpackage\sqlpackage.zip"
+    pushd "$CONFIG_DIR\sqlpackage"
+    unzip sqlpackage.zip
+    rm sqlpackage.zip
+    popd
+  }
+
+  if (podman ps -a | grep sqlserver) {
+    if ("$(podman inspect -f '{{.State.Status}} sqlserver')" -eq "running") {
+      Write-Host "SQL Server is already running"
+    } else {
+      Write-Host "Restarting existing SQL Server container"
+      podman start sqlserver
+    } 
+  } else {
+    Write-Host "Starting new SQL Server container"
+    podman run -d -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Dev0nly!" -e "MSSQL_PID=Developer" --name sqlserver -p 1433:1433 -v "$CONFIG_DIR\data:/var/opt/mssql/data:Z,U" -v "$CONFIG_DIR\secrets:/var/opt/mssql/secrets:Z,U" mcr.microsoft.com/mssql/server:$SQL_SERVER_VERSION
+  }
+}
 
 # Starship Prompt
 $env:SYSTEM_ICON=""

@@ -5,3 +5,5 @@ sanity/
 github-copilot/
 lazygit/state.yml
 .android/avd/
+containers/podman/machine/wsl/podman-machine-default.json
+containers/podman/machine/wsl/podman-machine-default.lock
